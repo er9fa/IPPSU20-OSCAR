@@ -14,6 +14,7 @@ $ cd node-js-getting-started
 $ npm install
 $ npm start
 ```
+renita
 
 katie
 
