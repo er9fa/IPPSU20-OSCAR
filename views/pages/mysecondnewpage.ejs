@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  <% include ../partials/nav.ejs %>
+
+  <div style="text-align: center;">
+    yo yo
+    <div id="variable_here"></div>
+  </div>
+
+  <script>
+    var i = 0;
+    setInterval(() => {
+      console.log(i);
+      document.getElementById("variable_here").innerHTML = i;
+      i++;
+    }, 1000);
+  </script>
+
+</body>
+</html>
