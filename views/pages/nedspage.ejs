@@ -8,7 +8,18 @@
 
   <div style="text-align: center;">
     Hello I am Ned. And this is my page.
+    <div id="variable_here"></div>
   </div>
+
+  <script>
+   var i = 0;
+   setInterval(() => {
+     console.log(i);
+     document.getElementById("variable_here").innerHTML = i;
+     i++;
+   }, 1000);
+ </script>
+
 
 </body>
 </html>
