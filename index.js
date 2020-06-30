@@ -10,6 +10,7 @@ express()
   .get('/nedspage', (req, res) => res.render('pages/nedspage'))
   .get('/katiespage', (req, res) => res.render('pages/katiespage'))
   .get('/renitaspage', (req, res) => res.render('pages/renitaspage'))
+  .get('/davidspage', (req, res) => res.render('pages/davidspage'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 console.log("test");
