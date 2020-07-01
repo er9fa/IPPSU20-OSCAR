@@ -1,14 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style>
+    body { background: url(https://miro.medium.com/max/2880/1*Ar1k9HjU8Rhq1tqA6GEcdg.jpeg); background-size: 100%, 100%; }
+    .titlebox {
+      background-color: navy;
+      color: white;
+      font-family: "Arial Black";
+      border: 5px solid orange;
+      margin: 20px;
+      padding: 20px;
+    }
 
+    .textbox {
+      background-color: navy;
+      color: white;
+      font-family: "Lucida Console";
+      border: 5px solid orange;
+      margin: 20px;
+      padding: 20px;
+    }
+  </style>
 </head>
 
 <body>
-
-  <div style="text-align: center;">
-    Hello I am David. And this is my page.
+    <div style="text-align: center;" class="titlebox">
+    <h1>Hello I am David. And this is my page.</h1>
+    </div>
+    <div class = "textbox">
+      <h2> Bio </h2>
+        <p>My name is David, I’m from Fayetteville, NC, and I’m really excited for our project this summer. I’m planning to major in statistics and economics, but I’m also really interested in building my coding skills to help with my ability to use statistical analysis tools as well as for future work. I enjoy philosophy and have toyed with the idea of going for a minor in it, and based on the classes in philosophy I have taken at UVA, I’m becoming more and more convinced it’s something I would like to do.</p>
+        <p>Some of my older hobbies include playing violin, and swimming. I’ve more recently been diving into a drive to make art, particularly painting and sketching. When I work on a piece, I often like to listen to a random playlist so I can explore some new music and new artists. Though, deep down, I have to admit I’m a pretty big Taylor Swift fan. I must have listened to her newest album thousands of times while walking around campus, or trying to put in some work at the gym, or sitting in the library doing homework, or during pretty much anything I do.</p>
+        <p>I’d say a couple of my strengths are: I like digging into new things, and I’m pretty good with my hands in terms of repairing or making things. On the other hand, one of my weaknesses is I struggle to stay focused on things at times. Sometimes my love of exploring so many interests means that I’ll waste a night trying some random thing instead of doing something I should be doing like sleep or studying that extra little bit before a test.</p>
   </div>
+
+<div style="text-align: center;" class="titlebox">
+Counter!!!
+  <div id="variable_here"> </div>
+</div>
+
+<div class="textbox">
+Enter your info here for a <i><b>"totally personalized"</b></i> music suggestion.
+   <br>
+   Your Name:<br>
+   <input type="text" id="a"/>
+   <br>
+   Favorite Artist:<br>
+   <input type="text" id="artist"/>
+   <br>
+   Favorite Song:<br>
+   <input type="text" id="song" />
+   <br>
+   <button onclick="smaker()"> ENTER </button>
+   <p id="make"></p>
+</div>
+
+  <script>
+   var i = 0;
+   setInterval(() => {
+     console.log(i);
+     document.getElementById("variable_here").innerHTML = i;
+     i = i +5;
+   }, 1000);
+ </script>
+
+<script>
+function smaker(){
+  var storage;
+  var user111 = ""
+  var artist111 = ""
+  var song111 = ""
+  var user111 = document.getElementById('a').value;
+  var artist111 = document.getElementById('artist').value;
+  var song111 = document.getElementById('song').value;
+  if (user111 !== "" && artist111 !== "" &&song111 !== "")
+  {
+  storage = "Hello " + user111 + ", you beautiful wonderful person, our super advanced alogrithm suggests that you listen to " + song111 + " by " + artist111 +", the best artist in the world!!!!"
+  document.getElementById('make').innerHTML=storage
+  }else{
+  document.getElementById('make').innerHTML="Please complete all fields!"
+  }
+}
+</script>
 
 </body>
 </html>
