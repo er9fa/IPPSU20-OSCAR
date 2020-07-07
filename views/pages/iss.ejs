@@ -8,11 +8,32 @@ h1 {
     font-size: 60px;
     font-family: 'Orbitron', sans-serif;
 }
+.compute button{
+  background-color: dodgerblue;
+  border: 1px solid black;
+  border-radius: 50px;
+  color: white;
+  padding: 10px 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.compute button:hover {
+  background-color: cornflowerblue;
+}
+body{
+  text-align: center;
+}
 </style>
 </head>
 
 <body>
   <h1>Can I see the ISS?</h1>
+
+  <div class="compute">
+      <button>COMPUTE</button>
+ </div>
+
+  <br><div> Date & Time: </div>
 
   <div> Longitude: </div>
   <div id="iss_longitude"> </div>
