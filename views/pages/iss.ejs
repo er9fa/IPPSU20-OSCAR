@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+
+  <div> Longitude: </div>
+  <div id="iss_longitude"> </div>
+  <div> Latitude: </div>
+  <div id="iss_latitude"> </div>
+
+</body>
+
+<script>
+  fetch("http://api.open-notify.org/iss-now.json").then(r => r.json()).then(data => {
+    document.getElementById("iss_longitude").innerHTML = data.iss_position.longitude;
+    document.getElementById("iss_latitude").innerHTML = data.iss_position.latitude;
+  })
+</script>
+
+</html>
