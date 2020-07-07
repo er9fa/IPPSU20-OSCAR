@@ -30,23 +30,50 @@ body{
   <h1>Can I see the ISS?</h1>
 
   <div class="compute">
-      <button>COMPUTE</button>
+      <button onclick = "calc()"> COMPUTE</button>
  </div>
 
   <br><div> Date & Time: </div>
 
-  <div> Longitude: </div>
-  <div id="iss_longitude"> </div>
-  <div> Latitude: </div>
-  <div id="iss_latitude"> </div>
+  <div>
+    Location of ISS:  &emsp;
+    Longitude: &ensp; "<span id="iss_longitude"> </span>", &emsp;
+    Latitude: &ensp; "<span id="iss_latitude"> </span>"
+  </div>
+
+  <div>
+    Time since last request for ISS position: <span id="count"> </span>
+  </div>
 
 </body>
 
 <script>
   fetch("http://api.open-notify.org/iss-now.json").then(r => r.json()).then(data => {
-    document.getElementById("iss_longitude").innerHTML = data.iss_position.longitude;
-    document.getElementById("iss_latitude").innerHTML = data.iss_position.latitude;
-  })
+    var long = data.iss_position.longitude;
+    var lat = data.iss_position.latitude;
+
+    document.getElementById("iss_longitude").innerHTML = long;
+    document.getElementById("iss_latitude").innerHTML = lat;
+})
+
+var i = 0;
+setInterval(() => {
+  console.log(i);
+  document.getElementById("count").innerHTML = i;
+  i++;
+}, 1000)
+
+  function calc(){
+  i = 0
+  fetch("http://api.open-notify.org/iss-now.json").then(r => r.json()).then(data => {
+  var long = data.iss_position.longitude;
+  var lat = data.iss_position.latitude;
+
+  document.getElementById("iss_longitude").innerHTML = long
+  document.getElementById("iss_latitude").innerHTML = lat
+})
+}
+
 </script>
 
 </html>
