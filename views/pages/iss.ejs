@@ -29,6 +29,32 @@ body{
 <body>
   <h1>Can I see the ISS?</h1>
 
+  <style>
+  #map {
+    height:350px;
+    width:100%;
+  }
+  </style>
+
+  <div id="map"> </div>
+
+  <script>
+    function initMap() {
+      var map;
+      var latlong = new google.maps.LatLng(30.822, 21.508);
+      var options = {
+        zoom: 2,
+        center: latlong
+      }
+      map = new google.maps.Map(document.getElementById('map'), options);
+    }
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC10mzKXpMfjGa1LMZgKGEgvDvAs_WKZ20&libraries=places&callback=initMap" async defer>
+  </script>
+
+  <br>
+
   <div class="compute">
       <button onclick = "calc()"> COMPUTE</button>
  </div>
