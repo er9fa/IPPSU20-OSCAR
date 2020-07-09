@@ -65,6 +65,8 @@ body{
     Location of ISS:  &emsp;
     Longitude: &ensp; "<span id="iss_longitude"> </span>", &emsp;
     Latitude: &ensp; "<span id="iss_latitude"> </span>"
+    <br>
+    Can I see it?: &ensp; <span id="result_iss"></span>
   </div>
 
   <div>
@@ -97,6 +99,26 @@ setInterval(() => {
 
   document.getElementById("iss_longitude").innerHTML = long
   document.getElementById("iss_latitude").innerHTML = lat
+
+  const earthradkm = 6371
+  const issalt = 400
+  var distkm = Math.sqrt(Math.pow(issalt + earthradkm, 2) - Math.pow(earthradkm, 2))
+  var degreesdist = distkm*1000*0.0001/11.1
+
+  var ulong /*placeholder vars for user's longitude*/
+  var ulat /*placeholder vars for user's latitude*/
+  var num_long = parseFloat(long);
+  var num_lat = parseFloat(lat)
+  var num_ulong = parseFloat(ulong)
+  var num_ulat = parseFloat(ulat)
+  var x_cir = num_long - num_ulong
+  var y_cir = num_lat - num_ulat
+  var visioncheck = Math.pow(x_cir,2) + Math.pow(y_cir,2)
+  if (visioncheck<=Math.pow(degreesdist.toFixed(4),2)){
+    document.getElementById("result_iss").innerHTML = true
+  }else{
+    document.getElementById("result_iss").innerHTML = false
+  }
 })
 }
 
