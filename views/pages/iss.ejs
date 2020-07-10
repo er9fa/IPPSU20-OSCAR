@@ -130,9 +130,9 @@ body{
 </body>
 
 <script>
-  fetch("http://api.open-notify.org/iss-now.json").then(r => r.json()).then(data => {
-    var long = data.iss_position.longitude;
-    var lat = data.iss_position.latitude;
+  fetch("https://api.wheretheiss.at/v1/satellites/25544").then(r => r.json()).then(data => {
+    var long = data.longitude;
+    var lat = data.latitude;
 
     document.getElementById("iss_longitude").innerHTML = long;
     document.getElementById("iss_latitude").innerHTML = lat;
@@ -147,17 +147,17 @@ setInterval(() => {
 
   function calc(){
   i = 0
-  fetch("http://api.open-notify.org/iss-now.json").then(r => r.json()).then(data => {
-  var long = data.iss_position.longitude;
-  var lat = data.iss_position.latitude;
+  fetch("https://api.wheretheiss.at/v1/satellites/25544").then(r => r.json()).then(data => {
+  var long = data.longitude;
+  var lat = data.latitude;
 
   document.getElementById("iss_longitude").innerHTML = long
   document.getElementById("iss_latitude").innerHTML = lat
 
   const earthradkm = 6371
-  const issalt = 400
-  var distkm = Math.sqrt(Math.pow(issalt + earthradkm, 2) - Math.pow(earthradkm, 2))
-  var degreesdist = distkm*1000*0.0001/11.1
+  var issalt = data.altitude;
+  var distkmarc = earthradkm*Math.acos(earthradkm/(earthradkm+issalt))
+  var degreesdist = distkmarc*1000*0.0001/11.1
 
   var ulong = userlong;
   var ulat = userlat;
