@@ -56,10 +56,22 @@ body{
   <br>
 
   <div class="compute">
-      <button onclick = "calc()"> COMPUTE</button>
- </div>
+    <button onclick="myFunction(); calc()">COMPUTE</button>
+  </div>
 
-  <br><div> Date & Time: </div>
+  <script>
+  function myFunction() {
+    var d = new Date();
+    document.getElementById("demo").innerHTML = d;
+  }
+  </script>
+
+   <br><div> Date & Time:<p id="demo"></p></div>
+
+   <script>
+   var d = new Date();
+   document.getElementById("demo").innerHTML = d;
+   </script>
 
   <div>
     Location of ISS:  &emsp;
