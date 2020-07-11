@@ -7,7 +7,7 @@ h1 {
     text-align: center;
     font-size: 60px;
     color: white;
-    text-shadow: -4px 4px 4px #999;
+    text-shadow: 5px 5px 3px #999;
     font-family: 'Orbitron', sans-serif;
 }
 .compute button{
@@ -47,42 +47,52 @@ body{
 #rcorners2 {
   border-radius: 25px;
   background: white;
-  width: 400px;
-  height: 50px;
+  width: 500px;
+  height: 75px;
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
   font-family: "Helvetica";
   font-weight: 100;
-  line-height: 10px;
+  line-height: 15px;
+  margin: 10px 25px 10px 150px;
+  float:left;
+  box-shadow: 5px 5px 3px 1px #999;
 }
 #rcorners3 {
   border-radius: 25px;
   background: white;
-  width: 400px;
-  height: 50px;
+  width: 500px;
+  height: 75px;
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
   font-family: "Helvetica";
   font-weight: 100;
-  line-height: 17px;
+  line-height: 24px;
+  margin: 10px 150px 10px 25px;
+  float:right;
+  box-shadow: 5px 5px 3px 1px #999;
 }
 .circletext {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  padding: 10px;
-  font-size: 12px;
-  font-family: Helvetica;
-  font-weight: 100 bold;
+  padding: 15px;
+  font-size: 16px;
+  font-family: 'Orbitron';
+  font-weight: 100;
   color: black;
   text-align: center;
   background: #F4D03F;
-  margin:10px 50px 50px 40px;
+  line-height: 16.5px;
 }
 #alignleft {
   float:left;
+  margin: 20px 50px 50px 315px;
 }
-
+#alignright {
+  float:right;
+  margin: 20px 315px 50px 50px;
+}
 </style>
 </head>
 
@@ -165,17 +175,16 @@ body{
    <script>
      var d = new Date();
      document.getElementById("demo").innerHTML = d;
-   </script><br>
+   </script>
   <div id="rcorners3">
     Location of ISS:  &emsp; <br>
     Longitude: <span id="iss_longitude"> </span>
     <br>
     Latitude: <span id="iss_latitude"> </span>
-    <br>
   </div>
-  <br>
-  <div class="circletext" id="alignleft">
-    <br> <br> &nbsp; Can I see it?: &ensp; <span id="result_iss"></span>
+
+  <div class="circletext" id="alignright">
+    <br><br><br> &nbsp; Can I see it?: &ensp; <span id="result_iss"></span>
   </div>
 
   <div class="circletext" id="alignleft">
@@ -232,7 +241,6 @@ setInterval(() => {
   }
 })
 }
-
 </script>
 
 </html>
