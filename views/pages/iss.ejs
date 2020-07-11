@@ -6,27 +6,81 @@
 h1 {
     text-align: center;
     font-size: 60px;
+    color: white;
+    text-shadow: -4px 4px 4px #999;
     font-family: 'Orbitron', sans-serif;
 }
 .compute button{
-  background-color: dodgerblue;
+  background-color: #F4D03F;
   border: 1px solid black;
   border-radius: 50px;
-  color: white;
+  color: black;
   padding: 10px 24px;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Helvetica";
+  font-weight:100;
 }
 .compute button:hover {
   background-color: cornflowerblue;
 }
 body{
+  background: url(https://i0.wp.com/fieldgradeleader.themilitaryleader.com/wp-content/uploads/2019/02/earth-1149733.jpg?fit=4256%2C2832);
+  background-size: 170%, 170%;
   text-align: center;
 }
-
 .textbox {
-  font-family: "Times New Roman";
+  font-family: "Helvetica";
+  font-weight: 100;
   margin: 1px 10 10 30px;
+  color: black;
+}
+#rcorners1 {
+  border-radius: 25px;
+  background: white;
+  width: 600px;
+  height: 50px;
+  margin:0 auto;
+  text-align: center;
+  box-shadow: 5px 5px 3px 1px #999;
+}
+#rcorners2 {
+  border-radius: 25px;
+  background: white;
+  width: 400px;
+  height: 50px;
+  text-align: center;
+  font-size: 12px;
+  font-family: "Helvetica";
+  font-weight: 100;
+  line-height: 10px;
+}
+#rcorners3 {
+  border-radius: 25px;
+  background: white;
+  width: 400px;
+  height: 50px;
+  text-align: center;
+  font-size: 12px;
+  font-family: "Helvetica";
+  font-weight: 100;
+  line-height: 17px;
+}
+.circletext {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 12px;
+  font-family: Helvetica;
+  font-weight: 100 bold;
+  color: black;
+  text-align: center;
+  background: #F4D03F;
+  margin:10px 50px 50px 40px;
+}
+#alignleft {
+  float:left;
 }
 
 </style>
@@ -42,16 +96,18 @@ body{
   }
   </style>
 
-  <div class="textbox">
+  <div class="textbox" id="rcorners1">
+    <br>
     <form>
       <label>Latitude:</label>
       <input type="text" id="ulat"/>
+      &emsp;
       <label>Longitude:</label>
       <input type="text" id="ulong"/>
     </form>
     <p id="comp"></p>
   </div>
-
+  <br>
 
   <div id="map"> </div>
   <script>
@@ -68,13 +124,11 @@ body{
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC10mzKXpMfjGa1LMZgKGEgvDvAs_WKZ20&libraries=places&callback=initMap" async defer>
   </script>
-
   <br>
 
   <div class="compute">
     <button onclick="myFunction(); calc(); latlonginput();">COMPUTE</button>
   </div>
-
 
   <script>
   var userlat = "";
@@ -99,7 +153,6 @@ body{
   }
   </script>
 
-
   <script>
   function myFunction() {
     var d = new Date();
@@ -107,26 +160,28 @@ body{
   }
   </script>
 
-   <br><div> Date & Time:<p id="demo"></p></div>
-
+   <br>
+   <div id="rcorners2"> <br> Date & Time: <p id="demo"></p></div>
    <script>
-   var d = new Date();
-   document.getElementById("demo").innerHTML = d;
-   </script>
-
-  <div>
-    Location of ISS:  &emsp;
-    Longitude: &ensp; "<div id="iss_longitude"> </div>", &emsp;
+     var d = new Date();
+     document.getElementById("demo").innerHTML = d;
+   </script><br>
+  <div id="rcorners3">
+    Location of ISS:  &emsp; <br>
+    Longitude: <span id="iss_longitude"> </span>
     <br>
-    Latitude: &ensp; "<span id="iss_latitude"> </span>"
+    Latitude: <span id="iss_latitude"> </span>
     <br>
-    Can I see it?: &ensp; <span id="result_iss"></span>
+  </div>
+  <br>
+  <div class="circletext" id="alignleft">
+    <br> <br> &nbsp; Can I see it?: &ensp; <span id="result_iss"></span>
   </div>
 
-  <div>
-    Time since last request for ISS position: <span id="count"> </span>
+  <div class="circletext" id="alignleft">
+    <br><br>Time since last request for ISS position: <span id="count"> </span>
   </div>
-
+  <br>
 </body>
 
 <script>
