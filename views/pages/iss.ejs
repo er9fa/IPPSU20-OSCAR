@@ -6,23 +6,96 @@
 h1 {
     text-align: center;
     font-size: 60px;
+    color: white;
+    text-shadow: 5px 5px 3px #999;
     font-family: 'Orbitron', sans-serif;
 }
 .compute button{
-  background-color: dodgerblue;
+  background-color: #F4D03F;
   border: 1px solid black;
   border-radius: 50px;
-  color: white;
+  color: black;
   padding: 10px 24px;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Helvetica";
+  font-weight:100;
 }
 .compute button:hover {
   background-color: cornflowerblue;
 }
 body{
+  background: url(https://i0.wp.com/fieldgradeleader.themilitaryleader.com/wp-content/uploads/2019/02/earth-1149733.jpg?fit=4256%2C2832);
+  background-size: 170%, 170%;
   text-align: center;
 }
+<<<<<<< HEAD
+=======
+.textbox {
+  font-family: "Helvetica";
+  font-weight: 100;
+  margin: 1px 10 10 30px;
+  color: black;
+}
+#rcorners1 {
+  border-radius: 25px;
+  background: white;
+  width: 600px;
+  height: 50px;
+  margin:0 auto;
+  text-align: center;
+  box-shadow: 5px 5px 3px 1px #999;
+}
+#rcorners2 {
+  border-radius: 25px;
+  background: white;
+  width: 500px;
+  height: 75px;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Helvetica";
+  font-weight: 100;
+  line-height: 15px;
+  margin: 10px 25px 10px 150px;
+  float:left;
+  box-shadow: 5px 5px 3px 1px #999;
+}
+#rcorners3 {
+  border-radius: 25px;
+  background: white;
+  width: 500px;
+  height: 75px;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Helvetica";
+  font-weight: 100;
+  line-height: 24px;
+  margin: 10px 150px 10px 25px;
+  float:right;
+  box-shadow: 5px 5px 3px 1px #999;
+}
+.circletext {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  padding: 15px;
+  font-size: 16px;
+  font-family: 'Orbitron';
+  font-weight: 100;
+  color: black;
+  text-align: center;
+  background: #F4D03F;
+  line-height: 16.5px;
+}
+#alignleft {
+  float:left;
+  margin: 20px 50px 50px 315px;
+}
+#alignright {
+  float:right;
+  margin: 20px 315px 50px 50px;
+}
+>>>>>>> 06d30e0fe409de16d05e94afa1ee8bebe936f006
 </style>
 </head>
 
@@ -36,6 +109,22 @@ body{
   }
   </style>
 
+<<<<<<< HEAD
+=======
+  <div class="textbox" id="rcorners1">
+    <br>
+    <form>
+      <label>Latitude:</label>
+      <input type="text" id="ulat"/>
+      &emsp;
+      <label>Longitude:</label>
+      <input type="text" id="ulong"/>
+    </form>
+    <p id="comp"></p>
+  </div>
+  <br>
+
+>>>>>>> 06d30e0fe409de16d05e94afa1ee8bebe936f006
   <div id="map"> </div>
 
   <script>
@@ -52,13 +141,38 @@ body{
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC10mzKXpMfjGa1LMZgKGEgvDvAs_WKZ20&libraries=places&callback=initMap" async defer>
   </script>
-
   <br>
 
   <div class="compute">
     <button onclick="myFunction(); calc()">COMPUTE</button>
   </div>
 
+<<<<<<< HEAD
+=======
+  <script>
+  var userlat = "";
+  var userlong = "";
+  function latlonginput() {
+    var result;
+    userlat = document.getElementById('ulat').value;
+    userlong = document.getElementById('ulong').value;
+    if (userlat !== "" && userlong !== "") {
+      result = userlat + ", " + userlong;
+      document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
+    }
+    else if (userlat == "" && userlong == "") {
+      document.getElementById('comp').innerHTML="Please enter a latitude and longitude";
+    }
+    else if (userlong == "") {
+      document.getElementById('comp').innerHTML="Please enter a longitude";
+    }
+    else {
+      document.getElementById('comp').innerHTML="Please enter a latitude";
+    }
+  }
+  </script>
+
+>>>>>>> 06d30e0fe409de16d05e94afa1ee8bebe936f006
   <script>
   function myFunction() {
     var d = new Date();
@@ -66,31 +180,41 @@ body{
   }
   </script>
 
-   <br><div> Date & Time:<p id="demo"></p></div>
-
+   <br>
+   <div id="rcorners2"> <br> Date & Time: <p id="demo"></p></div>
    <script>
-   var d = new Date();
-   document.getElementById("demo").innerHTML = d;
+     var d = new Date();
+     document.getElementById("demo").innerHTML = d;
    </script>
+<<<<<<< HEAD
 
   <div>
     Location of ISS:  &emsp;
     Longitude: &ensp; "<span id="iss_longitude"> </span>", &emsp;
     Latitude: &ensp; "<span id="iss_latitude"> </span>"
+=======
+  <div id="rcorners3">
+    Location of ISS:  &emsp; <br>
+    Longitude: <span id="iss_longitude"> </span>
+>>>>>>> 06d30e0fe409de16d05e94afa1ee8bebe936f006
     <br>
-    Can I see it?: &ensp; <span id="result_iss"></span>
+    Latitude: <span id="iss_latitude"> </span>
   </div>
 
-  <div>
-    Time since last request for ISS position: <span id="count"> </span>
+  <div class="circletext" id="alignright">
+    <br><br><br> &nbsp; Can I see it?: &ensp; <span id="result_iss"></span>
   </div>
 
+  <div class="circletext" id="alignleft">
+    <br><br>Time since last request for ISS position: <span id="count"> </span>
+  </div>
+  <br>
 </body>
 
 <script>
-  fetch("http://api.open-notify.org/iss-now.json").then(r => r.json()).then(data => {
-    var long = data.iss_position.longitude;
-    var lat = data.iss_position.latitude;
+  fetch("https://api.wheretheiss.at/v1/satellites/25544").then(r => r.json()).then(data => {
+    var long = data.longitude;
+    var lat = data.latitude;
 
     document.getElementById("iss_longitude").innerHTML = long;
     document.getElementById("iss_latitude").innerHTML = lat;
@@ -105,17 +229,17 @@ setInterval(() => {
 
   function calc(){
   i = 0
-  fetch("http://api.open-notify.org/iss-now.json").then(r => r.json()).then(data => {
-  var long = data.iss_position.longitude;
-  var lat = data.iss_position.latitude;
+  fetch("https://api.wheretheiss.at/v1/satellites/25544").then(r => r.json()).then(data => {
+  var long = data.longitude;
+  var lat = data.latitude;
 
   document.getElementById("iss_longitude").innerHTML = long
   document.getElementById("iss_latitude").innerHTML = lat
 
   const earthradkm = 6371
-  const issalt = 400
-  var distkm = Math.sqrt(Math.pow(issalt + earthradkm, 2) - Math.pow(earthradkm, 2))
-  var degreesdist = distkm*1000*0.0001/11.1
+  var issalt = data.altitude;
+  var distkmarc = earthradkm*Math.acos(earthradkm/(earthradkm+issalt))
+  var degreesdist = distkmarc*1000*0.0001/11.1
 
   var ulong /*placeholder vars for user's longitude*/
   var ulat /*placeholder vars for user's latitude*/
@@ -133,7 +257,6 @@ setInterval(() => {
   }
 })
 }
-
 </script>
 
 </html>
