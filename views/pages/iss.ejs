@@ -23,12 +23,6 @@ h1 {
 body{
   text-align: center;
 }
-
-.textbox {
-  font-family: "Times New Roman";
-  margin: 1px 10 10 30px;
-}
-
 </style>
 </head>
 
@@ -42,18 +36,8 @@ body{
   }
   </style>
 
-  <div class="textbox">
-    <form>
-      <label>Latitude:</label>
-      <input type="text" id="ulat"/>
-      <label>Longitude:</label>
-      <input type="text" id="ulong"/>
-    </form>
-    <p id="comp"></p>
-  </div>
-
-
   <div id="map"> </div>
+
   <script>
     function initMap() {
       var map;
@@ -72,33 +56,8 @@ body{
   <br>
 
   <div class="compute">
-    <button onclick="myFunction(); calc(); latlonginput();">COMPUTE</button>
+    <button onclick="myFunction(); calc()">COMPUTE</button>
   </div>
-
-
-  <script>
-  var userlat = "";
-  var userlong = "";
-  function latlonginput() {
-    var result;
-    userlat = document.getElementById('ulat').value;
-    userlong = document.getElementById('ulong').value;
-    if (userlat !== "" && userlong !== "") {
-      result = userlat + ", " + userlong;
-      document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
-    }
-    else if (userlat == "" && userlong == "") {
-      document.getElementById('comp').innerHTML="Please enter a latitude and longitude";
-    }
-    else if (userlong == "") {
-      document.getElementById('comp').innerHTML="Please enter a longitude";
-    }
-    else {
-      document.getElementById('comp').innerHTML="Please enter a latitude";
-    }
-  }
-  </script>
-
 
   <script>
   function myFunction() {
@@ -116,8 +75,7 @@ body{
 
   <div>
     Location of ISS:  &emsp;
-    Longitude: &ensp; "<div id="iss_longitude"> </div>", &emsp;
-    <br>
+    Longitude: &ensp; "<span id="iss_longitude"> </span>", &emsp;
     Latitude: &ensp; "<span id="iss_latitude"> </span>"
     <br>
     Can I see it?: &ensp; <span id="result_iss"></span>
@@ -159,10 +117,8 @@ setInterval(() => {
   var distkm = Math.sqrt(Math.pow(issalt + earthradkm, 2) - Math.pow(earthradkm, 2))
   var degreesdist = distkm*1000*0.0001/11.1
 
-  var ulong = userlong;
-  var ulat = userlat;
-  console.log("Cheking latitude: " + ulat);
-  console.log("Checking longitude: " + ulong);
+  var ulong /*placeholder vars for user's longitude*/
+  var ulat /*placeholder vars for user's latitude*/
   var num_long = parseFloat(long);
   var num_lat = parseFloat(lat)
   var num_ulong = parseFloat(ulong)
