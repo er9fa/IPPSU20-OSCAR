@@ -76,7 +76,7 @@ p{
   border: 9px double #484E5E;
   width: 500px;
   height: 500px;
-  margin:0 auto;
+  margin: 20px auto;
   text-align: center;
   color: white;
 }
@@ -91,7 +91,7 @@ p{
    font-family: "Helvetica";
    font-weight: 100;
    line-height: 16px;
-   margin: 0 auto;
+   margin: 30px auto 30px auto;
 }
 #rcorners3 {
   border-radius: 25px;
@@ -154,10 +154,12 @@ p{
   <div id="map"> </div>
 
   <script>
+    var maplat;
+    var maplong;
+    var marker;
+    var map;
     function initMap() {
-      var map;
       var latlong = new google.maps.LatLng(30, 20);
-      var marker;
       var options = {
         zoom: 3,
         center: latlong
@@ -172,33 +174,57 @@ p{
       google.maps.event.addListener(map, 'click', function(e) {
         placeMarker(e.latLng, map, marker);
       })
-    marker.setClickable(true);
-    marker.addListener('click', function() {
-      map.setZoom(5);
-      map.setCenter(marker.getPosition());
-    });
+      marker.setClickable(true);
+      marker.addListener('click', function() {
+        map.setZoom(5);
+        map.setCenter(marker.getPosition());
+      });
 
-    google.maps.event.addListener(map, 'click', function(event) {
-      placeMarker(event.latLng);
-    });
-    function placeMarker(location) {
-      if (marker == undefined) {
-        marker = new google.maps.Marker({
-          position: location,
-          map: map,
-          animation: google.maps.Animation.DROP,
-        });
-      } else {
-        marker.setPosition(location);
-        userlat = marker.getPosition().lat();
-        userlong = marker.getPosition().lng();
-        console.log("TEST LAT: " + marker.getPosition().lat() + " check equals " + userlat);
-        console.log("TEST LONG: " + marker.getPosition().lng() + " check equals " + userlong);
+      google.maps.event.addListener(map, 'click', function(event) {
+        placeMarker(event.latLng);
+        maplat = marker.getPosition().lat();
+        maplong = marker.getPosition().lng();
+        document.getElementById('ulat').value = "";
+        document.getElementById('ulong').value = "";
+        userlat = maplat;
+        userlong = maplong;
+        document.getElementById('comp').innerHTML="User latitude and longitude: " + userlat + ", " + userlong;
+      });
+      google.maps.event.addListener(marker, 'dragend', function() {
+        maplat = marker.getPosition().lat();
+        maplong = marker.getPosition().lng();
+        document.getElementById('ulat').value = "";
+        document.getElementById('ulong').value = "";
+        userlat = maplat;
+        userlong = maplong;
+        document.getElementById('comp').innerHTML="User latitude and longitude: " + userlat + ", " + userlong;
+      })
+      function placeMarker(location) {
+        if (marker == undefined) {
+          marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            animation: google.maps.Animation.DROP,
+          });
+        } else {
+          marker.setPosition(location);
+          userlat = marker.getPosition().lat();
+          userlong = marker.getPosition().lng();
+          console.log("TEST LAT: " + marker.getPosition().lat() + " check equals " + userlat);
+          console.log("TEST LONG: " + marker.getPosition().lng() + " check equals " + userlong);
+        }
+        map.setCenter(location);
       }
-      map.setCenter(location);
     }
+    function reset() {
+      maplat = "";
+      maplong = "";
     }
-
+    function markerPosition() {
+      myLatLng = new google.maps.LatLng({lat: parseInt(userlat), lng: parseInt(userlong)});
+      marker.setPosition(myLatLng);
+      map.setCenter(myLatLng);
+    }
   </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCT6pTAuib-JSgt6j1obhJsrcbPm_dxt1s&libraries=places&callback=initMap" async defer>
@@ -206,7 +232,7 @@ p{
   <br>
 
   <div class="compute">
-    <button onclick="myFunction(); calc(); latlonginput(); counter();">COMPUTE</button>
+    <button onclick="myFunction(); calc(); latlonginput(); counter(); reset(); markerPosition();">COMPUTE</button>
   </div>
 
   <script>
@@ -218,19 +244,26 @@ p{
     var result;
     inputLat = document.getElementById('ulat').value;
     inputLong = document.getElementById('ulong').value;
-    if (userlat !== undefined && userlong !== undefined) {
-      result = userlat + ", " + userlong;
-      document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
-    } else if (userlat == undefined && userlong == undefined) {
-        if (inputLat !== "" && inputLong !== "") {
-          userlat = inputLat;
-          userlong = inputLong;
+    if (maplat == "" && maplong == "" || maplat == undefined && maplong == undefined) {
+      if (inputLat !== "" && inputLong !== "") {
+        userlat = inputLat;
+        userlong = inputLong;
+        result = userlat + ", " + userlong;
+        document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
+        document.getElementById('ulat').value = "";
+        document.getElementById('ulong').value = "";
       } else if (inputLat == "" && inputLong == "") {
-          document.getElementById('comp').innerHTML="Please enter a latitude and longitude.";
+        userlat = inputLat;
+        userlong = inputLong;
+        document.getElementById('comp').innerHTML="Please enter a latitude and longitude.";
       } else if (inputLong == "") {
-          document.getElementById('comp').innerHTML="Please enter a longitude.";
+        userlat = inputLat;
+        userlong = inputLong;
+        document.getElementById('comp').innerHTML="Please enter a longitude.";
       } else {
-          document.getElementById('comp').innerHTML="Please enter a latitude.";
+        userlat = inputLat;
+        userlong = inputLong;
+        document.getElementById('comp').innerHTML="Please enter a latitude.";
       }
     }
   }
@@ -250,7 +283,7 @@ p{
       setInterval(() => {
         console.log(i);
         document.getElementById("count").innerHTML = i;
-        i++;}, 1000)
+        i++;}, 1000);
     }
     </script>
 
