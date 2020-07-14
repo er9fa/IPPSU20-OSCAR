@@ -21,10 +21,9 @@ h1 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   font-family: "Helvetica";
   font-weight: bold;
-  font-weight:100;
 }
 .compute button:hover {
-  background-color: cornflowerblue;
+  background-color: gray;
 }
 body{
   background: url(https://i0.wp.com/fieldgradeleader.themilitaryleader.com/wp-content/uploads/2019/02/earth-1149733.jpg?fit=4256%2C2832);
@@ -37,6 +36,8 @@ label{
 input[type=text]{
   background-color: transparent;
   color: white;
+  border-radius: 50px;
+
 }
 p{
   color: white;
@@ -48,40 +49,36 @@ p{
   color: black;
 }
 #rcorners1 {
+  border-radius: 50px;
+  background: transparent;
+  border: 9px double yellowgreen;
+  width: 600px;
+  height: 50px;
+  margin:0 auto;
+  text-align: center;
+  color: white;
+}
+#rcorners2 {
+   border-radius: 50%;
+   background: #3F4457;
+   opacity: 0.8;
+   width: 375px;
+   height: 340px;
+   text-align: center;
+   font-size: 16px;
+   font-family: "Helvetica";
+   font-weight: 100;
+   line-height: 16px;
+   margin-left: 520px;
+   margin-top:50px;
+}
+#rcorners3 {
   border-radius: 25px;
   background: white;
   width: 600px;
   height: 50px;
   margin:0 auto;
   text-align: center;
-  box-shadow: 5px 5px 3px 1px #999;
-}
-#rcorners2 {
-  border-radius: 25px;
-  background: white;
-  width: 500px;
-  height: 75px;
-  text-align: center;
-  font-size: 16px;
-  font-family: "Helvetica";
-  font-weight: 100;
-  line-height: 15px;
-  margin: 10px 25px 10px 150px;
-  float:left;
-  box-shadow: 5px 5px 3px 1px #999;
-}
-#rcorners3 {
-  border-radius: 25px;
-  background: white;
-  width: 500px;
-  height: 75px;
-  text-align: center;
-  font-size: 16px;
-  font-family: "Helvetica";
-  font-weight: 100;
-  line-height: 24px;
-  margin: 10px 150px 10px 25px;
-  float:right;
   box-shadow: 5px 5px 3px 1px #999;
 }
 .circletext {
@@ -121,16 +118,16 @@ p{
   <div class="textbox" id="rcorners1">
     <br>
     <form>
-      <label>Latitude:</label>
       <label>LATITUDE:</label>
       <input type="text" id="ulat"/>
       &emsp;
-      <label>Longitude:</label>
       <label>LONGITUDE:</label>
       <input type="text" id="ulong"/>
     </form>
+    <br>
     <p id="comp"></p>
   </div>
+  <br>
   <br>
 
   <div id="map"> </div>
@@ -152,7 +149,7 @@ p{
   <br>
 
   <div class="compute">
-    <button onclick="myFunction(); calc(); latlonginput();">COMPUTE</button>
+    <button onclick="myFunction(); calc(); latlonginput(); count();">COMPUTE</button>
   </div>
 
   <script>
@@ -167,53 +164,44 @@ p{
       document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
     }
     else if (userlat == "" && userlong == "") {
-      document.getElementById('comp').innerHTML="Please enter a latitude and longitude";
+      document.getElementById('comp').innerHTML="Please enter a latitude and longitude.";
     }
     else if (userlong == "") {
-      document.getElementById('comp').innerHTML="Please enter a longitude";
+      document.getElementById('comp').innerHTML="Please enter a longitude.";
     }
     else {
-      document.getElementById('comp').innerHTML="Please enter a latitude";
+      document.getElementById('comp').innerHTML="Please enter a latitude.";
     }
   }
   </script>
 
-  <script>
-  function myFunction() {
-    var d = new Date();
-    document.getElementById("demo").innerHTML = d;
-    var dt = new Date();
-    document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
-  }
-  </script>
+  <div id="rcorners2">
+    <script>
+    function myFunction() {
+      var dt = new Date();
+      document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
+    }
+    </script>
 
-   <br>
-   <div id="rcorners2"> <br> <b>Date & Time:</b> <p id="demo"></p></div>
-   <script>
-     var d = new Date();
-     document.getElementById("demo").innerHTML = d;
-   </script>
-   
-  <div id="rcorners3">
-    Location of ISS:  &emsp; <br>
-   <p>Date & Time: <span id="datetime"></span></p>
-    Longitude: <span id="iss_longitude"> </span>
+     <br>
+     <br>
+     <p>Date & Time: <span id="datetime"></span></p>
+
+    <div><p>
+
+      Location of ISS: <br>
+      Longitude: <span id="iss_longitude"> </span>
+      <br>
+      Latitude: <span id="iss_latitude"> </span></p>
+    </div>
+
+      <br><p>Can I see it?: <span id="result_iss"></span></p>
+      <br><p>Time since last request for ISS position: <span id="count"> </span></p>
     <br>
-    Latitude: <span id="iss_latitude"> </span>
-    <br>
-    Longitude: <span id="iss_longitude"> </span>
-  </div>
+    </div>
 
-  <div class="circletext" id="alignright">
-    <br><br><br> &nbsp; <b>Can I see it?:</b> &ensp; <br> <span id="result_iss"></span>
-  </div>
-
-  <div class="circletext" id="alignleft">
-    <br><br> <i>Time since last request for ISS position:</i> <br> <b> <span id="count"></b> </span>
-
-  </div>
   <br>
-  <div style = "position: relative; top:300px;" class = "textbox" id = "rcorners1">
+  <div style = "position: relative; top:300px;" class = "textbox" id = "rcorners3">
     <br>
     <Label><b>Behind The Scenes</b></Label>
     <img style = "position: relative; top:-225px; width="500"; height="500"" src="/Calc_FOV.gif"> </div>
