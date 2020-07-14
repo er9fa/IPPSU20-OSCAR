@@ -152,7 +152,7 @@ p{
   <br>
 
   <div class="compute">
-    <button onclick="myFunction(); calc()">COMPUTE</button>
+    <button onclick="myFunction(); calc(); latlonginput();">COMPUTE</button>
   </div>
 
   <script>
@@ -188,27 +188,35 @@ p{
   </script>
 
    <br>
-   <div id="rcorners2"> <br> Date & Time: <p id="demo"></p></div>
+   <div id="rcorners2"> <br> <b>Date & Time:</b> <p id="demo"></p></div>
    <script>
      var d = new Date();
      document.getElementById("demo").innerHTML = d;
    </script>
+   
   <div id="rcorners3">
     Location of ISS:  &emsp; <br>
    <p>Date & Time: <span id="datetime"></span></p>
     Longitude: <span id="iss_longitude"> </span>
     <br>
     Latitude: <span id="iss_latitude"> </span>
+    <br>
+    Longitude: <span id="iss_longitude"> </span>
   </div>
 
   <div class="circletext" id="alignright">
-    <br><br><br> &nbsp; Can I see it?: &ensp; <span id="result_iss"></span>
+    <br><br><br> &nbsp; <b>Can I see it?:</b> &ensp; <br> <span id="result_iss"></span>
   </div>
 
   <div class="circletext" id="alignleft">
-    <br><br>Time since last request for ISS position: <span id="count"> </span>
+    <br><br> <i>Time since last request for ISS position:</i> <br> <b> <span id="count"></b> </span>
+
   </div>
   <br>
+  <div style = "position: relative; top:300px;" class = "textbox" id = "rcorners1">
+    <br>
+    <Label><b>Behind The Scenes</b></Label>
+    <img style = "position: relative; top:-225px; width="500"; height="500"" src="/Calc_FOV.gif"> </div>
 </body>
 
 <script>
@@ -216,8 +224,8 @@ p{
     var long = data.longitude;
     var lat = data.latitude;
 
-    document.getElementById("iss_longitude").innerHTML = long;
-    document.getElementById("iss_latitude").innerHTML = lat;
+    document.getElementById("iss_longitude").innerHTML = long.toFixed(4);
+    document.getElementById("iss_latitude").innerHTML = lat.toFixed(4);
 })
 
 var i = 0;
@@ -233,8 +241,8 @@ setInterval(() => {
   var long = data.longitude;
   var lat = data.latitude;
 
-  document.getElementById("iss_longitude").innerHTML = long
-  document.getElementById("iss_latitude").innerHTML = lat
+  document.getElementById("iss_longitude").innerHTML = long.toFixed(4);
+  document.getElementById("iss_latitude").innerHTML = lat.toFixed(4);
 
   const earthradkm = 6371
   var issalt = data.altitude;
