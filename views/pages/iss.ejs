@@ -5,20 +5,22 @@
 <style>
 h1 {
     text-align: center;
-    font-size: 60px;
+    font-size: 72px;
     color: white;
     text-shadow: 5px 5px 3px #999;
     font-family: 'Orbitron', sans-serif;
 }
+
 .compute button{
-  background-color: #F4D03F;
-  border: 1px solid black;
+  background-color: transparent;
+  border: 9px double yellowgreen;
   border-radius: 50px;
-  color: black;
+  color: white ;
   padding: 10px 24px;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   font-family: "Helvetica";
+  font-weight: bold;
   font-weight:100;
 }
 .compute button:hover {
@@ -28,6 +30,16 @@ body{
   background: url(https://i0.wp.com/fieldgradeleader.themilitaryleader.com/wp-content/uploads/2019/02/earth-1149733.jpg?fit=4256%2C2832);
   background-size: 170%, 170%;
   text-align: center;
+}
+label{
+  font-size: 16px;
+}
+input[type=text]{
+  background-color: transparent;
+  color: white;
+}
+p{
+  color: white;
 }
 .textbox {
   font-family: "Helvetica";
@@ -110,9 +122,11 @@ body{
     <br>
     <form>
       <label>Latitude:</label>
+      <label>LATITUDE:</label>
       <input type="text" id="ulat"/>
       &emsp;
       <label>Longitude:</label>
+      <label>LONGITUDE:</label>
       <input type="text" id="ulong"/>
     </form>
     <p id="comp"></p>
@@ -168,6 +182,8 @@ body{
   function myFunction() {
     var d = new Date();
     document.getElementById("demo").innerHTML = d;
+    var dt = new Date();
+    document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
   }
   </script>
 
@@ -179,6 +195,7 @@ body{
    </script>
   <div id="rcorners3">
     Location of ISS:  &emsp; <br>
+   <p>Date & Time: <span id="datetime"></span></p>
     Longitude: <span id="iss_longitude"> </span>
     <br>
     Latitude: <span id="iss_latitude"> </span>
