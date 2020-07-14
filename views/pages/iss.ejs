@@ -27,7 +27,9 @@ h1 {
 }
 body{
   background: url(https://i0.wp.com/fieldgradeleader.themilitaryleader.com/wp-content/uploads/2019/02/earth-1149733.jpg?fit=4256%2C2832);
-  background-size: 170%, 170%;
+  background-size: cover;
+  background-attachment: fixed;
+
   text-align: center;
 }
 label{
@@ -61,7 +63,7 @@ p{
 #rcorners1fill {
   border-radius: 50px;
   background: black;
-  border: 9px double yellowgreen;
+  border: 4px solid yellowgreen;
   width: 600px;
   height: 50px;
   margin:0 auto;
@@ -71,7 +73,7 @@ p{
 #rcorners1im {
   border-radius: 50px;
   background: black;
-  border: 9px double yellowgreen;
+  border: 9px double #484E5E;
   width: 500px;
   height: 500px;
   margin:0 auto;
@@ -81,7 +83,7 @@ p{
 #rcorners2 {
    border-radius: 50%;
    background: #3F4457;
-   opacity: 0.8;
+   opacity: 0.7;
    width: 375px;
    height: 340px;
    text-align: center;
@@ -169,7 +171,7 @@ p{
   <br>
 
   <div class="compute">
-    <button onclick="myFunction(); calc(); latlonginput(); count();">COMPUTE</button>
+    <button onclick="myFunction(); calc(); latlonginput(); counter();">COMPUTE</button>
   </div>
 
   <script>
@@ -203,9 +205,21 @@ p{
     }
     </script>
 
+    <script>
+    function counter(){
+      var i =0;
+      setInterval(() => {
+        console.log(i);
+        document.getElementById("count").innerHTML = i;
+        i++;}, 1000)
+    }
+    </script>
+
      <br>
      <br>
-     <p>Date & Time: <span id="datetime"></span></p>
+     <br>
+     <br>
+     <p><b>Date & Time: </b><span id="datetime"></span></p>
 
     <div><p>
 
@@ -215,26 +229,23 @@ p{
       Longitude: <span id="iss_longitude"> </span></p>
     </div>
 
-      <br><p>Can I see it?: <span id="result_iss"></span></p>
-      <br><p>Time since last request for ISS position: <span id="count"> </span></p>
+      <p><b>Can I see it? </b><span id="result_iss"></span></p>
+      <p><b>Time since last request for ISS position: </b><span id="count"> </span></p>
     <br>
     </div>
 
   <br>
   <div style = "position: relative; top:0px;" class = "textbox" id = "rcorners1fill">
     <br>
-    <Label><b>Behind The Scenes</b></Label>
+    <Label><b> -  -  - Behind The Scenes -  -  - </b></Label>
     <img style = "position: relative; top:25px; width="500"; id = "rcorners1im" height="500"" src="/Calc_FOV.gif"> </div>
+
+<br><br>
+
 </body>
 
 <script>
 
-var i = 0;
-setInterval(() => {
-  console.log(i);
-  document.getElementById("count").innerHTML = i;
-  i++;
-}, 1000)
 
   function calc(){
   i = 0
