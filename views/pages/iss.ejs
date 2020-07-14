@@ -156,13 +156,49 @@ p{
   <script>
     function initMap() {
       var map;
-      var latlong = new google.maps.LatLng(30.822, 21.508);
+      var latlong = new google.maps.LatLng(30, 20);
+      var marker;
       var options = {
-        zoom: 2,
+        zoom: 3,
         center: latlong
       }
       map = new google.maps.Map(document.getElementById('map'), options);
+      marker = new google.maps.Marker({
+        position: latlong,
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP
+      });
+      google.maps.event.addListener(map, 'click', function(e) {
+        placeMarker(e.latLng, map, marker);
+      })
+    marker.setClickable(true);
+    marker.addListener('click', function() {
+      map.setZoom(5);
+      map.setCenter(marker.getPosition());
+    });
+
+    google.maps.event.addListener(map, 'click', function(event) {
+      placeMarker(event.latLng);
+    });
+    function placeMarker(location) {
+      if (marker == undefined) {
+        marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          animation: google.maps.Animation.DROP,
+        });
+      } else {
+        marker.setPosition(location);
+        userlat = marker.getPosition().lat();
+        userlong = marker.getPosition().lng();
+        console.log("TEST LAT: " + marker.getPosition().lat() + " check equals " + userlat);
+        console.log("TEST LONG: " + marker.getPosition().lng() + " check equals " + userlong);
+      }
+      map.setCenter(location);
     }
+    }
+
   </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCT6pTAuib-JSgt6j1obhJsrcbPm_dxt1s&libraries=places&callback=initMap" async defer>
@@ -174,24 +210,28 @@ p{
   </div>
 
   <script>
-  var userlat = "";
-  var userlong = "";
+  var userlat;
+  var userlong;
+  var inputLat = "";
+  var inputLong = "";
   function latlonginput() {
     var result;
-    userlat = document.getElementById('ulat').value;
-    userlong = document.getElementById('ulong').value;
-    if (userlat !== "" && userlong !== "") {
+    inputLat = document.getElementById('ulat').value;
+    inputLong = document.getElementById('ulong').value;
+    if (userlat !== undefined && userlong !== undefined) {
       result = userlat + ", " + userlong;
       document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
-    }
-    else if (userlat == "" && userlong == "") {
-      document.getElementById('comp').innerHTML="Please enter a latitude and longitude.";
-    }
-    else if (userlong == "") {
-      document.getElementById('comp').innerHTML="Please enter a longitude.";
-    }
-    else {
-      document.getElementById('comp').innerHTML="Please enter a latitude.";
+    } else if (userlat == undefined && userlong == undefined) {
+        if (inputLat !== "" && inputLong !== "") {
+          userlat = inputLat;
+          userlong = inputLong;
+      } else if (inputLat == "" && inputLong == "") {
+          document.getElementById('comp').innerHTML="Please enter a latitude and longitude.";
+      } else if (inputLong == "") {
+          document.getElementById('comp').innerHTML="Please enter a longitude.";
+      } else {
+          document.getElementById('comp').innerHTML="Please enter a latitude.";
+      }
     }
   }
   </script>
@@ -272,9 +312,9 @@ p{
   var y_cir = num_lat - num_ulat
   var visioncheck = Math.pow(x_cir,2) + Math.pow(y_cir,2)
   if (visioncheck<=Math.pow(degreesdist.toFixed(4),2)){
-    document.getElementById("result_iss").innerHTML = true
+    document.getElementById("result_iss").innerHTML = "Yes"
   }else{
-    document.getElementById("result_iss").innerHTML = false
+    document.getElementById("result_iss").innerHTML = "No"
   }
 })
 }
