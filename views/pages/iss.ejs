@@ -10,8 +10,7 @@ h1 {
     text-shadow: 5px 5px 3px #999;
     font-family: 'Orbitron', sans-serif;
 }
-
-.compute button{
+.compute button {
   background-color: transparent;
   border: 9px double yellowgreen;
   border-radius: 50px;
@@ -25,23 +24,21 @@ h1 {
 .compute button:hover {
   background-color: gray;
 }
-body{
+body {
   background: url(https://i0.wp.com/fieldgradeleader.themilitaryleader.com/wp-content/uploads/2019/02/earth-1149733.jpg?fit=4256%2C2832);
   background-size: cover;
   background-attachment: fixed;
-
   text-align: center;
 }
-label{
+label {
   font-size: 16px;
 }
-input[type=text]{
+input[type=text] {
   background-color: transparent;
   color: white;
   border-radius: 50px;
-
 }
-p{
+p {
   color: white;
 }
 .textbox {
@@ -54,7 +51,7 @@ p{
   border-radius: 50px;
   background: transparent;
   border: 9px double yellowgreen;
-  width: 600px;
+  width: 700px;
   height: 50px;
   margin:0 auto;
   text-align: center;
@@ -76,7 +73,7 @@ p{
   border: 9px double #484E5E;
   width: 500px;
   height: 500px;
-  margin: 20px auto;
+  margin: 20px auto 20px auto;
   text-align: center;
   color: white;
 }
@@ -115,13 +112,18 @@ p{
   background: #F4D03F;
   line-height: 16.5px;
 }
-#alignleft {
-  float:left;
-  margin: 20px 50px 50px 315px;
-}
-#alignright {
-  float:right;
-  margin: 20px 315px 50px 50px;
+.locationsearch {
+  border-radius: 50px;
+  background: transparent;
+  border: 4px solid yellowgreen;
+  width: 500px;
+  height: 30px;
+  margin:20px auto 10px auto;
+  text-align: center;
+  color: white;
+  font-family: "Helvetica";
+  font-weight: 100;
+  padding: 15px 10px 4px 10px;
 }
 </style>
 </head>
@@ -133,6 +135,12 @@ p{
   #map {
     height:350px;
     width:100%;
+  }
+  .pac-card {
+    margin: 0 auto;
+    background-color: #fff;
+    font-family: Helvetica;
+    font-weight: 100;
   }
   </style>
 
@@ -151,6 +159,15 @@ p{
   <br>
   <br>
 
+  <div class=locationsearch>
+    <label>Enter a location:</label>
+    <input
+    id="searchTextField"
+    type="text"
+    size="50"
+    placeholder="Address"/>
+  </div>
+
   <div id="map"> </div>
 
   <script>
@@ -165,19 +182,34 @@ p{
         center: latlong
       }
       map = new google.maps.Map(document.getElementById('map'), options);
+
+      var input = document.getElementById('searchTextField');
+      var autocomplete = new google.maps.places.Autocomplete(input);
+
       marker = new google.maps.Marker({
         position: latlong,
         map: map,
         draggable: true,
         animation: google.maps.Animation.DROP
       });
-      google.maps.event.addListener(map, 'click', function(e) {
-        placeMarker(e.latLng, map, marker);
-      })
-      marker.setClickable(true);
-      marker.addListener('click', function() {
-        map.setZoom(5);
-        map.setCenter(marker.getPosition());
+
+      autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          document.getElementById('comp').innerHTML = "Invalid address: " + input.value;
+          return;
+        }
+        map.fitBounds(place.geometry.viewport);
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+
+        maplat = marker.getPosition().lat();
+        maplong = marker.getPosition().lng();
+        document.getElementById('ulat').value = "";
+        document.getElementById('ulong').value = "";
+        userlat = maplat;
+        userlong = maplong;
+        document.getElementById('comp').innerHTML= "Address: " + input.value + ". Latitude and longitude: " + userlat + ", " + userlong;
       });
 
       google.maps.event.addListener(map, 'click', function(event) {
@@ -188,8 +220,9 @@ p{
         document.getElementById('ulong').value = "";
         userlat = maplat;
         userlong = maplong;
-        document.getElementById('comp').innerHTML="User latitude and longitude: " + userlat + ", " + userlong;
+        document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
       });
+
       google.maps.event.addListener(marker, 'dragend', function() {
         maplat = marker.getPosition().lat();
         maplong = marker.getPosition().lng();
@@ -197,8 +230,9 @@ p{
         document.getElementById('ulong').value = "";
         userlat = maplat;
         userlong = maplong;
-        document.getElementById('comp').innerHTML="User latitude and longitude: " + userlat + ", " + userlong;
-      })
+        document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
+      });
+
       function placeMarker(location) {
         if (marker == undefined) {
           marker = new google.maps.Marker({
@@ -216,14 +250,19 @@ p{
         map.setCenter(location);
       }
     }
+
     function reset() {
       maplat = "";
       maplong = "";
+      document.getElementById('searchTextField').value = "";
     }
+
     function markerPosition() {
-      myLatLng = new google.maps.LatLng({lat: parseInt(userlat), lng: parseInt(userlong)});
-      marker.setPosition(myLatLng);
-      map.setCenter(myLatLng);
+      if (userlat && userlong) {
+        myLatLng = new google.maps.LatLng({lat: parseFloat(userlat), lng: parseFloat(userlong)});
+        marker.setPosition(myLatLng);
+        map.setCenter(myLatLng);
+      }
     }
   </script>
 
@@ -279,7 +318,7 @@ p{
 
     <script>
     function counter(){
-      var i =0;
+      var i=0;
       setInterval(() => {
         console.log(i);
         document.getElementById("count").innerHTML = i;
@@ -304,7 +343,7 @@ p{
       <p><b>Can I see it? </b><span id="result_iss"></span></p>
       <p><b>Time since last request for ISS position: </b><span id="count"> </span></p>
     <br>
-    </div>
+  </div>
 
   <br>
   <div style = "position: relative; top:0px;" class = "textbox" id = "rcorners1fill">
