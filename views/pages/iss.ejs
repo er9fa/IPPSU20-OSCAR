@@ -285,12 +285,17 @@ p {
     inputLong = document.getElementById('ulong').value;
     if (maplat == "" && maplong == "" || maplat == undefined && maplong == undefined) {
       if (inputLat !== "" && inputLong !== "") {
-        userlat = inputLat;
-        userlong = inputLong;
-        result = userlat + ", " + userlong;
-        document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
-        document.getElementById('ulat').value = "";
-        document.getElementById('ulong').value = "";
+        if (parseFloat(inputLat) && parseFloat(inputLong)) {
+          userlat = inputLat;
+          userlong = inputLong;
+          result = userlat + ", " + userlong;
+          document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
+          document.getElementById('ulat').value = "";
+          document.getElementById('ulong').value = "";
+        }
+        else {
+          document.getElementById('comp').innerHTML = "Please enter a valid number."
+        }
       } else if (inputLat == "" && inputLong == "") {
         userlat = inputLat;
         userlong = inputLong;
