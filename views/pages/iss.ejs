@@ -271,7 +271,7 @@ p {
   <br>
 
   <div class="compute">
-    <button onclick="myFunction(); calc(); latlonginput(); counter(); reset(); markerPosition();">COMPUTE</button>
+    <button onclick="myFunction(); calc(); latlonginput(); counter(); reset(); markerPosition(); clouds();">COMPUTE</button>
   </div>
 
   <script>
@@ -346,6 +346,7 @@ p {
     </div>
 
       <p><b>Can I see it? </b><span id="result_iss"></span></p>
+      <p><b> Weather Description: </b><span id="cloud_descrip"></span></p>
       <p><b>Time since last request for ISS position: </b><span id="count"> </span></p>
     <br>
   </div>
@@ -394,6 +395,15 @@ p {
     document.getElementById("result_iss").innerHTML = "No"
   }
 })
+}
+
+function clouds(){
+  fetch("https://api.openweathermap.org/data/2.5/weather?lat="+userlat+"&lon="+userlong+"&appid=658295ed6de928f64794e23ee97cab06").then(r_weath => r_weath.json()).then(data_weath => {
+      var cloudy_desc = data_weath.weather[0].description;
+      var cloudy = data_weath.clouds.all;
+      document.getElementById("cloud_descrip").innerHTML = cloudy_desc;
+      document.getElementById("cloud_perc").innerHTML = cloudy;
+  })
 }
 </script>
 
