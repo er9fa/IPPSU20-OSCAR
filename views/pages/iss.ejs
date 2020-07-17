@@ -126,14 +126,14 @@ p {
   padding: 15px 10px 4px 10px;
 }
 .dropdownbutton {
-  background-color: #3F4457;
+  background-color: transparent;
   opacity: 0.7;
   color: white;
   padding: 15px;
   font-size: 18px;
   font-family: monospace;
   border-radius: 30px;
-  border: 3px solid black;
+  border: 3px solid yellowgreen;
 }
 .dropdown {
   position: relative;
@@ -161,17 +161,20 @@ p {
 </style>
 </head>
 
-<div class="dropdown" style = "position: absolute; left:10px; top:20px;">
-<button class="dropdownbutton">Satellites</button>
-<div class="dropdown-content">
-  <a href="#">Satellite 1</a>
-  <a href="#">Satellite 2</a>
-  <a href="#">Satellite 3</a>
-</div>
-</div>
 <body>
   <br>
   <h1>Can I see the ISS?</h1>
+
+  <div class="dropdown">
+  <button class="dropdownbutton">Satellites</button>
+  <div class="dropdown-content">
+    <a href="#">Satellite 1</a>
+    <a href="#">Satellite 2</a>
+    <a href="#">Satellite 3</a>
+  </div>
+  </div>
+
+  <br>
 
   <style>
   #map {
@@ -186,6 +189,7 @@ p {
   }
   </style>
 
+<br>
   <div class="textbox" id="rcorners1">
     <br>
     <form>
@@ -313,7 +317,7 @@ p {
   <br>
 
   <div class="compute">
-    <button onclick="myFunction(); calc(); latlonginput(); counter(); reset(); markerPosition(); clouds();">COMPUTE</button>
+    <button onclick="myFunction(); calc(); latlonginput(); counter(); set(); markerPosition(); clouds();">COMPUTE</button>
   </div>
 
   <script>
@@ -365,13 +369,13 @@ p {
 
     <script>
     function counter(){
-      var i=0;
-      setInterval(() => {
-        console.log(i);
-        document.getElementById("count").innerHTML = i;
-        i++;}, 1000);
+     var i = 0;
+     setInterval(() => {
+       document.getElementById("count").innerHTML = i;
+       i+=1;
+     }, 1000);
     }
-    </script>
+   </script>
 
      <br>
      <br>
