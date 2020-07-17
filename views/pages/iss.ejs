@@ -81,8 +81,8 @@ p {
    border-radius: 50%;
    background: #3F4457;
    opacity: 0.7;
-   width: 375px;
-   height: 340px;
+   width: 475px;
+   height: 400px;
    text-align: center;
    font-size: 16px;
    font-family: "Helvetica";
@@ -346,7 +346,8 @@ p {
     </div>
 
       <p><b>Can I see it? </b><span id="result_iss"></span></p>
-      <p><b> Weather Description: </b><span id="cloud_descrip"></span></p>
+      <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
+      <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
       <p><b>Time since last request for ISS position: </b><span id="count"> </span></p>
     <br>
   </div>
@@ -365,7 +366,6 @@ p {
 
 
   function calc(){
-  i = 0
   fetch("https://api.wheretheiss.at/v1/satellites/25544").then(r => r.json()).then(data => {
   var long = data.longitude;
   var lat = data.latitude;
@@ -402,7 +402,13 @@ function clouds(){
       var cloudy_desc = data_weath.weather[0].description;
       var cloudy = data_weath.clouds.all;
       document.getElementById("cloud_descrip").innerHTML = cloudy_desc;
-      document.getElementById("cloud_perc").innerHTML = cloudy;
+      if(cloudy<=33){
+      document.getElementById("cloud_perc").innerHTML = cloudy+" There is likely light to no cloud coverage";
+    }else if (cloudy<=66) {
+      document.getElementById("cloud_perc").innerHTML = cloudy+" There is likely mid to heavy cloud coverage";
+    }else{
+      document.getElementById("cloud_perc").innerHTML = cloudy+" There is likely very heavy cloud coverage";
+    }
   })
 }
 </script>
