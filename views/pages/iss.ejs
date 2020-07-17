@@ -222,9 +222,9 @@ p {
     var marker;
     var map;
     function initMap() {
-      var latlong = new google.maps.LatLng(30, 20);
+      var latlong = new google.maps.LatLng(38.031078, -78.512772);
       var options = {
-        zoom: 3,
+        zoom: 12,
         center: latlong
       }
       map = new google.maps.Map(document.getElementById('map'), options);
@@ -317,7 +317,7 @@ p {
   <br>
 
   <div class="compute">
-    <button onclick="myFunction(); calc(); latlonginput(); counter(); set(); markerPosition(); clouds();">COMPUTE</button>
+    <button onclick="resetCounter(); myFunction(); calc(); latlonginput(); counter(); set(); markerPosition(); clouds();">COMPUTE</button>
   </div>
 
   <script>
@@ -368,12 +368,16 @@ p {
     </script>
 
     <script>
+    var count = null;
     function counter(){
      var i = 0;
-     setInterval(() => {
+     count = setInterval(() => {
        document.getElementById("count").innerHTML = i;
        i+=1;
      }, 1000);
+    }
+    function resetCounter() {
+      clearInterval(count);
     }
    </script>
 
