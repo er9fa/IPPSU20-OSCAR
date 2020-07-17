@@ -3,6 +3,7 @@
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
+/* title of the page */
 h1 {
     text-align: center;
     font-size: 72px;
@@ -10,6 +11,7 @@ h1 {
     text-shadow: 5px 5px 3px #999;
     font-family: 'Orbitron', sans-serif;
 }
+/* button that controls basic functions including user relation to space objects */
 .compute button {
   background-color: transparent;
   border: 9px double yellowgreen;
@@ -25,6 +27,7 @@ h1 {
   background-color: gray;
 }
 body {
+  /* background image is copyright free */
   background: url(https://i0.wp.com/fieldgradeleader.themilitaryleader.com/wp-content/uploads/2019/02/earth-1149733.jpg?fit=4256%2C2832);
   background-size: cover;
   background-attachment: fixed;
@@ -139,7 +142,6 @@ p {
   position: relative;
   display: inline-block;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -177,6 +179,7 @@ p {
   <br>
 
   <style>
+  /* style and size setting for the google map */
   #map {
     height:350px;
     width:100%;
@@ -193,9 +196,11 @@ p {
   <div class="textbox" id="rcorners1">
     <br>
     <form>
+      <!-- manual input box for user latitude -->
       <label>LATITUDE:</label>
       <input type="text" id="ulat"/>
       &emsp;
+      <!-- manual input box for user longitude -->
       <label>LONGITUDE:</label>
       <input type="text" id="ulong"/>
     </form>
@@ -206,7 +211,9 @@ p {
   <br>
 
   <div class=locationsearch>
+    <!-- user input for google autocomplete search bar -->
     <label>Enter a location:</label>
+    <!-- fields related to the google autocomplete search bar -->
     <input
     id="searchTextField"
     type="text"
@@ -217,69 +224,83 @@ p {
   <div id="map"> </div>
 
   <script>
-    var maplat;
-    var maplong;
-    var marker;
-    var map;
+    var maplat; // describes the latitude pulled from the google map
+    var maplong; // describes the longitude pulled from the google map
+    var marker; // describes the google map marker
+    var map; // describes the google map
+    /* function that initializes the google map, google autocomplete search bar,
+    and the google map marker. takes no parameters. */
     function initMap() {
-      var latlong = new google.maps.LatLng(38.031078, -78.512772);
+      var latlong = new google.maps.LatLng(38.031078, -78.512772); // default location for google map marker
       var options = {
         zoom: 12,
         center: latlong
       }
       map = new google.maps.Map(document.getElementById('map'), options);
 
-      var input = document.getElementById('searchTextField');
+      var input = document.getElementById('searchTextField'); // user input from the google autocomplete search bar
       var autocomplete = new google.maps.places.Autocomplete(input);
 
+      // google map marker
       marker = new google.maps.Marker({
         position: latlong,
         map: map,
-        draggable: true,
-        animation: google.maps.Animation.DROP
+        draggable: true, // user can freely drag the marker around the map
+        animation: google.maps.Animation.DROP // marker drops onto the screen
       });
 
       autocomplete.addListener('place_changed', function() {
         var place = autocomplete.getPlace();
+        /* if the user enters an unknown address into the google autocomplete
+        search bar an invalid address message will print */
         if (!place.geometry) {
           document.getElementById('comp').innerHTML = "Invalid address: " + input.value;
           return;
         }
+        /* setting the bounds of the map according to user input and placing the
+        marker at the user's provided address */
         map.fitBounds(place.geometry.viewport);
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
 
-        maplat = marker.getPosition().lat();
-        maplong = marker.getPosition().lng();
-        document.getElementById('ulat').value = "";
-        document.getElementById('ulong').value = "";
-        userlat = maplat;
-        userlong = maplong;
+        maplat = marker.getPosition().lat(); // latitude from the google map
+        maplong = marker.getPosition().lng(); // longitude from the google map
+        document.getElementById('ulat').value = ""; // clearing the latitude input box
+        document.getElementById('ulong').value = ""; // clearing the longitude input box
+        userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
+        userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
         document.getElementById('comp').innerHTML= "Address: " + input.value + ". Latitude and longitude: " + userlat + ", " + userlong;
       });
 
+      /* allows the user to select a place on the map by clicking on the map */
       google.maps.event.addListener(map, 'click', function(event) {
         placeMarker(event.latLng);
-        maplat = marker.getPosition().lat();
-        maplong = marker.getPosition().lng();
-        document.getElementById('ulat').value = "";
-        document.getElementById('ulong').value = "";
-        userlat = maplat;
-        userlong = maplong;
+        maplat = marker.getPosition().lat(); // latitude from the google map
+        maplong = marker.getPosition().lng(); // longitude from the google map
+        document.getElementById('ulat').value = ""; // clearing the latitude input box
+        document.getElementById('ulong').value = ""; // clearing the longitude input box
+        userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
+        userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
+        /* printing out the user latitude and longitude */
         document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
       });
 
+      /* allows the user to select a place on the map by dragging the google map marker*/
       google.maps.event.addListener(marker, 'dragend', function() {
-        maplat = marker.getPosition().lat();
-        maplong = marker.getPosition().lng();
-        document.getElementById('ulat').value = "";
-        document.getElementById('ulong').value = "";
-        userlat = maplat;
-        userlong = maplong;
+        maplat = marker.getPosition().lat(); // latitude from the google map
+        maplong = marker.getPosition().lng(); // longitude from the google map
+        document.getElementById('ulat').value = ""; // clearing the latitude input box
+        document.getElementById('ulong').value = ""; // clearing the longitude input box
+        userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
+        userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
+        /* printing out the user latitude and longitude */
         document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
       });
 
+      /* function that takes a location and places a marker on the location */
       function placeMarker(location) {
+        /* if a marker has not yet been created then a new marker is created and
+        placed at the given loaction */
         if (marker == undefined) {
           marker = new google.maps.Marker({
             position: location,
@@ -287,24 +308,33 @@ p {
             animation: google.maps.Animation.DROP,
           });
         } else {
+          /* if a marker has already been created then the marker's location is
+          moved to the provided location */
           marker.setPosition(location);
-          userlat = marker.getPosition().lat();
-          userlong = marker.getPosition().lng();
+          userlat = marker.getPosition().lat(); // setting the user latitude to the marker's latitude
+          userlong = marker.getPosition().lng(); // setting the user longitude to the marker's longitude
+          /* checks to ensure the latitude and longitude are correctly assigned */
           console.log("TEST LAT: " + marker.getPosition().lat() + " check equals " + userlat);
           console.log("TEST LONG: " + marker.getPosition().lng() + " check equals " + userlong);
         }
-        map.setCenter(location);
+        map.setCenter(location); // centering the map on the provided location
       }
     }
 
+    /* function that resets the maplat and maplong variables. this function also
+    resets the google autocomplete search bar everytime the compute button is clicked. */
     function reset() {
       maplat = "";
       maplong = "";
       document.getElementById('searchTextField').value = "";
     }
 
+    /* function that centers the marker/map around the user latitude and longitude. */
     function markerPosition() {
+      /* if the user inputs latitude and longitude (the userlat and userlong variables
+      are not empty) then the marker/map center around the provided latitude/longitude */
       if (userlat && userlong) {
+        // creating a google LatLng object
         myLatLng = new google.maps.LatLng({lat: parseFloat(userlat), lng: parseFloat(userlong)});
         marker.setPosition(myLatLng);
         map.setCenter(myLatLng);
@@ -312,6 +342,7 @@ p {
     }
   </script>
 
+  <!-- calling the google map api -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCT6pTAuib-JSgt6j1obhJsrcbPm_dxt1s&libraries=places&callback=initMap" async defer>
   </script>
   <br>
@@ -321,36 +352,53 @@ p {
   </div>
 
   <script>
-  var userlat;
-  var userlong;
-  var inputLat = "";
-  var inputLong = "";
+  var userlat; // describes the user's latitude
+  var userlong; // describes the user's longitude
+  var inputLat = ""; // describes the manually inputted latitude
+  var inputLong = ""; // describes the manually inputted longitude
+  /* function that controls the manual input of latitude and longitude. displays
+  inputted values on the screen and controls user input. */
   function latlonginput() {
-    var result;
-    inputLat = document.getElementById('ulat').value;
-    inputLong = document.getElementById('ulong').value;
+    var result; // describes the combined user latitude and longitude
+    inputLat = document.getElementById('ulat').value; // pulling user latitude from input box
+    inputLong = document.getElementById('ulong').value; // pulling user longitude from input box
+    /* only executes if the user has not yet entered information into the google
+    auto complete search bar. if information has already been entered into the
+    google autocomplete search bar when compute is pressed, that data will be used
+    for calculations */
     if (maplat == "" && maplong == "" || maplat == undefined && maplong == undefined) {
+      // executes if the input textboxes contain data
       if (inputLat !== "" && inputLong !== "") {
+        // ensuring that the inputted values are numbers
         if (parseFloat(inputLat) && parseFloat(inputLong)) {
-          userlat = inputLat;
-          userlong = inputLong;
+          userlat = inputLat; // setting user latitude equal to the inputted value
+          userlong = inputLong; // setting user longitude equal to the inputted value
           result = userlat + ", " + userlong;
+          // displaying the inputted user latitude and longitude
           document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
+          /* reseting the input boxes after compute is pressed */
           document.getElementById('ulat').value = "";
           document.getElementById('ulong').value = "";
         }
+        /* executes if the user inputted non-number data into text fields */
         else {
           document.getElementById('comp').innerHTML = "Please enter a valid number."
         }
-      } else if (inputLat == "" && inputLong == "") {
+      }
+      /* executes if compute is pressed and both input boxes are empty */
+      else if (inputLat == "" && inputLong == "") {
         userlat = inputLat;
         userlong = inputLong;
         document.getElementById('comp').innerHTML="Please enter a latitude and longitude.";
-      } else if (inputLong == "") {
+      }
+      /* executes if compute is pressed and the longitude textbox is empty */
+      else if (inputLong == "") {
         userlat = inputLat;
         userlong = inputLong;
         document.getElementById('comp').innerHTML="Please enter a longitude.";
-      } else {
+      }
+      /* executes if compute is pressed and the latitude textbox is empty */
+      else {
         userlat = inputLat;
         userlong = inputLong;
         document.getElementById('comp').innerHTML="Please enter a latitude.";
@@ -376,6 +424,7 @@ p {
        i+=1;
      }, 1000);
     }
+    /* resets the counter everytime compute is pressed */ 
     function resetCounter() {
       clearInterval(count);
     }
