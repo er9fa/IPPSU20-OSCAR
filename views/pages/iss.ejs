@@ -186,7 +186,7 @@ p {
 
 <body>
   <h1>Can I see the   <div class="dropdown">
-    <button class="dropdownbutton"><h1><span id=satname></h1></button>
+    <button class="dropdownbutton"><h1><span id="satname1"></span></h1></button>
     <div class="dropdown-content">
       <a href="#"><button onclick ="titlesat('ISS')"> <h2>ISS</h2> </button> </a>
       <a href="#"><button onclick ="titlesat('GALILEO 26')"> <h2>GALILEO 26</h2> </button></a>
@@ -196,12 +196,15 @@ p {
 
     <div id="map"> </div>
 
-  <script>
-  document.getElementById("satname").innerHTML="Satellites"
-  function titlesat(sat_name){
-    document.getElementById("satname").innerHTML=sat_name
-  }
-  </script>
+    <script>
+    document.getElementById("satname1").innerHTML="Satellites";
+    function titlesat(sat_name){
+      var sat=sat_name;
+      document.getElementById("satname1").innerHTML=sat;
+      document.getElementById("satname").innerHTML=sat;
+      document.getElementById("satname2").innerHTML=sat;
+    }
+    </script>
 
   <style>
   /* style and size setting for the google map */
@@ -451,29 +454,29 @@ p {
   }
   </script>
 
+  <script>
+  function myFunction() {
+    var dt = new Date();
+    document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
+  }
+  </script>
+
+  <script>
+  var count = null;
+  function counter(){
+   var i = 0;
+   count = setInterval(() => {
+     document.getElementById("count").innerHTML = i;
+     i+=1;
+   }, 1000);
+  }
+  /* resets the counter everytime compute is pressed */
+  function resetCounter() {
+    clearInterval(count);
+  }
+ </script>
+
   <div id="rcorners2">
-    <script>
-    function myFunction() {
-      var dt = new Date();
-      document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
-    }
-    </script>
-
-    <script>
-    var count = null;
-    function counter(){
-     var i = 0;
-     count = setInterval(() => {
-       document.getElementById("count").innerHTML = i;
-       i+=1;
-     }, 1000);
-    }
-    /* resets the counter everytime compute is pressed */
-    function resetCounter() {
-      clearInterval(count);
-    }
-   </script>
-
      <br>
      <br>
      <br>
@@ -482,7 +485,7 @@ p {
 
     <div><p>
 
-      <b>Location of ISS:</b> <br>
+      <b>Location of <span id="satname"></span>:</b> <br>
       Latitude: <span id="iss_latitude"> </span>
       <br>
       Longitude: <span id="iss_longitude"> </span></p>
@@ -491,8 +494,8 @@ p {
       <p><b>Can I see it? </b><span id="result_iss"></span></p>
       <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
       <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
-      <p><b>Time since last request for ISS position: </b><span id="count"> </span></p>
-    
+      <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
+
   </div>
 
 
