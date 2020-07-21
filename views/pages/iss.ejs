@@ -3,6 +3,8 @@
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
+
+
 /* title of the page */
 h1 {
     text-align: center;
@@ -11,6 +13,8 @@ h1 {
     text-shadow: 5px 5px 3px #999;
     font-family: 'Orbitron', sans-serif;
 }
+
+
 /* button that controls basic functions including user relation to space objects */
 .compute button {
   background-color: transparent;
@@ -26,6 +30,8 @@ h1 {
 .compute button:hover {
   background-color: gray;
 }
+
+/* general features of the background */
 body {
   /* background image is copyright free */
   background: url(https://images.unsplash.com/photo-1587465511660-05c929e0e874?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80);
@@ -33,17 +39,25 @@ body {
   background-attachment: fixed;
   text-align: center;
 }
+
+
 label {
   font-size: 16px;
 }
+
+
 input[type=text] {
   background-color: transparent;
   color: white;
   border-radius: 50px;
 }
+
+
 p {
   color: white;
 }
+
+
 .textbox {
   font-family: "Helvetica";
   font-weight: 100;
@@ -56,16 +70,7 @@ p {
   color: white;
   border: 8px double #C0ECAD;
 }
-#rcorners1 {
-  border-radius: 100px;
-  background: transparent;
-  border: 9px double #C0ECAD;
-  width: 100;
-  height: 200px;
-  margin:0 auto;
-  text-align: center;
-  color: white;
-}
+
 #header2 {
   border-radius: 50px;
   opacity: 100;
@@ -78,6 +83,8 @@ p {
   font-family: 'Orbitron', sans-serif;
   text-shadow: 2px 2px 2px #999;
 }
+
+
 #rcornersimg {
   border-radius: 50px;
   background: black;
@@ -89,6 +96,8 @@ p {
   color: white;
   padding: 0 auto;
 }
+
+
 #rcorners2 {
    border-radius: 50%;
    background: #3F4457;
@@ -103,28 +112,8 @@ p {
    margin: 30px auto 30px auto;
    padding: 20px;
 }
-#rcorners3 {
-  border-radius: 25px;
-  background: white;
-  width: 600px;
-  height: 50px;
-  margin:0 auto;
-  text-align: center;
-  box-shadow: 5px 5px 3px 1px #999;
-}
-.circletext {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  padding: 15px;
-  font-size: 16px;
-  font-family: 'Orbitron';
-  font-weight: 100;
-  color: black;
-  text-align: center;
-  background: #F4D03F;
-  line-height: 16.5px;
-}
+
+
 .locationsearch {
   border-radius: 50px;
   background: transparent;
@@ -138,6 +127,8 @@ p {
   font-weight: 100;
   padding: 15px 10px 4px 10px;
 }
+
+
 .footer {
    left:0; bottom:0; right:0;
    width: 100%;
@@ -149,6 +140,71 @@ p {
    font-weight: 100;
    margin-top: 100px;
 }
+
+
+.container{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  transition:0.3s;
+  padding: 20px;
+}
+.container#blur.active{
+    filter: blur(15px);
+    pointer-events: none;
+    user-select: none;
+}
+.containet .content{
+  position: relative;
+  max-width: 800px;
+}
+
+
+a{
+  position: relative;
+  border-radius:
+  padding: 10px 24px;
+  display: inline-block;
+  margin-top:20px;
+  text-decoration: none;
+  background-color: transparent;
+  border: 3px solid #C0ECAD;
+  border-radius: 50px;
+  color: white ;
+  padding: 10px 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Helvetica";
+}
+a:hover{
+    background-color: lightgray;
+}
+
+
+#popup{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 400px;
+  padding:50px;
+  box-shadow: 0 5px 30px rgba(0,0,0,.30);
+  background: gray;
+  visibility: hidden;
+  opacity: 1;
+  transition: 0.5s;
+  color: black;
+  border: 9px double #C0ECAD;
+}
+#popup.active{
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
+}
+
+
 .dropdownbutton {
   background-color: transparent;
   width: 500px;
@@ -169,7 +225,6 @@ p {
   display: none;
   position: absolute;
   opacity: 0.7;
-  background-color: lightgray;
   min-width: 160px;
   border-radius: 25px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -183,93 +238,131 @@ p {
 .dropdown-content a:hover {background-color: darkgray;}
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown:hover .dropdownbutton {background-color: darkgray;}
+
 </style>
 </head>
 
 <body>
-  <h1>Can I see the   <div class="dropdown">
-    <button class="dropdownbutton"><h1><span id="satname1"></span></h1></button>
-    <div class="dropdown-content">
-      <a href="#"><button onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button> </a>
-      <a href="#"><button onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button></a>
-      <a href="#"><button onclick="titlesat('YAOGAN-31 A','43275');resetlatlong();"> <h2>YAOGAN-31 A</h2> </button></a>
-    </div>
-    </div> ?</h1>
 
-    <div id="map"> </div>
+  <div class = "container" id="blur">
+   <div class = "content">
 
-    <script>
-    document.getElementById("satname1").innerHTML="Choose a Satellite";
-    function titlesat(sat_name,satel_id){
-    var satel=sat_name;
-    document.getElementById("satname1").innerHTML=satel;
-    document.getElementById("satname").innerHTML=satel;
-    document.getElementById("satname2").innerHTML=satel;
-    sat_key=satel_id
-    }
-    </script>
+     <h1>Can I see the
+        <div class="dropdown">
+        <button class="dropdownbutton"><h1><span id="satname1"></span></h1></button>
+        <div class="dropdown-content">
+          <a href="#"><button onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button> </a>
+          <a href="#"><button onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button></a>
+          <a href="#"><button onclick="titlesat('YAOGAN-31 A','43275');resetlatlong();"> <h2>YAOGAN-31 A</h2> </button></a>
+        </div>
+        </div>?
+     </h1>
 
-  <style>
-  /* style and size setting for the google map */
-  #map {
-    height:350px;
-    width:100%;
-  }
-  .pac-card {
-    margin: 0 auto;
-    background-color: #fff;
-    font-family: Helvetica;
-    font-weight: 100;
-  }
-  </style>
-  <br>
+     <div id="map"> </div>
 
-  <div class="textbox">
-    <form>
+      <script>
+      document.getElementById("satname1").innerHTML="Choose a Satellite";
+      function titlesat(sat_name,satel_id){
+      var satel=sat_name;
+      document.getElementById("satname1").innerHTML=satel;
+      document.getElementById("satname").innerHTML=satel;
+      document.getElementById("satname2").innerHTML=satel;
+      sat_key=satel_id
+      }
+      </script>
+
+      <style>
+      /* style and size setting for the google map */
+      #map {
+        height:350px;
+        width:100%;
+      }
+      .pac-card {
+        margin: 0 auto;
+        background-color: #fff;
+        font-family: Helvetica;
+        font-weight: 100;
+      }
+      </style>
       <br>
-      <!-- manual input box for user latitude -->
-      <label>Latitude:</label>
-      <input type="text" id="ulat"/>
-      &emsp;
-      <!-- manual input box for user longitude -->
-      <label>Longitude:</label>
-      <input type="text" id="ulong"/>
-      &emsp;
-    </form>
-      <br>
-      <div> OR </div>
-      <br>
-      <!-- user input for google autocomplete search bar -->
-      <label>Enter a Location:</label>
-      <!-- fields related to the google autocomplete search bar -->
-      <input
-      id="searchTextField"
-      type="text"
-      size="40"
-      placeholder="Address"/>
-      <br>
-      <p id="comp"></p>
-      <br>
-      <div class="compute">
-        <button onclick="myFunction(); calc(); resetlatlong(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</button>
+
+      <div class="textbox">
+        <form>
+          <br>
+          <br>
+          <!-- manual input box for user latitude -->
+          <label>Latitude:</label>
+          <input type="text" id="ulat"/>
+          &emsp;
+          <!-- manual input box for user longitude -->
+          <label>Longitude:</label>
+          <input type="text" id="ulong"/>
+          &emsp;
+        </form>
+          <br>
+          <div> OR </div>
+          <br>
+          <!-- user input for google autocomplete search bar -->
+          <label>Enter a Location:</label>
+          <!-- fields related to the google autocomplete search bar -->
+          <input
+          id="searchTextField"
+          type="text"
+          size="40"
+          placeholder="Address"/>
+          <br>
+          <a href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
+          <br>
+          <p id="comp"></p>
+          <br>
+          <br>
       </div>
-    <br>
+
+        <br>
+      <div style = "position: relative; top:0px;" id = "header2">
+        <br>
+        <hr style="border: 4px double #C0ECAD;" />
+        <b>Behind The Scenes</b>
+        <hr style="border: 4px double #C0ECAD;" />
+        <img src="/Calc_FOV.gif" style = "width:500px; height:500px;" id ="rcornersimg">
+      </div>
+
+      <br><br>
+      <br><br>
+        <div style = "position: relative; top:500px;", class="footer">
+          <p>Coded By: David Li, Katie Stadler, Renita John;&emsp;
+          With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
+          And Sponsored By: The UVA DevHub</p>
+        </div>
+
+      </div>
+    </div>
+
+  <div id="popup">
+     <p><b>Date & Time: </b><span id="datetime"></span></p>
+
+      <div><p>
+        <b>Location of <span id="satname"></span>:</b> <br>
+        Latitude: <span id="sat_latitude"> </span>
+        <br>
+        Longitude: <span id="sat_longitude"> </span></p>
+      </div>
+
+      <p><b>Can I see it? </b><span style="color:#C0ECAD; font-size: 25px" id="result_sat"></span></p>
+      <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
+      <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
+      <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
+      <a href="#" onclick="toggle()">Close</a>
   </div>
 
-  <br>
-
-
-<!--  <div class=locationsearch>
-     user input for google autocomplete search bar
-    <label>Enter a location:</label>
-     fields related to the google autocomplete search bar
-    <input
-    id="searchTextField"
-    type="text"
-    size="50"
-    placeholder="Address"/>
-  </div> -->
-
+  <script type="text/javascript">
+    function toggle(){
+      var blur = document.getElementById('blur');
+      blur.classList.toggle('active')
+      var popup = document.getElementById('popup');
+      popup.classList.toggle('active')
+    }
+  </script>
 
   <script>
     var maplat; // describes the latitude pulled from the google map
@@ -560,42 +653,6 @@ p {
   }
  </script>
 
-  <div id="rcorners2">
-     <br> <br> <br>
-     <br> <br> <br>
-
-     <p><b>Date & Time: </b><span id="datetime"></span></p>
-
-    <div><p>
-
-      <b>Location of <span id="satname"></span>:</b> <br>
-      Latitude: <span id="sat_latitude"> </span>
-      <br>
-      Longitude: <span id="sat_longitude"> </span></p>
-    </div>
-
-      <p><b>Can I see it? </b><span id="result_sat"></span></p>
-      <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
-      <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
-      <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
-
-  </div>
-
-
-  <div style = "position: relative; top:0px;" id = "header2">
-    <br>
-    <hr style="border: 4px double #C0ECAD;" />
-    <b>Behind The Scenes</b>
-    <hr style="border: 4px double #C0ECAD;" />
-    <img src="/Calc_FOV.gif" style = "width:500px; height:500px;" id ="rcornersimg"> </div>
-
-<br><br>
-<br><br>
-  <div style = "position: relative; top:500px;", class="footer">
-    <p>Coded By: David Li, Katie Stadler, Renita John;&emsp;
-    With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
-    And Sponsored By: The UVA DevHub</p>
-  </div>
 </body>
 
 
