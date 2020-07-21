@@ -189,9 +189,9 @@ p {
   <h1>Can I see the   <div class="dropdown">
     <button class="dropdownbutton"><h1><span id="satname1"></span></h1></button>
     <div class="dropdown-content">
-      <a href="#"><button onclick="titlesat('ISS','25544')"> <h2>ISS</h2> </button> </a>
-      <a href="#"><button onclick="titlesat('GALILEO 26','43565');"> <h2>GALILEO 26</h2> </button></a>
-      <a href="#"><button onclick="titlesat('YAOGAN-31 A','43275')"> <h2>YAOGAN-31 A</h2> </button></a>
+      <a href="#"><button onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button> </a>
+      <a href="#"><button onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button></a>
+      <a href="#"><button onclick="titlesat('YAOGAN-31 A','43275');resetlatlong();"> <h2>YAOGAN-31 A</h2> </button></a>
     </div>
     </div> ?</h1>
 
@@ -251,7 +251,7 @@ p {
       <p id="comp"></p>
       <br>
       <div class="compute">
-        <button onclick="myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</button>
+        <button onclick="myFunction(); calc(); resetlatlong(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</button>
       </div>
     <br>
     <hr style="border: 4px double #C0ECAD;" />
@@ -601,6 +601,11 @@ p {
 
 
 <script>
+  function resetlatlong(){
+  document.getElementById("sat_longitude").innerHTML = "";
+  document.getElementById("sat_latitude").innerHTML = "";
+  document.getElementById("result_sat").innerHTML = ""
+  }
 
   function calc(){
   fetch("https://www.n2yo.com/rest/v1/satellite/positions/"+sat_key+"/"+userlat+"/"+userlong+"/0/1/&apiKey=UG67VU-3MRS33-SWNLRM-4I6R").then(r => r.json()).then(data => {
@@ -641,11 +646,11 @@ function clouds(){
       var cloudy = data_weath.clouds.all;
       document.getElementById("cloud_descrip").innerHTML = cloudy_desc;
       if(cloudy<=33){
-      document.getElementById("cloud_perc").innerHTML = cloudy+" There is likely light to no cloud coverage";
+      document.getElementById("cloud_perc").innerHTML = cloudy+", There is likely light to no cloud coverage";
     }else if (cloudy<=66) {
-      document.getElementById("cloud_perc").innerHTML = cloudy+" There is likely mid to heavy cloud coverage";
+      document.getElementById("cloud_perc").innerHTML = cloudy+", There is likely mid to heavy cloud coverage";
     }else{
-      document.getElementById("cloud_perc").innerHTML = cloudy+" There is likely very heavy cloud coverage";
+      document.getElementById("cloud_perc").innerHTML = cloudy+", There is likely very heavy cloud coverage";
     }
   })
 }
