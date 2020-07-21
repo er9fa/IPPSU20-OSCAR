@@ -93,13 +93,14 @@ p {
    background: #3F4457;
    opacity: 0.7;
    width: 475px;
-   height: 400px;
+   height: 475px;
    text-align: center;
    font-size: 16px;
    font-family: "Helvetica";
    font-weight: 100;
    line-height: 16px;
    margin: 30px auto 30px auto;
+   padding: 20px;
 }
 #rcorners3 {
   border-radius: 25px;
@@ -156,7 +157,7 @@ p {
   font-size: 18px;
   font-family: monospace;
   border-radius: 30px;
-  border: 3px solid yellowgreen;
+  border: 3px solid #C0ECAD;
 }
 .dropdown {
   position: relative;
@@ -192,7 +193,7 @@ p {
       <a href="#"><button onclick="titlesat('GALILEO 26','43565');"> <h2>GALILEO 26</h2> </button></a>
       <a href="#"><button onclick="titlesat('YAOGAN-31 A','43275')"> <h2>YAOGAN-31 A</h2> </button></a>
     </div>
-    </div>?</h1>
+    </div> ?</h1>
 
     <div id="map"> </div>
 
@@ -284,7 +285,90 @@ p {
         zoom: 12,
         center: latlong
       }
-      map = new google.maps.Map(document.getElementById('map'), options);
+      map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 38.031078, lng: -78.512772},
+      zoom: 13,
+      styles: [
+        {elementType: 'geometry', stylers: [{color: '#242F3E'}]},
+        {elementType: 'labels.text.stroke', stylers: [{color: '#242F3E'}]},
+        {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+        {
+          featureType: 'administrative.locality',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#d59563'}]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#d59563'}]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'geometry',
+          stylers: [{color: '#263c3f'}]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#6b9a76'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry',
+          stylers: [{color: '#38414e'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry.stroke',
+          stylers: [{color: '#212a37'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#9ca5b3'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry',
+          stylers: [{color: '#746855'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry.stroke',
+          stylers: [{color: '#1f2835'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#f3d19c'}]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'geometry',
+          stylers: [{color: '#2f3948'}]
+        },
+        {
+          featureType: 'transit.station',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#d59563'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry',
+          stylers: [{color: '#17263c'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#515c6d'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.stroke',
+          stylers: [{color: '#17263c'}]
+        }
+      ]
+    });
 
       var input = document.getElementById('searchTextField'); // user input from the google autocomplete search bar
       var autocomplete = new google.maps.places.Autocomplete(input);
@@ -478,10 +562,9 @@ p {
  </script>
 
   <div id="rcorners2">
-     <br>
-     <br>
-     <br>
-     <br>
+     <br> <br> <br>
+     <br> <br> <br>
+
      <p><b>Date & Time: </b><span id="datetime"></span></p>
 
     <div><p>
