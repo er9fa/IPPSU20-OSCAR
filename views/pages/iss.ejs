@@ -149,9 +149,10 @@ p {
 }
 .dropdownbutton {
   background-color: transparent;
-  opacity: 0.7;
+  width: 500px;
+  opacity: 1.0;
   color: white;
-  padding: 15px;
+  padding: 0px;
   font-size: 18px;
   font-family: monospace;
   border-radius: 30px;
@@ -160,6 +161,7 @@ p {
 .dropdown {
   position: relative;
   display: inline-block;
+  z-index:999
 }
 .dropdown-content {
   display: none;
@@ -183,19 +185,23 @@ p {
 </head>
 
 <body>
-  <h1>Can I see the ISS?</h1>
+  <h1>Can I see the   <div class="dropdown">
+    <button class="dropdownbutton"><h1><span id=satname></h1></button>
+    <div class="dropdown-content">
+      <a href="#"><button onclick ="titlesat('ISS')"> <h2>ISS</h2> </button> </a>
+      <a href="#"><button onclick ="titlesat('GALILEO 26')"> <h2>GALILEO 26</h2> </button></a>
+      <a href="#"><button onclick ="titlesat('YAOGAN-31 A')"> <h2>YAOGAN-31 A</h2> </button></a>
+    </div>
+    </div>?</h1>
 
     <div id="map"> </div>
 
-  <!--<div class="dropdown">
-  <button class="dropdownbutton">Satellites</button>
-  <div class="dropdown-content">
-    <a href="#">Satellite 1</a>
-    <a href="#">Satellite 2</a>
-    <a href="#">Satellite 3</a>
-  </div>
-  </div>
-  -->
+  <script>
+  document.getElementById("satname").innerHTML="Satellites"
+  function titlesat(sat_name){
+    document.getElementById("satname").innerHTML=sat_name
+  }
+  </script>
 
   <style>
   /* style and size setting for the google map */
