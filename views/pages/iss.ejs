@@ -65,25 +65,28 @@ p {
   text-align: center;
   color: white;
 }
-#rcorners1fill {
+#header2 {
   border-radius: 50px;
-  background: black;
-  border: 4px solid yellowgreen;
-  width: 600px;
+  opacity: 100;
   height: 50px;
+  width: 600px;
   margin:0 auto;
   text-align: center;
   color: white;
+  font-size: 30px;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 2px 2px 2px #999;
 }
-#rcorners1im {
+#rcornersimg {
   border-radius: 50px;
   background: black;
   border: 9px double #484E5E;
   width: 500px;
   height: 500px;
-  margin: 20px auto 20px auto;
+  margin: 20px auto 50px auto;
   text-align: center;
   color: white;
+  padding: 0 auto;
 }
 #rcorners2 {
    border-radius: 50%;
@@ -134,13 +137,15 @@ p {
   padding: 15px 10px 4px 10px;
 }
 .footer {
-   left: 0;
-   bottom: 0;
+   left:0; bottom:0; right:0;
    width: 100%;
    background-color: gray;
    opacity: 0.7;
    color: white;
-   text-align: right;
+   text-align: center;
+   font-family: "Helvetica";
+   font-weight: 100;
+   margin-top: 100px;
 }
 .dropdownbutton {
   background-color: transparent;
@@ -481,23 +486,26 @@ p {
       <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
       <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
       <p><b>Time since last request for ISS position: </b><span id="count"> </span></p>
-    <br>
+    
   </div>
 
-  <br>
-  <div style = "position: relative; top:0px;" class = "textbox" id = "rcorners1fill">
-    <br>
-    <Label><b> -  -  - Behind The Scenes -  -  - </b></Label>
-    <img style = "position: relative; top:25px; width="500"; id = "rcorners1im" height="500"" src="/Calc_FOV.gif"> </div>
 
+  <div style = "position: relative; top:0px;" id = "header2">
+    <br>
+    <hr style="border: 4px double #C0ECAD;" />
+    <b>Behind The Scenes</b>
+    <hr style="border: 4px double #C0ECAD;" />
+    <img src="/Calc_FOV.gif" style = "width:500px; height:500px;" id ="rcornersimg"> </div>
+
+<br><br>
 <br><br>
   <div style = "position: relative; top:500px;", class="footer">
     <p>Coded By: David Li, Katie Stadler, Renita John;&emsp;
     With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
     And Sponsored By: The UVA DevHub</p>
   </div>
-
 </body>
+
 
 <script>
 
