@@ -139,6 +139,27 @@ p {
   position: absolute;
 }
 
+.grow {
+  align-self: center;
+  padding: 20px 15px 12px 15px;
+  border-radius: 25px;
+  height: 30px;
+  width: 400px;
+  margin: 0px 10px 25px 10px;
+  position: relative;
+  transition:height 0.5s;
+  text-align: center;
+  background-color: #3F4457;
+  opacity: 0.7;
+  font-family: "Helvetica";
+  font-weight: 100;
+  color: #FFFFFF;
+  overflow-y: hidden;
+}
+.grow:hover {
+  height: 250px;
+}
+
 /**/
 .container{
   position: relative;
@@ -267,6 +288,15 @@ a:hover{
       }
       </script>
 
+      <div class="grow">
+          <text style="font-size: 20px; font-family: 'Orbitron';"> INSTRUCTIONS </text> <br> <br>
+          <text> 1. Select a satellite. Hover your mouse over “choose a satellite” to select a satellite. <br> <br>
+                 2. Enter your location. This can be done through typing your location in the search bar, manually
+                 entering your latitude and longitude, clicking a location on the map, or dragging the map marker to
+                 your desired location. <br> <br>
+                 3. Once your location is entered, click the “compute” button. <br></text>
+      </div>
+
       <div>
         <input
            id="searchTextField"
@@ -315,7 +345,7 @@ a:hover{
           <p id="comp"></p>
       </div>
 
-        <br>
+      <br>
       <div style = "position: relative; top:0px;" id = "header2">
         <br>
         <hr style="border: 4px double #C0ECAD;" />
@@ -384,37 +414,37 @@ a:hover{
         {
           featureType: 'administrative.locality',
           elementType: 'labels.text.fill',
-          stylers: [{color: '#d59563'}]
+          stylers: [{color: '#D59563'}]
         },
         {
           featureType: 'poi',
           elementType: 'labels.text.fill',
-          stylers: [{color: '#d59563'}]
+          stylers: [{color: '#D59563'}]
         },
         {
           featureType: 'poi.park',
           elementType: 'geometry',
-          stylers: [{color: '#263c3f'}]
+          stylers: [{color: '#263C3F'}]
         },
         {
           featureType: 'poi.park',
           elementType: 'labels.text.fill',
-          stylers: [{color: '#6b9a76'}]
+          stylers: [{color: '#6B9A76'}]
         },
         {
           featureType: 'road',
           elementType: 'geometry',
-          stylers: [{color: '#38414e'}]
+          stylers: [{color: '#38414E'}]
         },
         {
           featureType: 'road',
           elementType: 'geometry.stroke',
-          stylers: [{color: '#212a37'}]
+          stylers: [{color: '#212A37'}]
         },
         {
           featureType: 'road',
           elementType: 'labels.text.fill',
-          stylers: [{color: '#9ca5b3'}]
+          stylers: [{color: '#9CA5b3'}]
         },
         {
           featureType: 'road.highway',
@@ -424,37 +454,37 @@ a:hover{
         {
           featureType: 'road.highway',
           elementType: 'geometry.stroke',
-          stylers: [{color: '#1f2835'}]
+          stylers: [{color: '#1F2835'}]
         },
         {
           featureType: 'road.highway',
           elementType: 'labels.text.fill',
-          stylers: [{color: '#f3d19c'}]
+          stylers: [{color: '#F3D19C'}]
         },
         {
           featureType: 'transit',
           elementType: 'geometry',
-          stylers: [{color: '#2f3948'}]
+          stylers: [{color: '#2F3948'}]
         },
         {
           featureType: 'transit.station',
           elementType: 'labels.text.fill',
-          stylers: [{color: '#d59563'}]
+          stylers: [{color: '#D59563'}]
         },
         {
           featureType: 'water',
           elementType: 'geometry',
-          stylers: [{color: '#17263c'}]
+          stylers: [{color: '#17263C'}]
         },
         {
           featureType: 'water',
           elementType: 'labels.text.fill',
-          stylers: [{color: '#515c6d'}]
+          stylers: [{color: '#515C6D'}]
         },
         {
           featureType: 'water',
           elementType: 'labels.text.stroke',
-          stylers: [{color: '#17263c'}]
+          stylers: [{color: '#17263C'}]
         }
       ]
     });
@@ -567,7 +597,7 @@ a:hover{
         myLatLng = new google.maps.LatLng({lat: parseFloat(userlat), lng: parseFloat(userlong)});
         marker.setPosition(myLatLng);
         map.setCenter(myLatLng);
-        map.setZoom(5); 
+        map.setZoom(5);
       }
     }
   </script>
@@ -660,7 +690,6 @@ a:hover{
  </script>
 
 </body>
-
 
 <script>
   function resetlatlong(){
