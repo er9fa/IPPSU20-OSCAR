@@ -567,6 +567,7 @@ a:hover{
         myLatLng = new google.maps.LatLng({lat: parseFloat(userlat), lng: parseFloat(userlong)});
         marker.setPosition(myLatLng);
         map.setCenter(myLatLng);
+        map.setZoom(5); 
       }
     }
   </script>
@@ -599,7 +600,7 @@ a:hover{
       // executes if the input textboxes contain data
       if (inputLat !== "" && inputLong !== "") {
         // ensuring that the inputted values are numbers
-        if (parseFloat(inputLat) && parseFloat(inputLong)) {
+        if (-91 < parseFloat(inputLat) < 91 && -181 < parseFloat(inputLong) < 181) {
           userlat = inputLat; // setting user latitude equal to the inputted value
           userlong = inputLong; // setting user longitude equal to the inputted value
           result = userlat + ", " + userlong;
