@@ -4,7 +4,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
 html {
-  max-width: 100%;
+  max-width: 97%;
   overflow-x: visible;
 }
 /* title of the page */
@@ -84,6 +84,7 @@ p {
   font-size: 30px;
   font-family: 'Orbitron', sans-serif;
   text-shadow: 2px 2px 2px #999;
+  float: left
 }
 
 /**/
@@ -147,7 +148,7 @@ p {
   padding: 20px 15px 12px 15px;
   border-radius: 25px;
   height: 250px;
-  width: 400px;
+  width: 28%;
   margin: 0px 10px 25px 20px;
   float: right;
   transition:height 0.5s;
@@ -158,7 +159,22 @@ p {
   color: #FFFFFF;
   overflow-y: hidden;
   border: 4px solid #C0ECAD;
-  margin-right: 50px
+  margin-right: 10px
+}
+
+.buttoncomp{
+  align-self: center;
+  padding: 20px 15px 12px 15px;
+  width: 28%;
+  margin: 0px 10px 25px 20px;
+  float: right;
+  transition:height 0.5s;
+  text-align: center;
+  background-color: transparent;
+  font-family: "Helvetica";
+  font-weight: 100;
+  color: #FFFFFF;
+  margin-right: 10px
 }
 
 /**/
@@ -227,10 +243,11 @@ a:hover{
 /**/
 .dropdownbutton {
   background-color: transparent;
-  width: 500px;
+  width: auto;
   opacity: 1.0;
   color: white;
-  padding: 0px;
+  padding-left: 30px;
+  padding-right: 30px;
   font-size: 18px;
   font-family: monospace;
   border-radius: 30px;
@@ -279,7 +296,7 @@ a:hover{
      </h1>
 
       <script>
-      document.getElementById("satname1").innerHTML="Choose a Satellite";
+      document.getElementById("satname1").innerHTML="Select Satellite";
       function titlesat(sat_name,satel_id){
       var satel=sat_name;
       document.getElementById("satname1").innerHTML=satel;
@@ -291,7 +308,7 @@ a:hover{
 
       <div class="grow">
           <text style="font-size: 20px; font-family: 'Orbitron';"> INSTRUCTIONS </text> <br> <br>
-          <text> 1. Select a satellite. Hover your mouse over “choose a satellite” to select a satellite. <br> <br>
+          <text> 1. Select a satellite. Hover your mouse over “Select Satellite” (or if you have already selected one, the satellite name in title) to select a satellite. <br> <br>
                  2. Enter your location. This can be done through typing your location in the search bar, manually
                  entering your latitude and longitude, clicking a location on the map, or dragging the map marker to
                  your desired location. <br> <br>
@@ -329,7 +346,7 @@ a:hover{
       </style>
       <br>
 
-      <div class="textbox">
+      <div class="buttoncomp">
         <!-- <form>
           <br>
           <br>
@@ -342,10 +359,13 @@ a:hover{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
-          <br>
-          <p id="comp"></p>
+          <a style = "position:relative; right:10px; width: 200px; font-size: 20px" href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();"><b>COMPUTE</b></a>
+          <br><br><br>
+          <div style="position:relative; right:700px" class = "textbox">
+              <p id="comp"></p>
+          </div>
       </div>
+
 
       <br>
       <div style = "position: relative; top:0px;" id = "header2">
@@ -358,7 +378,7 @@ a:hover{
 
       <br><br>
       <br><br>
-        <div style = "position: relative; top:500px;", class="footer">
+        <div style = "position: absolute; bottom: -750px", class="footer">
           <p>Coded By: David Li, Katie Stadler, Renita John;&emsp;
           With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
           And Sponsored By: The UVA DevHub</p>
