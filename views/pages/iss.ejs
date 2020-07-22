@@ -66,7 +66,7 @@ p {
   margin:0 auto;
   text-align: center;
   color: white;
-  border: 8px double #C0ECAD;
+  /* border: 8px double #C0ECAD; */
 }
 
 /**/
@@ -124,6 +124,21 @@ p {
   position: absolute;
 }
 
+.mapInputs {
+  background-color: #FFFFFF;
+  border-radius: 25px;
+  border: 1px solid;
+  border-color: white;
+  margin: 7px 5px 5px 10px;
+  width: 170px;
+  height: 27px;
+  font-size: 15px;
+  font-family: "Helvetica";
+  font-weight: 100;
+  padding: 5px 5px 5px 10px;
+  position: absolute;
+}
+
 /**/
 .container{
   position: relative;
@@ -139,7 +154,7 @@ p {
     pointer-events: none;
     user-select: none;
 }
-.containet .content{
+.container.content{
   position: relative;
   max-width: 800px;
 }
@@ -259,6 +274,18 @@ a:hover{
            type="search"
            placeholder="Enter a location">
       </div>
+      <div>
+        <input
+          id="ulat"
+          class="mapInputs"
+          type="search"
+          placeholder="Latitude">
+        <input
+          id="ulong"
+          class="mapInputs"
+          type="search"
+          placeholder="Longitude">
+      </div>
       <div id="map"> </div>
 
       <style>
@@ -271,18 +298,18 @@ a:hover{
       <br>
 
       <div class="textbox">
-        <form>
+        <!-- <form>
           <br>
           <br>
-          <!-- manual input box for user latitude -->
+          manual input box for user latitude
           <label>Latitude:</label>
           <input type="text" id="ulat"/>
           &emsp;
-          <!-- manual input box for user longitude -->
+          manual input box for user longitude
           <label>Longitude:</label>
           <input type="text" id="ulong"/>
           &emsp;
-        </form>
+        </form> -->
           <a href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
           <br>
           <p id="comp"></p>
@@ -433,6 +460,11 @@ a:hover{
     });
 
       var input = document.getElementById('searchTextField'); // user input from the google autocomplete search bar
+      var manualLat = document.getElementById('ulat');
+      var manualLng = document.getElementById('ulong');
+
+      map.controls[google.maps.ControlPosition.LEFT_TOP].push(manualLat);
+      map.controls[google.maps.ControlPosition.LEFT_TOP].push(manualLng);
 
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
       var autocomplete = new google.maps.places.Autocomplete(input);
