@@ -3,7 +3,10 @@
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
-
+html {
+  max-width: 100%;
+  overflow-x: visible;
+}
 /* title of the page */
 h1 {
     text-align: center;
@@ -145,16 +148,16 @@ p {
   border-radius: 25px;
   height: 30px;
   width: 400px;
-  margin: 0px 10px 25px 10px;
+  margin: 0px 10px 25px 20px;
   position: relative;
   transition:height 0.5s;
   text-align: center;
-  background-color: #3F4457;
-  opacity: 0.7;
+  background-color: transparent;
   font-family: "Helvetica";
   font-weight: 100;
   color: #FFFFFF;
   overflow-y: hidden;
+  border: 4px solid #C0ECAD;
 }
 .grow:hover {
   height: 250px;
@@ -323,6 +326,7 @@ a:hover{
       #map {
         height:350px;
         width:100%;
+        float:center;
       }
       </style>
       <br>
