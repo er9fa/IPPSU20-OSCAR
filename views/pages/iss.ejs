@@ -79,12 +79,14 @@ p {
   height: 50px;
   width: 600px;
   margin:0 auto;
+  margin-right: 400px;
+  margin-top: 50px; 
   text-align: center;
   color: white;
   font-size: 30px;
   font-family: 'Orbitron', sans-serif;
   text-shadow: 2px 2px 2px #999;
-  float: left
+  float: right;
 }
 
 /**/
@@ -150,7 +152,7 @@ p {
   height: 30px;
   width: 26%;
   margin-right: 20px;
-  margin-left: 2px;
+  margin-left: 3px;
   float: left;
   transition:height 0.5s;
   text-align: center;
@@ -167,17 +169,17 @@ p {
 
 .buttoncomp{
   align-self: center;
-  padding: 20px 15px 12px 15px;
-  width: 28%;
+  /* padding: 20px 15px 12px 15px; */
+  width: 20%;
   margin: 0px 10px 25px 20px;
-  float: right;
+  float: left;
   transition:height 0.5s;
   text-align: center;
   background-color: transparent;
   font-family: "Helvetica";
   font-weight: 100;
   color: #FFFFFF;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
 /**/
@@ -363,9 +365,9 @@ a:hover{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a style = "position:relative; left:10px; width: 200px; font-size: 20px" href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();"><b>COMPUTE</b></a>
+          <a style = "position:relative; left:42px; width: 200px; font-size: 20px; margin-top: 50px;" href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();"><b>COMPUTE</b></a>
           <br><br><br>
-          <div style="position:relative; left:700px" class = "textbox">
+          <div style="position:relative; right:700px" class = "textbox">
               <p id="comp"></p>
           </div>
       </div>
