@@ -62,7 +62,7 @@ p {
   margin: 1px 10 10 30px;
   background: transparent;
   width: 800px;
-  height: 250px;
+  height: 150px;
   margin:0 auto;
   text-align: center;
   color: white;
@@ -107,6 +107,21 @@ p {
    font-family: "Helvetica";
    font-weight: 100;
    margin-top: 100px;
+}
+
+.searchBox {
+  background-color: #FFFFFF;
+  border-radius: 25px;
+  border: 1px solid;
+  border-color: white;
+  margin: 15px 10px 10px 30px;
+  width: 400px;
+  height: 20px;
+  font-size: 18px;
+  font-family: "Helvetica";
+  font-weight: 100;
+  padding: 16px 15px 15px 15px;
+  position: absolute;
 }
 
 /**/
@@ -223,10 +238,8 @@ a:hover{
           <a href="#"><button onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button></a>
           <a href="#"><button onclick="titlesat('YAOGAN-31 A','43275');resetlatlong();"> <h2>YAOGAN-31 A</h2> </button></a>
         </div>
-        </div>?
+        </div> ?
      </h1>
-
-     <div id="map"> </div>
 
       <script>
       document.getElementById("satname1").innerHTML="Choose a Satellite";
@@ -239,17 +252,20 @@ a:hover{
       }
       </script>
 
+      <div>
+        <input
+           id="searchTextField"
+           class="searchBox"
+           type="search"
+           placeholder="Enter a location">
+      </div>
+      <div id="map"> </div>
+
       <style>
       /* style and size setting for the google map */
       #map {
         height:350px;
         width:100%;
-      }
-      .pac-card {
-        margin: 0 auto;
-        background-color: #fff;
-        font-family: Helvetica;
-        font-weight: 100;
       }
       </style>
       <br>
@@ -267,24 +283,9 @@ a:hover{
           <input type="text" id="ulong"/>
           &emsp;
         </form>
-          <br>
-          <div> OR </div>
-          <br>
-          <!-- user input for google autocomplete search bar -->
-          <label>Enter a Location:</label>
-          <!-- fields related to the google autocomplete search bar -->
-          <input
-          id="searchTextField"
-          type="text"
-          size="40"
-          placeholder="Address"/>
-          <br>
-          <br>
           <a href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
           <br>
           <p id="comp"></p>
-          <br>
-          <br>
       </div>
 
         <br>
@@ -432,7 +433,10 @@ a:hover{
     });
 
       var input = document.getElementById('searchTextField'); // user input from the google autocomplete search bar
+
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
       var autocomplete = new google.maps.places.Autocomplete(input);
+      autocomplete.bindTo('bounds', map);
 
       // google map marker
       marker = new google.maps.Marker({
