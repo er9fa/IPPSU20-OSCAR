@@ -321,12 +321,23 @@ a:hover{
 
       <script>
       document.getElementById("satname1").innerHTML="Select Satellite";
+      document.getElementById("sat_desc").innerHTML="Please select a satellite!";
       function titlesat(sat_name,satel_id){
       var satel=sat_name;
       document.getElementById("satname1").innerHTML=satel;
       document.getElementById("satname").innerHTML=satel;
       document.getElementById("satname2").innerHTML=satel;
-      sat_key=satel_id
+      sat_key=satel_id;
+      var satid_num =parseFloat(satel_id);
+      if (satid_num ===25544){
+        document.getElementById("sat_desc").innerHTML="The International Space Station is a large spacecraft in orbit around Earth. It serves as a home where crews of astronauts and cosmonauts live. The space station is also a unique science laboratory. Several nations worked together to build and use the space station."
+      } else if (satid_num ===43565){
+        document.getElementById("sat_desc").innerHTML="222"
+      }else if (satid_num ===43275){
+        document.getElementById("sat_desc").innerHTML="333"
+      }else{
+        document.getElementById("sat_desc").innerHTML="Please select a satellite!";
+      }
       }
       </script>
 
@@ -373,7 +384,7 @@ a:hover{
 
       <div style="margin-top: 10px;" class="grow">
           <text style="font-size: 20px; font-family: 'Orbitron';"> SATELLITE DESCRIPTION </text> <br> <br>
-          <text style="font-size: 14px;">  <br></text>
+          <text style="font-size: 14px;"> <span id="sat_desc"> </span> <br></text>
       </div>
 
       <div style="margin-top: 10px;" class="grow">
