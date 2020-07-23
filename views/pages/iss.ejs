@@ -371,7 +371,14 @@ a:hover{
       </style>
       <br>
 
-      <div class="circletext">
+      <div style="margin-top: 10px;" class="grow">
+          <text style="font-size: 20px; font-family: 'Orbitron';"> SATELLITE DESCRIPTION </text> <br> <br>
+          <text style="font-size: 14px;">  <br></text>
+      </div>
+
+      <div style="margin-top: 10px;" class="grow">
+        <text style="font-size: 20px; font-family: 'Orbitron';"> PREVIOUS REQUEST </text> <br> <br>
+        <text style="font-size: 14px;">
         <p><b>Date & Time: </b> <!-- <span id="datetime"></span> --> </p>
          <div><p>
            <b>Location of <!-- <span id="satname"></span> -->:</b> <br>
@@ -382,7 +389,8 @@ a:hover{
          <p><b>Can I see it? </b> <!-- <span style="color:#C0ECAD; font-size: 14px" id="result_sat"></span> --> </p>
          <p><b>Weather Description: </b> <!-- <span id="cloud_descrip"></span> --> </p>
          <p><b>Percent(%) Cloudiness: </b> <!-- <span id=cloud_perc></span> --> </p>
-         <p><b>Time since last request for <!-- <span id="satname2"></span> position: </b><span id="count"> </span> --> </p>
+         <p><b>Time since last request for <!-- <span id="satname2"></span> position: </b><span id="count"> </span> --></b> </p>
+         </text>
       </div>
 
 
@@ -401,14 +409,13 @@ a:hover{
         </form> -->
           <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
           <br><br><br>
-          <div style="position:relative; right:700px" class = "textbox">
-              <p style="float:center;" id="comp"></p>
-          </div>
+      </div>
+      <div style="float:right; position:relative; bottom: 10px;left:100px" class = "textbox">
+          <p  id="comp"></p>
       </div>
 
-
       <br>
-      <div style = "position: relative; top:0px;" id = "header2">
+      <div style = "position: relative; bottom:200px;" id = "header2">
         <br>
         <hr style="border: 4px double #C0ECAD;" />
         <b>Behind The Scenes</b>
