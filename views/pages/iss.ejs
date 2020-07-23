@@ -320,6 +320,7 @@ a:hover{
      </h1>
 
       <script>
+      var sat_key
       document.getElementById("satname1").innerHTML="Select Satellite";
       document.getElementById("sat_desc").innerHTML="Please select a satellite!";
       function titlesat(sat_name,satel_id){
@@ -418,7 +419,7 @@ a:hover{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="toggle(); myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
+          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="toggle(); myFunction(); resetlatlong(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
           <br><br><br>
       </div>
       <div style="float:right; position:relative; bottom: 10px;left:100px" class = "textbox">
@@ -464,10 +465,18 @@ a:hover{
 
   <script type="text/javascript">
     function toggle(){
-      var blur = document.getElementById('blur');
-      blur.classList.toggle('active')
-      var popup = document.getElementById('popup');
-      popup.classList.toggle('active')
+      if (sat_key == undefined) {
+        alert('Please select a satellite before pressing compute.');
+      }
+      else if (userlat == "" || userlong== ""){
+        alert('Please select a location before pressing compute.')
+      }
+      else{
+        var blur = document.getElementById('blur');
+        blur.classList.toggle('active');
+        var popup = document.getElementById('popup');
+        popup.classList.toggle('active');
+    }
     }
   </script>
 
