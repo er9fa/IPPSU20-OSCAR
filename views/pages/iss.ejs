@@ -460,7 +460,7 @@ a:hover{
       <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
       <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
       <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
-      <a href="#" onclick="toggle()">Close</a>
+      <a href="#" onclick="toggleclose()">Close</a>
   </div>
 
   <script type="text/javascript">
@@ -469,7 +469,7 @@ a:hover{
         alert('Please select a satellite before pressing compute.');
       }
       else if (userlat == "" || userlong== ""||userlat == undefined || userlong== undefined){
-        alert('Please select a location before pressing compute.')
+        alert('Please select, or reinput, a location before pressing compute.')
       }
       else{
         var blur = document.getElementById('blur');
@@ -477,6 +477,12 @@ a:hover{
         var popup = document.getElementById('popup');
         popup.classList.toggle('active');
     }
+    }
+    function toggleclose(){
+      var blur = document.getElementById('blur');
+      blur.classList.toggle('active');
+      var popup = document.getElementById('popup');
+      popup.classList.toggle('active');
     }
   </script>
 
