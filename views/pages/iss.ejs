@@ -451,7 +451,7 @@ tr:nth-child{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); setTimeout(addhistory, 1000); clouds();">COMPUTE</a>
+          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
           <br><br><br>
       </div>
       <div style="float:right; position:relative; bottom: 10px;left:100px; margin-right: 200px;" class = "textbox">
@@ -521,7 +521,7 @@ tr:nth-child{
       <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
       <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
       <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
-      <a href="#" onclick="toggleclose(); history();">Close</a>
+      <a href="#" onclick="toggleclose(); history(); setTimeout(addhistory, 1000)">Close</a>
   </div>
 
   <script type="text/javascript">
