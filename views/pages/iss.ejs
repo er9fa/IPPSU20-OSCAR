@@ -727,8 +727,12 @@ a:hover{
     if (maplat == "" && maplong == "" || maplat == undefined && maplong == undefined) {
       // executes if the input textboxes contain data
       if (inputLat !== "" && inputLong !== "") {
+        /* executes if the user inputted non-number data into text fields */
+        if (isNaN(inputLat) || isNaN(inputLong)) {
+          document.getElementById('comp').innerHTML = "Please enter a valid number."
+        }
         // ensuring that the inputted values are numbers
-        if (-91 < parseFloat(inputLat) < 91 && -181 < parseFloat(inputLong) < 181) {
+        else if (-91 < parseFloat(inputLat) < 91 && -181 < parseFloat(inputLong) < 181) {
           userlat = inputLat; // setting user latitude equal to the inputted value
           userlong = inputLong; // setting user longitude equal to the inputted value
           result = userlat + ", " + userlong;
@@ -738,9 +742,8 @@ a:hover{
           document.getElementById('ulat').value = "";
           document.getElementById('ulong').value = "";
         }
-        /* executes if the user inputted non-number data into text fields */
         else {
-          document.getElementById('comp').innerHTML = "Please enter a valid number."
+          document.getElementById('comp').innerHTML = "Please enter values within the latitude and longitude ranges."
         }
       }
       /* executes if compute is pressed and both input boxes are empty */
