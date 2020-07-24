@@ -484,7 +484,7 @@ a:hover{
         blur.classList.toggle('active');
         var popup = document.getElementById('popup');
         popup.classList.toggle('active');
-    }
+      }
     }
     function toggleclose(){
       var blur = document.getElementById('blur');
@@ -737,7 +737,7 @@ a:hover{
           document.getElementById('comp').innerHTML = "Please enter a valid number."
         }
         // ensuring that the inputted values are numbers
-        else if (-91 < parseFloat(inputLat) < 91 && -181 < parseFloat(inputLong) < 181) {
+        else if ((parseFloat(inputLat) > -91 && parseFloat(inputLat) < 91) && (parseFloat(inputLong) > -181 && parseFloat(inputLong) < 181)) {
           userlat = inputLat; // setting user latitude equal to the inputted value
           userlong = inputLong; // setting user longitude equal to the inputted value
           result = userlat + ", " + userlong;
