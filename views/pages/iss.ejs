@@ -15,6 +15,10 @@ h1 {
     text-shadow: 5px 5px 3px #999;
     font-family: 'Orbitron', sans-serif;
 }
+h2{
+  color: white;
+  size: 40px;
+}
 
 /* button that controls basic functions including user relation to space objects */
 .compute button {
@@ -267,6 +271,27 @@ a:hover{
   transition: 0.2s;
 }
 
+table {
+  border-collapse: collapse;
+  width: 97%;
+  text-align: center;
+}
+
+td, th {
+  border: 1px solid #C0ECAD;
+  text-align: left;
+  padding: 8px;
+  color: #fff;
+  font-family: "Helvetica"
+}
+td{
+  border-color: transparent;
+}
+
+tr:nth-child{
+  border: transparent;
+}
+
 /**/
 .dropdownbutton {
   background-color: transparent;
@@ -301,7 +326,6 @@ a:hover{
   border-radius: 30px;
   border: 3px solid #C0ECAD;
   width: 550px;
-
 }
 .dropdown-content a:hover {background-color: darkgray;}
 .dropdown:hover .dropdown-content {display: block;}
@@ -390,7 +414,6 @@ a:hover{
         margin-right: 40px;
       }
       </style>
-      <br>
 
       <div style="margin-top: 10px;" class="grow">
           <text style="font-size: 20px; font-family: 'Orbitron';"> SATELLITE DESCRIPTION </text> <br> <br>
@@ -400,7 +423,7 @@ a:hover{
       <div style="margin-top: 10px;" class="grow">
         <text style="font-size: 20px; font-family: 'Orbitron';"> PREVIOUS REQUEST </text> <br>
         <text style="font-size: 14px;">
-        <p><b>Date & Time: </b> <span id="datetimeprint"></span> </p>
+        <p><b>Date & Time: </b><span id="datetimeprint"></span> </p>
          <div><p>
            <b>Location of <span id="satnameprint"></span>:</b> <br>
            Latitude: <span id="sat_latitudeprint"> </span>
@@ -436,6 +459,24 @@ a:hover{
           <p  id="comp"></p>
       </div>
 
+      <table>
+        <tr>
+          <th>Date&Time: </th>
+          <th>Satellite Location: </th>
+          <th>User Location:</th>
+          <th>Can I see it?</th>
+        </tr>
+        <tr>
+          <td><span id="d&t"></td>
+          <td><span id="slat&long"></td>
+          <td><span id="ulat&long"></td>
+          <td><span id="visible"></td>
+        </tr>
+
+      </table>
+
+      <br><br><br><br>
+      <br><br><br><br>
       <br>
       <div style = "position: relative; bottom:200px;" id = "header2">
         <br>
@@ -882,6 +923,10 @@ a:hover{
     document.getElementById("sat_longitudeprint").innerHTML = satlong;
     document.getElementById("result_satprint").innerHTML = result_sat;
     document.getElementById("cloud_descrip_print").innerHTML = cloudy_desc;
+    document.getElementById("d&t").innerHTML = date;
+    document.getElementById("slat&long").innerHTML = satlat + ", " + satlong;
+    document.getElementById("ulat&long").innerHTML = result;
+    document.getElementById("visible").innerHTML = result_sat;
     /* eliminate repetitive if statements */
     if (light) {
       document.getElementById("cloud_perc_print").innerHTML = cloudy + light;
@@ -894,6 +939,12 @@ a:hover{
     }
     document.getElementById("prev_position").innerHTML = result;
   }
+
+  function addhistory(){
+
+  }
+
+
 </script>
 
 
