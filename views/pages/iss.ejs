@@ -267,20 +267,24 @@ a:hover{
 }
 
 table {
-  border-collapse: collapse;
   width: 97%;
   text-align: center;
 }
 
-td, th {
+td{
+  border: transparent;
+  text-align: left;
+  padding: 8px;
+  color: #fff;
+  font-family: "Helvetica"
+}
+th{
   border: 1px solid #C0ECAD;
   text-align: left;
   padding: 8px;
   color: #fff;
   font-family: "Helvetica"
 }
-td{
-  border-color: transparent;
 }
 
 tr:nth-child{
@@ -447,13 +451,14 @@ tr:nth-child{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
+          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="addhistory(); latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
           <br><br><br>
       </div>
       <div style="float:right; position:relative; bottom: 10px;left:100px; margin-right: 200px;" class = "textbox">
           <p  id="comp"></p>
       </div>
 
+      <!--
       <table>
         <tr>
           <th>Date&Time: </th>
@@ -468,6 +473,22 @@ tr:nth-child{
           <td><span id="visible"></td>
         </tr>
 
+      </table>
+      -->
+
+      <table id="myTable">
+        tr>
+          <th>Date&Time: </th>
+          <th>Satellite Location: </th>
+          <th>User Location:</th>
+          <th>Can I see it?</th>
+        </tr>
+        <tr>
+          <td><span id="d&t"></td>
+          <td><span id="slat&long"></td>
+          <td><span id="ulat&long"></td>
+          <td><span id="visible"></td>
+        </tr>
       </table>
 
       <br><br><br><br>
@@ -838,6 +859,21 @@ tr:nth-child{
   }
  </script>
 
+    <script>
+    function addhistory() {
+      var table = document.getElementById("myTable");
+      var row = table.insertRow(1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      cell1.innerHTML = "work";
+      cell2.innerHTML = "NEW CELL2";
+      cell3.innerHTML = "NEW CELL3";
+      cell4.innerHTML = "NEW CELL4";
+    }
+    </script>
+
 </body>
 
 <script>
@@ -933,10 +969,6 @@ tr:nth-child{
       document.getElementById("cloud_perc_print").innerHTML = cloudy + heavy;
     }
     document.getElementById("prev_position").innerHTML = result;
-  }
-
-  function addhistory(){
-
   }
 
 
