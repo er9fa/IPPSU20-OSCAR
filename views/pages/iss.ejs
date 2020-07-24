@@ -436,9 +436,9 @@ tr:nth-child{
            <br>
            Longitude: <span id="sat_longitudeprint"> </span> </p>
          </div>
-         <p><b>Can I see it? </b> <span style="color:#C0ECAD; font-size: 14px" id="result_satprint"></span> </p>
+         <p><b>Is it above me? </b> <span style="color:#C0ECAD; font-size: 14px" id="result_satprint"></span> </p>
          <p><b>Weather Description: </b> <span id="cloud_descrip_print"></span> </p>
-         <p><b>Percent(%) Cloudiness: </b> <span id="cloud_perc_print"></span> </p>
+         <p><b>Can I see it? </b> <span id="cloud_perc_print"></span> </p>
          <!-- <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span> </b> </p> -->
          <p><b>User latitude and longitude: </b> <span id="prev_position"></span> <br> </p>
          </text>
@@ -458,7 +458,7 @@ tr:nth-child{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
+          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000);">COMPUTE</a>
           <br><br><br>
       </div>
       <div style="float:right; position:relative; bottom: 10px;left:100px; margin-right: 200px;" class = "textbox">
@@ -488,7 +488,7 @@ tr:nth-child{
           <th>Date&Time: </th>
           <th>Satellite Location: </th>
           <th>User Location:</th>
-          <th>Can I see it?</th>
+          <th>Is it above me?</th>
         </tr>
       </table>
 
@@ -517,9 +517,9 @@ tr:nth-child{
         Longitude: <span id="sat_longitude"> </span></p>
       </div>
 
-      <p><b>Can I see it? </b><span style="color:#C0ECAD;" id="result_sat"></span></p>
+      <p><b>Is it above me? </b><span style="color:#C0ECAD;" id="result_sat"></span></p>
       <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
-      <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
+      <p><b>Can I see it? </b> <span id=cloud_perc></span> </p>
       <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
       <a href="#" onclick="toggleclose(); history(); setTimeout(addhistory, 1000)">Close</a>
   </div>
@@ -877,7 +877,9 @@ tr:nth-child{
   function resetlatlong(){
   document.getElementById("sat_longitude").innerHTML = "";
   document.getElementById("sat_latitude").innerHTML = "";
-  document.getElementById("result_sat").innerHTML = ""
+  document.getElementById("result_sat").innerHTML = "";
+  document.getElementById("cloud_perc").innerHTML = "";
+  document.getElementById("cloud_descrip").innerHTML= "";
   }
 
   function calc(){
@@ -911,9 +913,11 @@ tr:nth-child{
   var visioncheck = Math.pow(x_cir,2) + Math.pow(y_cir,2)
   if (visioncheck<=Math.pow(degreesdist.toFixed(4),2)){
     result_sat = "Yes";
+    visiblevar = true
     document.getElementById("result_sat").innerHTML = result_sat;
   }else{
     result_sat = "No";
+    visiblevar = false
     document.getElementById("result_sat").innerHTML = result_sat;
   }
 })
@@ -929,15 +933,24 @@ tr:nth-child{
         cloudy_desc = data_weath.weather[0].description;
         cloudy = data_weath.clouds.all;
         document.getElementById("cloud_descrip").innerHTML = cloudy_desc;
-        if(cloudy<=33){
-          light = ", There is likely light to no cloud coverage";
-          document.getElementById("cloud_perc").innerHTML = cloudy + light;
-      }else if (cloudy<=66) {
-        mid = ", There is likely mid to heavy cloud coverage";
-        document.getElementById("cloud_perc").innerHTML = cloudy + mid;
+        if(cloudy<=33&&visiblevar===true){
+          light = "There is likely light to no cloud coverage in your area, so the satellite should be visible.";
+          document.getElementById("cloud_perc").innerHTML = light;
+      }else if(cloudy<=33&&visiblevar===false){
+        light = "There is likely light to no cloud coverage in your area, but the satellite is not currently visible from your location.";
+        document.getElementById("cloud_perc").innerHTML = light;
+      }else if (cloudy<=66&&visiblevar===true){
+        mid = "There is likely mid to heavy cloud coverage in your area, so the satellite may be visible between clouds.";
+        document.getElementById("cloud_perc").innerHTML = mid;
+      }else if (cloudy<=66&&visiblevar===false){
+        mid = "There is likely mid to heavy cloud coverage in your area, and the satellite is not currently visible from your location.";
+        document.getElementById("cloud_perc").innerHTML = mid;
+      }else if (cloudy>66&&visiblevar===true){
+        heavy = "There is likely mid to heavy cloud coverage in your area, but your view of the satellite is likely impeded by cloud cover.";
+        document.getElementById("cloud_perc").innerHTML = heavy;
       }else{
-        heavy = ", There is likely very heavy cloud coverage";
-        document.getElementById("cloud_perc").innerHTML = cloudy + heavy;
+        heavy = "There is likely very heavy cloud coverage in your area, and the satellite is not currently visible from your location.";
+        document.getElementById("cloud_perc").innerHTML = heavy;
       }
     })
   }
