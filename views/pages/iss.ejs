@@ -451,7 +451,7 @@ tr:nth-child{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="addhistory(); latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</a>
+          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); addhistory(); clouds();">COMPUTE</a>
           <br><br><br>
       </div>
       <div style="float:right; position:relative; bottom: 10px;left:100px; margin-right: 200px;" class = "textbox">
@@ -482,12 +482,6 @@ tr:nth-child{
           <th>Satellite Location: </th>
           <th>User Location:</th>
           <th>Can I see it?</th>
-        </tr>
-        <tr>
-          <td><span id="d&t"></td>
-          <td><span id="slat&long"></td>
-          <td><span id="ulat&long"></td>
-          <td><span id="visible"></td>
         </tr>
       </table>
 
@@ -867,10 +861,10 @@ tr:nth-child{
       var cell2 = row.insertCell(1);
       var cell3 = row.insertCell(2);
       var cell4 = row.insertCell(3);
-      cell1.innerHTML = "work";
-      cell2.innerHTML = "NEW CELL2";
-      cell3.innerHTML = "NEW CELL3";
-      cell4.innerHTML = "NEW CELL4";
+      cell1.innerHTML = date;
+      cell2.innerHTML = satlat + ", " + satlong;
+      cell3.innerHTML = result;
+      cell4.innerHTML = result_sat;
     }
     </script>
 
@@ -954,10 +948,6 @@ tr:nth-child{
     document.getElementById("sat_longitudeprint").innerHTML = satlong;
     document.getElementById("result_satprint").innerHTML = result_sat;
     document.getElementById("cloud_descrip_print").innerHTML = cloudy_desc;
-    document.getElementById("d&t").innerHTML = date;
-    document.getElementById("slat&long").innerHTML = satlat + ", " + satlong;
-    document.getElementById("ulat&long").innerHTML = result;
-    document.getElementById("visible").innerHTML = result_sat;
     /* eliminate repetitive if statements */
     if (light) {
       document.getElementById("cloud_perc_print").innerHTML = cloudy + light;
