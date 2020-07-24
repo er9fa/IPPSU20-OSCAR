@@ -336,6 +336,7 @@ a:hover{
       document.getElementById("satname1").innerHTML=satel;
       document.getElementById("satname").innerHTML=satel;
       document.getElementById("satname2").innerHTML=satel;
+      document.getElementById("satnameprint").innerHTML=satel;
       sat_key=satel_id;
       var satid_num =parseFloat(satel_id);
       if (satid_num ===25544){
@@ -397,19 +398,20 @@ a:hover{
       </div>
 
       <div style="margin-top: 10px;" class="grow">
-        <text style="font-size: 20px; font-family: 'Orbitron';"> PREVIOUS REQUEST </text> <br> <br>
+        <text style="font-size: 20px; font-family: 'Orbitron';"> PREVIOUS REQUEST </text> <br>
         <text style="font-size: 14px;">
-        <p><b>Date & Time: </b> <!-- <span id="datetime"></span> --> </p>
+        <p><b>Date & Time: </b> <span id="datetimeprint"></span> </p>
          <div><p>
-           <b>Location of <!-- <span id="satname"></span> -->:</b> <br>
-           Latitude: <!-- <span id="sat_latitude"> </span> -->
+           <b>Location of <span id="satnameprint"></span>:</b> <br>
+           Latitude: <span id="sat_latitudeprint"> </span>
            <br>
-           Longitude: <!-- <span id="sat_longitude"> </span> --> </p>
+           Longitude: <span id="sat_longitudeprint"> </span> </p>
          </div>
-         <p><b>Can I see it? </b> <!-- <span style="color:#C0ECAD; font-size: 14px" id="result_sat"></span> --> </p>
-         <p><b>Weather Description: </b> <!-- <span id="cloud_descrip"></span> --> </p>
-         <p><b>Percent(%) Cloudiness: </b> <!-- <span id=cloud_perc></span> --> </p>
-         <p><b>Time since last request for <!-- <span id="satname2"></span> position: </b><span id="count"> </span> --></b> </p>
+         <p><b>Can I see it? </b> <span style="color:#C0ECAD; font-size: 14px" id="result_satprint"></span> </p>
+         <p><b>Weather Description: </b> <span id="cloud_descrip_print"></span> </p>
+         <p><b>Percent(%) Cloudiness: </b> <span id="cloud_perc_print"></span> </p>
+         <!-- <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span> </b> </p> -->
+         <p><b>User latitude and longitude: </b> <span id="prev_position"></span> <br> </p>
          </text>
       </div>
 
@@ -468,7 +470,7 @@ a:hover{
       <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
       <p><b> Percent(%) Cloudiness: </b> <span id=cloud_perc></span> </p>
       <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
-      <a href="#" onclick="toggleclose()">Close</a>
+      <a href="#" onclick="toggleclose(); history();">Close</a>
   </div>
 
   <script type="text/javascript">
@@ -476,7 +478,7 @@ a:hover{
       if (sat_key == undefined) {
         alert('Please select a satellite before pressing compute.');
       }
-      else if (userlat == "" || userlong== ""||userlat == undefined || userlong== undefined){
+      else if (userlat == "" || userlong== "" || userlat == undefined || userlong == undefined){
         alert('Please select, or reinput, a location before pressing compute.')
       }
       else{
@@ -719,10 +721,10 @@ a:hover{
   var userlong; // describes the user's longitude
   var inputLat = ""; // describes the manually inputted latitude
   var inputLong = ""; // describes the manually inputted longitude
+  var result; // describes the combined user latitude and longitude
   /* function that controls the manual input of latitude and longitude. displays
   inputted values on the screen and controls user input. */
   function latlonginput() {
-    var result; // describes the combined user latitude and longitude
     inputLat = document.getElementById('ulat').value; // pulling user latitude from input box
     inputLong = document.getElementById('ulong').value; // pulling user longitude from input box
     /* only executes if the user has not yet entered information into the google
@@ -770,13 +772,18 @@ a:hover{
         document.getElementById('comp').innerHTML="Please enter a latitude.";
       }
     }
+    else {
+      result = maplat + ", " + maplong;
+    }
   }
   </script>
 
   <script>
+  var date;
   function myFunction() {
     var dt = new Date();
-    document.getElementById("datetime").innerHTML = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
+    date = (("0"+dt.getDate()).slice(-2)) +"/"+ (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2));
+    document.getElementById("datetime").innerHTML = date;
   }
   </script>
 
@@ -798,6 +805,9 @@ a:hover{
 </body>
 
 <script>
+  var satlat;
+  var satlong;
+  var result_sat;
   function resetlatlong(){
   document.getElementById("sat_longitude").innerHTML = "";
   document.getElementById("sat_latitude").innerHTML = "";
@@ -810,8 +820,12 @@ a:hover{
   var long = data.positions[0].satlongitude;
   var lat = data.positions[0].satlatitude;
 
-  document.getElementById("sat_longitude").innerHTML = long.toFixed(4);
-  document.getElementById("sat_latitude").innerHTML = lat.toFixed(4);
+  satlat = lat.toFixed(4);
+  satlong = long.toFixed(4);
+  document.getElementById("sat_latitude").innerHTML = satlat;
+  document.getElementById("sat_longitude").innerHTML = satlong;
+  // document.getElementById("sat_longitude").innerHTML = long.toFixed(4);
+  // document.getElementById("sat_latitude").innerHTML = lat.toFixed(4);
 
   const earthradkm = 6371
   var satalt = data.positions[0].sataltitude;
@@ -830,27 +844,57 @@ a:hover{
   var y_cir = num_lat - num_ulat
   var visioncheck = Math.pow(x_cir,2) + Math.pow(y_cir,2)
   if (visioncheck<=Math.pow(degreesdist.toFixed(4),2)){
-    document.getElementById("result_sat").innerHTML = "Yes"
+    result_sat = "Yes";
+    document.getElementById("result_sat").innerHTML = result_sat;
   }else{
-    document.getElementById("result_sat").innerHTML = "No"
+    result_sat = "No";
+    document.getElementById("result_sat").innerHTML = result_sat;
   }
 })
 }
 
-function clouds(){
-  fetch("https://api.openweathermap.org/data/2.5/weather?lat="+userlat+"&lon="+userlong+"&appid=658295ed6de928f64794e23ee97cab06").then(r_weath => r_weath.json()).then(data_weath => {
-      var cloudy_desc = data_weath.weather[0].description;
-      var cloudy = data_weath.clouds.all;
-      document.getElementById("cloud_descrip").innerHTML = cloudy_desc;
-      if(cloudy<=33){
-      document.getElementById("cloud_perc").innerHTML = cloudy+", There is likely light to no cloud coverage";
-    }else if (cloudy<=66) {
-      document.getElementById("cloud_perc").innerHTML = cloudy+", There is likely mid to heavy cloud coverage";
-    }else{
-      document.getElementById("cloud_perc").innerHTML = cloudy+", There is likely very heavy cloud coverage";
+  var cloudy_desc;
+  var cloudy;
+  var light;
+  var mid;
+  var heavy;
+  function clouds(){
+    fetch("https://api.openweathermap.org/data/2.5/weather?lat="+userlat+"&lon="+userlong+"&appid=658295ed6de928f64794e23ee97cab06").then(r_weath => r_weath.json()).then(data_weath => {
+        cloudy_desc = data_weath.weather[0].description;
+        cloudy = data_weath.clouds.all;
+        document.getElementById("cloud_descrip").innerHTML = cloudy_desc;
+        if(cloudy<=33){
+          light = ", There is likely light to no cloud coverage";
+          document.getElementById("cloud_perc").innerHTML = cloudy + light;
+      }else if (cloudy<=66) {
+        mid = ", There is likely mid to heavy cloud coverage";
+        document.getElementById("cloud_perc").innerHTML = cloudy + mid;
+      }else{
+        heavy = ", There is likely very heavy cloud coverage";
+        document.getElementById("cloud_perc").innerHTML = cloudy + heavy;
+      }
+    })
+  }
+
+  function history() {
+    document.getElementById("datetimeprint").innerHTML = date;
+    document.getElementById("sat_latitudeprint").innerHTML = satlat;
+    document.getElementById("sat_longitudeprint").innerHTML = satlong;
+    document.getElementById("result_satprint").innerHTML = result_sat;
+    document.getElementById("cloud_descrip_print").innerHTML = cloudy_desc;
+    /* eliminate repetitive if statements */
+    if (light) {
+      document.getElementById("cloud_perc_print").innerHTML = cloudy + light;
     }
-  })
-}
+    else if (mid) {
+      document.getElementById("cloud_perc_print").innerHTML = cloudy + mid;
+    }
+    else if (heavy) {
+      document.getElementById("cloud_perc_print").innerHTML = cloudy + heavy;
+    }
+    document.getElementById("prev_position").innerHTML = result;
+  }
 </script>
+
 
 </html>
