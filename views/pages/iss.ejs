@@ -775,10 +775,12 @@ tr:nth-child{
       }
     }
     function manualInfoWindow() {
-      var requestInfo = "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
+      if (userlat !== "" && userlong !== "" && userlat !== undefined && userlong !== undefined && !isNaN(userlat) && !isNaN(userlong)) {
+        var requestInfo = "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
 
-      infowindow.setContent(requestInfo);
-      infowindow.open(map, marker);
+        infowindow.setContent(requestInfo);
+        infowindow.open(map, marker);
+      }
     }
 
     /* function that resets the maplat and maplong variables. this function also
