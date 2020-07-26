@@ -221,15 +221,29 @@ p {
 }
 
 /**/
-a{
-  position: relative;
-  border-radius:
-  padding: 10px 24px; /* interfering with map */
+/* .compbutton {
+  position:relative;
+  padding: 10px 24px;
   display: inline-block;
   margin-top:20px;
   text-decoration: none;
   background-color: transparent;
-  border: 3px solid #C0ECAD; /* interfering with map */
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: "Helvetica";
+  border: 3px solid #C0ECAD;
+} */
+a {
+  position: relative;
+  border-radius:
+  padding: 10px 24px;
+  display: inline-block;
+  margin-top:20px;
+  text-decoration: none;
+  background-color: transparent;
+  border: 3px solid #C0ECAD;
   border-radius: 50px;
   color: white ;
   padding: 10px 24px;
@@ -240,6 +254,9 @@ a{
 a:hover{
     background-color: lightgray;
 }
+/* .compbutton:hover {
+  background-color: lightgray;
+} */
 
 /**/
 #popup{
@@ -428,7 +445,6 @@ tr:nth-child{
       <div style="margin-top: 10px;" class="grow">
         <text style="font-size: 20px; font-family: 'Orbitron';"> PREVIOUS REQUEST </text> <br>
         <text style="font-size: 14px;">
-          <br>
         <p><b>Date & Time: </b><span id="datetimeprint"></span> </p>
          <div><p>
            <b>Location of <span id="satnameprint"></span>:</b> <br>
@@ -458,7 +474,7 @@ tr:nth-child{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000);">COMPUTE</a>
+          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); ">COMPUTE</a>
           <br><br><br>
       </div>
       <div style="float:right; position:relative; bottom: 10px;left:100px; margin-right: 200px;" class = "textbox">
@@ -484,8 +500,8 @@ tr:nth-child{
       -->
 
       <table id="myTable">
-        tr>
-          <th>Date&Time: </th>
+        <tr>
+          <th>Date & Time: </th>
           <th>Satellite Location: </th>
           <th>User Location:</th>
           <th>Is it above me?</th>
@@ -499,9 +515,12 @@ tr:nth-child{
       <br><br>
       <br><br>
         <div style = "position: absolute; bottom: -750px", class="footer">
-          <p>Coded By: David Li, Katie Stadler, Renita John;&emsp;
+          <p style="margin-right:200px;float:right;">Coded By: David Li, Katie Stadler, Renita John;&emsp;
           With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
           And Sponsored By: The UVA DevHub</p>
+          <div style="margin-left:150px;float:left;">
+            <img src="https://i.ya-webdesign.com/images/space-invaders-alien-png.png" style = "width:50px; height:50px;" onclick="window.open('https://arcade.ly/games/space-invaders/', '_blank');">
+          </div>
         </div>
 
       </div>
@@ -680,11 +699,14 @@ tr:nth-child{
 
         maplat = marker.getPosition().lat(); // latitude from the google map
         maplong = marker.getPosition().lng(); // longitude from the google map
-        document.getElementById('ulat').value = ""; // clearing the latitude input box
-        document.getElementById('ulong').value = ""; // clearing the longitude input box
+        document.getElementById('ulat').value = maplat; // clearing the latitude input box
+        document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
         document.getElementById('comp').innerHTML= "Address: " + input.value + ". Latitude and longitude: " + userlat + ", " + userlong;
+        // same functions as compute button
+        latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); setTimeout(clouds, 1000); computeZoom();
+
       });
 
       /* allows the user to select a place on the map by clicking on the map */
@@ -692,8 +714,8 @@ tr:nth-child{
         placeMarker(event.latLng);
         maplat = marker.getPosition().lat(); // latitude from the google map
         maplong = marker.getPosition().lng(); // longitude from the google map
-        document.getElementById('ulat').value = ""; // clearing the latitude input box
-        document.getElementById('ulong').value = ""; // clearing the longitude input box
+        document.getElementById('ulat').value = maplat; // clearing the latitude input box
+        document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
         /* printing out the user latitude and longitude */
@@ -704,8 +726,8 @@ tr:nth-child{
       google.maps.event.addListener(marker, 'dragend', function() {
         maplat = marker.getPosition().lat(); // latitude from the google map
         maplong = marker.getPosition().lng(); // longitude from the google map
-        document.getElementById('ulat').value = ""; // clearing the latitude input box
-        document.getElementById('ulong').value = ""; // clearing the longitude input box
+        document.getElementById('ulat').value = maplat; // clearing the latitude input box
+        document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
         /* printing out the user latitude and longitude */
@@ -728,6 +750,7 @@ tr:nth-child{
           marker.setPosition(location);
           userlat = marker.getPosition().lat(); // setting the user latitude to the marker's latitude
           userlong = marker.getPosition().lng(); // setting the user longitude to the marker's longitude
+          map.setZoom(10);
           /* checks to ensure the latitude and longitude are correctly assigned */
           console.log("TEST LAT: " + marker.getPosition().lat() + " check equals " + userlat);
           console.log("TEST LONG: " + marker.getPosition().lng() + " check equals " + userlong);
@@ -742,6 +765,8 @@ tr:nth-child{
       maplat = "";
       maplong = "";
       document.getElementById('searchTextField').value = "";
+      document.getElementById('ulat').value = "";
+      document.getElementById('ulong').value = "";
     }
 
     /* function that centers the marker/map around the user latitude and longitude. */
@@ -755,6 +780,9 @@ tr:nth-child{
         map.setCenter(myLatLng);
         map.setZoom(5);
       }
+    }
+    function computeZoom() {
+      map.setZoom(10);
     }
   </script>
 
@@ -963,13 +991,13 @@ tr:nth-child{
     document.getElementById("cloud_descrip_print").innerHTML = cloudy_desc;
     /* eliminate repetitive if statements */
     if (light) {
-      document.getElementById("cloud_perc_print").innerHTML = cloudy + light;
+      document.getElementById("cloud_perc_print").innerHTML = light;
     }
     else if (mid) {
-      document.getElementById("cloud_perc_print").innerHTML = cloudy + mid;
+      document.getElementById("cloud_perc_print").innerHTML = mid;
     }
     else if (heavy) {
-      document.getElementById("cloud_perc_print").innerHTML = cloudy + heavy;
+      document.getElementById("cloud_perc_print").innerHTML = heavy;
     }
     document.getElementById("prev_position").innerHTML = result;
   }
