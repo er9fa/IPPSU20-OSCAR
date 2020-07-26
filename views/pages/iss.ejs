@@ -474,7 +474,7 @@ tr:nth-child{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); ">COMPUTE</a>
+          <a style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
           <br><br><br>
       </div>
       <div style="float:right; position:relative; bottom: 10px;left:100px; margin-right: 200px;" class = "textbox">
@@ -573,6 +573,7 @@ tr:nth-child{
     var map; // describes the google map
     /* function that initializes the google map, google autocomplete search bar,
     and the google map marker. takes no parameters. */
+    var infowindow;
     function initMap() {
       var latlong = new google.maps.LatLng(38.031078, -78.512772); // default location for google map marker
       var options = {
@@ -664,9 +665,15 @@ tr:nth-child{
       ]
     });
 
+
+
       var input = document.getElementById('searchTextField'); // user input from the google autocomplete search bar
       var manualLat = document.getElementById('ulat');
       var manualLng = document.getElementById('ulong');
+
+      infowindow = new google.maps.InfoWindow({
+        content: ''
+      });
 
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(manualLat);
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(manualLng);
@@ -684,6 +691,7 @@ tr:nth-child{
       });
 
       autocomplete.addListener('place_changed', function() {
+        infowindow.close();
         var place = autocomplete.getPlace();
         /* if the user enters an unknown address into the google autocomplete
         search bar an invalid address message will print */
@@ -704,13 +712,19 @@ tr:nth-child{
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
         document.getElementById('comp').innerHTML= "Address: " + input.value + ". Latitude and longitude: " + userlat + ", " + userlong;
+
+        var requestInfo = "<b>Address: </b>" + input.value + ". <br>" + "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
+
+        infowindow.setContent(requestInfo);
         // same functions as compute button
         latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); setTimeout(clouds, 1000); computeZoom();
 
+        infowindow.open(map,marker);
       });
 
       /* allows the user to select a place on the map by clicking on the map */
       google.maps.event.addListener(map, 'click', function(event) {
+        infowindow.close();
         placeMarker(event.latLng);
         maplat = marker.getPosition().lat(); // latitude from the google map
         maplong = marker.getPosition().lng(); // longitude from the google map
@@ -724,6 +738,7 @@ tr:nth-child{
 
       /* allows the user to select a place on the map by dragging the google map marker*/
       google.maps.event.addListener(marker, 'dragend', function() {
+        infowindow.close();
         maplat = marker.getPosition().lat(); // latitude from the google map
         maplong = marker.getPosition().lng(); // longitude from the google map
         document.getElementById('ulat').value = maplat; // clearing the latitude input box
@@ -745,6 +760,7 @@ tr:nth-child{
             animation: google.maps.Animation.DROP,
           });
         } else {
+          infowindow.close();
           /* if a marker has already been created then the marker's location is
           moved to the provided location */
           marker.setPosition(location);
@@ -758,10 +774,17 @@ tr:nth-child{
         map.setCenter(location); // centering the map on the provided location
       }
     }
+    function manualInfoWindow() {
+      var requestInfo = "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
+
+      infowindow.setContent(requestInfo);
+      infowindow.open(map, marker);
+    }
 
     /* function that resets the maplat and maplong variables. this function also
     resets the google autocomplete search bar everytime the compute button is clicked. */
     function reset() {
+      infowindow.close();
       maplat = "";
       maplong = "";
       document.getElementById('searchTextField').value = "";
@@ -774,6 +797,7 @@ tr:nth-child{
       /* if the user inputs latitude and longitude (the userlat and userlong variables
       are not empty) then the marker/map center around the provided latitude/longitude */
       if (userlat && userlong) {
+        infowindow.close();
         // creating a google LatLng object
         myLatLng = new google.maps.LatLng({lat: parseFloat(userlat), lng: parseFloat(userlong)});
         marker.setPosition(myLatLng);
