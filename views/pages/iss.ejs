@@ -711,7 +711,7 @@ tr:nth-child{
         document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
-        document.getElementById('comp').innerHTML= "Address: " + input.value + ". Latitude and longitude: " + userlat + ", " + userlong;
+        //document.getElementById('comp').innerHTML= "Address: " + input.value + ". Latitude and longitude: " + userlat + ", " + userlong;
 
         var requestInfo = "<b>Address: </b>" + input.value + ". <br>" + "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
 
@@ -733,7 +733,7 @@ tr:nth-child{
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
         /* printing out the user latitude and longitude */
-        document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
+        //document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
       });
 
       /* allows the user to select a place on the map by dragging the google map marker*/
@@ -746,7 +746,7 @@ tr:nth-child{
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
         /* printing out the user latitude and longitude */
-        document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
+        //document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
       });
 
       /* function that takes a location and places a marker on the location */
@@ -847,7 +847,7 @@ tr:nth-child{
           userlong = inputLong; // setting user longitude equal to the inputted value
           result = userlat + ", " + userlong;
           // displaying the inputted user latitude and longitude
-          document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
+          //document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
           /* reseting the input boxes after compute is pressed */
           document.getElementById('ulat').value = "";
           document.getElementById('ulong').value = "";
