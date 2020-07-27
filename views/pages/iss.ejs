@@ -163,7 +163,7 @@ p {
   border: 4px solid #C0ECAD;
 }
 .grow:hover {
-  height: 280px;
+  height: 300px;
 }
 .circletext {
    border-radius: 50%;
@@ -438,7 +438,7 @@ tr:nth-child{
       </div>
 
       <script>
-      var sat_key
+      var sat_key;
       document.getElementById("satname1").innerHTML="Select Satellite";
       document.getElementById("sat_desc").innerHTML="A satellite is any object that orbits in a curved path around a planet. The moon is one of the Earth’s natural satellites. Conventionally, the term “satellite” refers to a machine that is launched into space and orbits around Earth or another object in space. To learn more about specific satellites and your relation to these artificial space objects, please select a satellite. ";
       function titlesat(sat_name,satel_id){
@@ -772,7 +772,7 @@ tr:nth-child{
           marker.setPosition(location);
           userlat = marker.getPosition().lat(); // setting the user latitude to the marker's latitude
           userlong = marker.getPosition().lng(); // setting the user longitude to the marker's longitude
-          map.setZoom(10);
+        //  map.setZoom(7);
           /* checks to ensure the latitude and longitude are correctly assigned */
           console.log("TEST LAT: " + marker.getPosition().lat() + " check equals " + userlat);
           console.log("TEST LONG: " + marker.getPosition().lng() + " check equals " + userlong);
