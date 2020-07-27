@@ -844,44 +844,27 @@ tr:nth-child{
     for calculations */
       // executes if the input textboxes contain data
       if (inputLat !== "" && inputLong !== "") {
-        /* executes if the user inputted non-number data into text fields */
-        if (isNaN(inputLat) || isNaN(inputLong)) {
-          document.getElementById('comp').innerHTML = "Please enter a valid number."
-        }
-        // ensuring that the inputted values are numbers
-        else if ((parseFloat(inputLat) > -91 && parseFloat(inputLat) < 91) && (parseFloat(inputLong) > -181 && parseFloat(inputLong) < 181)) {
-          userlat = inputLat; // setting user latitude equal to the inputted value
-          userlong = inputLong; // setting user longitude equal to the inputted value
-          result = userlat + ", " + userlong;
-          // displaying the inputted user latitude and longitude
-          //document.getElementById('comp').innerHTML="User latitude and longitude: " + result;
-          /* reseting the input boxes after compute is pressed */
-          document.getElementById('ulat').value = "";
-          document.getElementById('ulong').value = "";
-        }
-        else {
-          userlat = "NV";
-          userlong = "NV";
-          //document.getElementById('comp').innerHTML = "Please enter values within the latitude and longitude ranges."
+        /* executes if the user inputs number data into text fields */
+        if (!isNaN(inputLat) || isNaN(!inputLong)) {
+          // ensuring that the inputted values within the valid ranges
+          if ((parseFloat(inputLat) > -91 && parseFloat(inputLat) < 91) && (parseFloat(inputLong) > -181 && parseFloat(inputLong) < 181)) {
+            userlat = inputLat; // setting user latitude equal to the inputted value
+            userlong = inputLong; // setting user longitude equal to the inputted value
+            result = userlat + ", " + userlong;
+            /* reseting the input boxes after compute is pressed */
+            document.getElementById('ulat').value = "";
+            document.getElementById('ulong').value = "";
+          }
+          else {
+            userlat = "NV"; // user entered a non-valid (NV) latitude
+            userlong = "NV"; // user entered a non-valid (NV) longitude
+          }
         }
       }
-      /* executes if compute is pressed and both input boxes are empty */
-      else if (inputLat == "" && inputLong == "") {
+      /* executes if compute is pressed and either input boxes are empty */
+      else if (inputLat == "" || inputLong == "") {
         userlat = inputLat;
         userlong = inputLong;
-        //document.getElementById('comp').innerHTML="Please enter a latitude and longitude.";
-      }
-      /* executes if compute is pressed and the longitude textbox is empty */
-      else if (inputLong == "") {
-        userlat = inputLat;
-        userlong = inputLong;
-        //document.getElementById('comp').innerHTML="Please enter a longitude.";
-      }
-      /* executes if compute is pressed and the latitude textbox is empty */
-      else {
-        userlat = inputLat;
-        userlong = inputLong;
-        //document.getElementById('comp').innerHTML="Please enter a latitude.";
       }
   }
   </script>
