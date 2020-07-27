@@ -701,7 +701,8 @@ tr:nth-child{
         /* if the user enters an unknown address into the google autocomplete
         search bar an invalid address message will print */
         if (!place.geometry) {
-          document.getElementById('comp').innerHTML = "Invalid address: " + input.value;
+          alert("Invalid address: " + input.value);
+          //document.getElementById('comp').innerHTML = "Invalid address: " + input.value;
           return;
         }
         /* setting the bounds of the map according to user input and placing the
@@ -841,7 +842,6 @@ tr:nth-child{
     auto complete search bar. if information has already been entered into the
     google autocomplete search bar when compute is pressed, that data will be used
     for calculations */
-    if (maplat == "" && maplong == "" || maplat == undefined && maplong == undefined) {
       // executes if the input textboxes contain data
       if (inputLat !== "" && inputLong !== "") {
         /* executes if the user inputted non-number data into text fields */
@@ -883,10 +883,6 @@ tr:nth-child{
         userlong = inputLong;
         //document.getElementById('comp').innerHTML="Please enter a latitude.";
       }
-    }
-    else {
-      result = maplat + ", " + maplong;
-    }
   }
   </script>
 
