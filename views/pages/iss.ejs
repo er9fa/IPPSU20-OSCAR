@@ -1,414 +1,333 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-<style>
-html {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-/* title of the page */
-h1 {
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+  html {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  /* title of the page */
+  h1 {
+      text-align: center;
+      font-size: 60px;
+      color: white;
+      text-shadow: 5px 5px 3px #999;
+      font-family: 'Orbitron', sans-serif;
+  }
+
+  /* button that controls basic functions including user relation to space objects */
+  .compute button {
+    background-color: transparent;
+    border: 3px solid #C0ECAD;
+    border-radius: 50px;
+    color: white ;
+    padding: 10px 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: "Helvetica";
+    font-weight: bold;
+  }
+  /* controls the hover color of the compute button */
+  .compute button:hover {
+    background-color: gray;
+  }
+
+  /* general features of the background */
+  body {
+    /* background image is copyright free */
+    background: url(https://images.unsplash.com/photo-1587465511660-05c929e0e874?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80);
+    background-size: cover;
+    background-attachment: fixed;
     text-align: center;
-    font-size: 60px;
+  }
+
+  /* controls font color of paragraph color */
+  p {
     color: white;
-    text-shadow: 5px 5px 3px #999;
+  }
+
+  /* controls the second header */
+  #header2 {
+    border-radius: 50px;
+    opacity: 100;
+    height: 50px;
+    width: 600px;
+    margin:0 auto;
+    margin-right: 400px;
+    margin-top: 0px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
     font-family: 'Orbitron', sans-serif;
-}
-/* button that controls basic functions including user relation to space objects */
-.compute button {
-  background-color: transparent;
-  border: 3px solid #C0ECAD;
-  border-radius: 50px;
-  color: white ;
-  padding: 10px 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-family: "Helvetica";
-  font-weight: bold;
-}
-.compute button:hover {
-  background-color: gray;
-}
+    text-shadow: 2px 2px 2px #999;
+    float: right;
+  }
 
-/* general features of the background */
-body {
-  /* background image is copyright free */
-  background: url(https://images.unsplash.com/photo-1587465511660-05c929e0e874?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80);
-  background-size: cover;
-  background-attachment: fixed;
-  text-align: center;
-}
+  /* formatting for the display of images */
+  #rcornersimg {
+    border-radius: 50px;
+    background: black;
+    border: 9px double #484E5E;
+    width: 500px;
+    height: 500px;
+    margin: 20px auto 50px auto;
+    text-align: center;
+    color: white;
+    padding: 0 auto;
+  }
 
-/**/
-label {
-  font-size: 16px;
-}
+  /* formatting for the footer */
+  footer {
+     margin-bottom: 0;
+     left:0; bottom:0;
+     width: 100%;
+     height: 35px;
+     opacity: 0.7;
+     color: white;
+     text-align: center;
+     font-family: "Helvetica";
+     font-weight: 100;
+     position: absolute;
+     float: center;
+     overflow: hidden;
+  }
 
-/**/
-input[type=text] {
-  background-color: transparent;
-  color: white;
-  border-radius: 50px;
-}
+  /* formatting for the google searchbox */
+  .searchBox {
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    border: 1px solid;
+    border-color: white;
+    margin: 15px 10px 10px 30px;
+    width: 400px;
+    height: 20px;
+    font-size: 18px;
+    font-family: "Helvetica";
+    font-weight: 100;
+    padding: 16px 15px 15px 15px;
+    position: absolute;
+  }
 
-/**/
-p {
-  color: white;
-}
+  /* formatting for the latitude/longitude input boxes */
+  .mapInputs {
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    border: 1px solid;
+    border-color: white;
+    margin: 7px 5px 5px 10px;
+    width: 170px;
+    height: 27px;
+    font-size: 15px;
+    font-family: "Helvetica";
+    font-weight: 100;
+    padding: 5px 5px 5px 10px;
+    position: absolute;
+  }
 
-/**/
-.textbox {
-  font-family: "Helvetica";
-  font-weight: 100;
-  margin: 1px 10 10 30px;
-  background: transparent;
-  width: 800px;
-  height: 75px;
-  margin:0 auto;
-  text-align: center;
-  color: white;
-  /* border: 8px double #C0ECAD; */
-}
+  /* controls the growing information boxes */
+  .grow {
+    padding: 20px 15px 12px 15px;
+    width: 400px;
+    border-radius: 25px;
+    height: 30px;
+    float: left;
+    transition:height 0.5s;
+    text-align: center;
+    background-color: transparent;
+    font-family: "Helvetica";
+    font-weight: 100;
+    color: #FFFFFF;
+    overflow-y: hidden;
+    border: 4px solid #C0ECAD;
+  }
+  /* controls the hover feature of the information boxes */
+  .grow:hover {
+    height: 300px;
+  }
 
-/**/
-#header2 {
-  border-radius: 50px;
-  opacity: 100;
-  height: 50px;
-  width: 600px;
-  margin:0 auto;
-  margin-right: 400px;
-  margin-top: 0px;
-  text-align: center;
-  color: white;
-  font-size: 30px;
-  font-family: 'Orbitron', sans-serif;
-  text-shadow: 2px 2px 2px #999;
-  float: right;
-}
+  .container{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    transition:0.3s;
+    padding: 20px;
+  }
+  .container#blur.active{
+      filter: blur(15px);
+      pointer-events: none;
+      user-select: none;
+  }
+  .container.content{
+    position: relative;
+    max-width: 800px;
+  }
 
-/**/
-#rcornersimg {
-  border-radius: 50px;
-  background: black;
-  border: 9px double #484E5E;
-  width: 500px;
-  height: 500px;
-  margin: 20px auto 50px auto;
-  text-align: center;
-  color: white;
-  padding: 0 auto;
-}
+  .a {
+    position: relative;
+    border-radius:
+    padding: 10px 24px;
+    display: inline-block;
+    margin-top:20px;
+    text-decoration: none;
+    background-color: transparent;
+    border: 3px solid #C0ECAD;
+    border-radius: 50px;
+    color: white;
+    padding: 10px 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: "Helvetica";
+  }
+  .a:hover{
+      background-color: lightgray;
+  }
 
-/**/
-footer {
-   margin-bottom: 0;
-   left:0; bottom:0;
-   width: 100%;
-   height: 35px;
-   /* background-color: gray; */
-   opacity: 0.7;
-   color: white;
-   text-align: center;
-   font-family: "Helvetica";
-   font-weight: 100;
-   /* margin-top: 100px; */
-   position: absolute;
-   float: center;
-   overflow: hidden;
-}
+  /* formatting for the popup feature */
+  #popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    padding:50px;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background: #3F4457;
+    visibility: hidden;
+    opacity: 1;
+    transition: 0.5s;
+    color: black;
+    border: 9px double #C0ECAD;
+    font-family: "Helvetica";
+    font-weight: 100;
+    border-radius: 50%;
+  }
+  #popup.active{
+    visibility: visible;
+    opacity: 1;
+    transition: 0.2s;
+  }
 
-.searchBox {
-  background-color: #FFFFFF;
-  border-radius: 25px;
-  border: 1px solid;
-  border-color: white;
-  margin: 15px 10px 10px 30px;
-  width: 400px;
-  height: 20px;
-  font-size: 18px;
-  font-family: "Helvetica";
-  font-weight: 100;
-  padding: 16px 15px 15px 15px;
-  position: absolute;
-}
+  /* controls table settings */
+  table {
+    width: 97%;
+    text-align: center;
+  }
+  td {
+    border: transparent;
+    text-align: left;
+    padding: 8px;
+    color: #fff;
+    font-family: "Helvetica"
+  }
+  th {
+    border: 1px solid #C0ECAD;
+    text-align: left;
+    padding: 8px;
+    color: #fff;
+    font-family: "Helvetica"
+  }
+  tr:nth-child {
+    border: transparent;
+  }
 
-.mapInputs {
-  background-color: #FFFFFF;
-  border-radius: 25px;
-  border: 1px solid;
-  border-color: white;
-  margin: 7px 5px 5px 10px;
-  width: 170px;
-  height: 27px;
-  font-size: 15px;
-  font-family: "Helvetica";
-  font-weight: 100;
-  padding: 5px 5px 5px 10px;
-  position: absolute;
-}
+  /* formatting for the dropdown menu */
+  .dropdownbutton {
+    background-color: transparent;
+    width: 600px;
+    opacity: 1.0;
+    color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 18px;
+    font-family: monospace;
+    border-radius: 30px;
+    border: 3px solid #C0ECAD;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    z-index:999
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    opacity: 0.95;
+  }
+  .dropdown-content .a {
+    opacity: 1.0;
+    color: white;
+    padding-left: -30px;
+    padding-right: -30px;
+    font-size: 18px;
+    font-family: monospace;
+    border-radius: 30px;
+    border: 3px solid #C0ECAD;
+    width: 550px;
+  }
+  .dropdown-content .a:hover {background-color: darkgray;}
+  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropdownbutton {background-color: darkgray;}
 
-.grow {
-  padding: 20px 15px 12px 15px;
-  width: 400px;
-  border-radius: 25px;
-  height: 30px;
-  float: left;
-  transition:height 0.5s;
-  text-align: center;
-  background-color: transparent;
-  font-family: "Helvetica";
-  font-weight: 100;
-  color: #FFFFFF;
-  overflow-y: hidden;
-  border: 4px solid #C0ECAD;
-}
-.grow:hover {
-  height: 300px;
-}
-.circletext {
-   border-radius: 50%;
-   background: #3F4457;
-   opacity: 0.7;
-   width: 375px;
-   height: 300px;
-   text-align: center;
-   font-size: 13px;
-   font-family: "Helvetica";
-   font-weight: 100;
-   color: #FFFFFF;
-   line-height: 16px;
-   margin-top: 25px;
-   margin-left: 10px;
-   float:left;
-   padding-top: 50px;
-   padding-left: 20px;
-   padding-right: 20px;
-}
+  .item1 {
+    grid-area: header;
+    text-align: center;
+    width: auto;
+  }
+  .item2 {
+    grid-area: drop;
+  }
+  .item3 {
+    grid-area: map;
+  }
+  .item4 {
+    grid-area: history;
+  }
 
-.buttoncomp{
-  align-self: center;
-  /* padding: 20px 15px 12px 15px; */
-  width: 20%;
-  margin: 0px 10px 25px 20px;
-  float: left;
-  transition:height 0.5s;
-  text-align: center;
-  background-color: transparent;
-  font-family: "Helvetica";
-  font-weight: 100;
-  color: #FFFFFF;
-  margin-right: 10px;
-}
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      'header header header header header header'
+      'drop drop map map map map'
+      'history history history history history history';
+    grid-gap: 8px;
+    padding: 5px;
+  }
 
-/**/
-.container{
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-  transition:0.3s;
-  padding: 20px;
-}
-.container#blur.active{
-    filter: blur(15px);
-    pointer-events: none;
-    user-select: none;
-}
-.container.content{
-  position: relative;
-  max-width: 800px;
-}
-
-/**/
-/* .compbutton {
-  position:relative;
-  padding: 10px 24px;
-  display: inline-block;
-  margin-top:20px;
-  text-decoration: none;
-  background-color: transparent;
-  border-radius: 50px;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-family: "Helvetica";
-  border: 3px solid #C0ECAD;
-} */
-.a {
-  position: relative;
-  border-radius:
-  padding: 10px 24px;
-  display: inline-block;
-  margin-top:20px;
-  text-decoration: none;
-  background-color: transparent;
-  border: 3px solid #C0ECAD;
-  border-radius: 50px;
-  color: white;
-  padding: 10px 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-family: "Helvetica";
-}
-.a:hover{
-    background-color: lightgray;
-}
-/* .compbutton:hover {
-  background-color: lightgray;
-} */
-
-/**/
-#popup{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 400px;
-  padding:50px;
-  box-shadow: 0 5px 30px rgba(0,0,0,.30);
-  background: #3F4457;
-  visibility: hidden;
-  opacity: 1;
-  transition: 0.5s;
-  color: black;
-  border: 9px double #C0ECAD;
-  font-family: "Helvetica";
-  font-weight: 100;
-  border-radius: 50%;
-}
-#popup.active{
-  visibility: visible;
-  opacity: 1;
-  transition: 0.2s;
-}
-
-table {
-  width: 97%;
-  text-align: center;
-}
-
-td{
-  border: transparent;
-  text-align: left;
-  padding: 8px;
-  color: #fff;
-  font-family: "Helvetica"
-}
-th{
-  border: 1px solid #C0ECAD;
-  text-align: left;
-  padding: 8px;
-  color: #fff;
-  font-family: "Helvetica"
-}
-}
-
-tr:nth-child{
-  border: transparent;
-}
-
-/**/
-.dropdownbutton {
-  background-color: transparent;
-  width: 600px;
-  opacity: 1.0;
-  color: white;
-  padding-left: 30px;
-  padding-right: 30px;
-  font-size: 18px;
-  font-family: monospace;
-  border-radius: 30px;
-  border: 3px solid #C0ECAD;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-  z-index:999
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  opacity: 0.95;
-
-}
-.dropdown-content .a {
-  opacity: 1.0;
-  color: white;
-  padding-left: -30px;
-  padding-right: -30px;
-  font-size: 18px;
-  font-family: monospace;
-  border-radius: 30px;
-  border: 3px solid #C0ECAD;
-  width: 550px;
-}
-.dropdown-content .a:hover {background-color: darkgray;}
-.dropdown:hover .dropdown-content {display: block;}
-.dropdown:hover .dropdownbutton {background-color: darkgray;}
-
-.item1 {
-  grid-area: header;
-  text-align: center;
-  width: auto;
-}
-.item2 {
-  grid-area: drop;
-}
-.item3 {
-  grid-area: map;
-}
-.item4 {
-  grid-area: history; }
-
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'header header header header header header'
-    'drop drop map map map map'
-    'history history history history history history';
-  grid-gap: 8px;
-  padding: 5px;
-}
-
-.grid-container > div {
-  text-align: center;
-  padding: 20px 0;
-}
-
-</style>
+  .grid-container > div {
+    text-align: center;
+    padding: 20px 0;
+  }
+  </style>
 </head>
 
 <body>
 
   <div class = "container" id="blur">
    <div class = "content">
-
      <div class="grid-container">
-
-     <div class="item1">
-
-     <h1>Can I see the
-        <div class="dropdown">
-        <button class="dropdownbutton"><h1><span id="satname1"></span></h1></button>
-        <div class="dropdown-content">
-          <a class="a" style="background-color: black" href="#">
-            <button style="width:175px; margin-bottom:10px" onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button>
-            <button style="width:175px;margin-bottom:10px" onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button>
-            <button style="width:175px;margin-bottom:10px" onclick="titlesat('YAOGAN-31 A','43275');resetlatlong();"> <h2>YAOGAN-31 A</h2> </button>
-            <button style="width:175px;margin-bottom:10px" onclick="titlesat('CANX-6','32784');resetlatlong();"> <h2>CANX-6</h2> </button>
-            <button style="width:175px;margin-bottom:10px" onclick="titlesat('STARLINK-1517','45787');resetlatlong();"> <h2>STARLINK-1517</h2> </button>
-            <button style="width:175px;margin-bottom:10px" onclick="titlesat('DMC 3-FM3','40717');resetlatlong();"> <h2>DMC 3-FM3</h2> </button>
-            <button style="width:175px;margin-bottom:10px" onclick="titlesat('COSMOS 2428','31792');resetlatlong();"> <h2>COSMOS 2428</h2> </button>
-            <button style="width:175px;margin-bottom:10px" onclick="titlesat('NOAA 19','33591');resetlatlong();"> <h2>NOAA 19</h2> </button>
-            <button style="width:175px;margin-bottom:10px" onclick="titlesat('FOX-1A (AO-85)','40967');resetlatlong();"> <h2>FOX-1A (AO-85)</h2> </button>
-          </a>
-        </div>
-        </div> ?
-     </h1>
-     </div>
+       <div class="item1">
+         <h1>Can I see the
+            <div class="dropdown">
+            <button class="dropdownbutton"><h1><span id="satname1"></span></h1></button>
+            <div class="dropdown-content">
+              <a class="a" style="background-color: black" href="#">
+                <button style="width:175px; margin-bottom:10px" onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button>
+                <button style="width:175px;margin-bottom:10px" onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button>
+                <button style="width:175px;margin-bottom:10px" onclick="titlesat('YAOGAN-31 A','43275');resetlatlong();"> <h2>YAOGAN-31 A</h2> </button>
+                <button style="width:175px;margin-bottom:10px" onclick="titlesat('CANX-6','32784');resetlatlong();"> <h2>CANX-6</h2> </button>
+                <button style="width:175px;margin-bottom:10px" onclick="titlesat('STARLINK-1517','45787');resetlatlong();"> <h2>STARLINK-1517</h2> </button>
+                <button style="width:175px;margin-bottom:10px" onclick="titlesat('DMC 3-FM3','40717');resetlatlong();"> <h2>DMC 3-FM3</h2> </button>
+                <button style="width:175px;margin-bottom:10px" onclick="titlesat('COSMOS 2428','31792');resetlatlong();"> <h2>COSMOS 2428</h2> </button>
+                <button style="width:175px;margin-bottom:10px" onclick="titlesat('NOAA 19','33591');resetlatlong();"> <h2>NOAA 19</h2> </button>
+                <button style="width:175px;margin-bottom:10px" onclick="titlesat('FOX-1A (AO-85)','40967');resetlatlong();"> <h2>FOX-1A (AO-85)</h2> </button>
+              </a>
+            </div>
+            </div> ?
+         </h1>
+       </div>
 
      <div class="item2">
       <div class="grow">
@@ -433,58 +352,28 @@ tr:nth-child{
       <div style="margin-top: 10px;" class="grow">
         <text style="font-size: 20px; font-family: 'Orbitron';">     PREVIOUS REQUEST   </text> <br>
         <text style="font-size: 14px;">
-        <br>
-        <p><b>Date & Time: </b><span id="datetimeprint"></span> </p>
-         <div><p>
-           <b>Location of <span id="satnameprint"></span>:</b> <br>
-           Latitude: <span id="sat_latitudeprint"> </span>
-           <br>
-           Longitude: <span id="sat_longitudeprint"> </span> </p>
-         </div>
-         <p><b>Is it above me? </b> <span style="color:#C0ECAD; font-size: 14px" id="result_satprint"></span> </p>
-         <p><b>Weather Description: </b> <span id="cloud_descrip_print"></span> </p>
-         <p><b>Can I see it? </b> <span id="cloud_perc_print"></span> </p>
-         <!-- <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span> </b> </p> -->
-         <p><b>User latitude and longitude: </b> <span id="prev_position"></span> <br> </p>
-         </text>
+          <br>
+          <p><b>Date & Time: </b><span id="datetimeprint"></span> </p>
+          <div><p>
+             <b>Location of <span id="satnameprint"></span>:</b> <br>
+             Latitude: <span id="sat_latitudeprint"> </span>
+             <br>
+             Longitude: <span id="sat_longitudeprint"> </span> </p>
+          </div>
+          <p><b>Is it above me? </b> <span style="color:#C0ECAD; font-size: 14px" id="result_satprint"></span> </p>
+          <p><b>Weather Description: </b> <span id="cloud_descrip_print"></span> </p>
+          <p><b>Can I see it? </b> <span id="cloud_perc_print"></span> </p>
+          <p><b>User latitude and longitude: </b> <span id="prev_position"></span> <br> </p>
+        </text>
       </div>
 
       <div style="margin-top: 10px;margin-right: 35px;" >
-        <!-- <form>
-          <br>
-          <br>
-          manual input box for user latitude
-          <label>Latitude:</label>
-          <input type="text" id="ulat"/>
-          &emsp;
-          manual input box for user longitude
-          <label>Longitude:</label>
-          <input type="text" id="ulong"/>
-          &emsp;
-        </form> -->
-          <a class="a" style ="position:relative; width: 200px; font-size: 20px; font-family:'Helvetica'; font-weight:100;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
-          <br><br><br>
+        <a class="a" style ="position:relative; width: 200px; font-size: 20px; font-family:'Helvetica'; font-weight:100;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
+        <br><br><br>
       </div>
-      </div>
+    </div>
 
-      <!--
-      <table>
-        <tr>
-          <th>Date&Time: </th>
-          <th>Satellite Location: </th>
-          <th>User Location:</th>
-          <th>Can I see it?</th>
-        </tr>
-        <tr>
-          <td><span id="d&t"></td>
-          <td><span id="slat&long"></td>
-          <td><span id="ulat&long"></td>
-          <td><span id="visible"></td>
-        </tr>
-
-      </table>
-      -->
-      <div class="item3">
+    <div class="item3">
       <div>
         <input
            id="searchTextField"
@@ -514,10 +403,10 @@ tr:nth-child{
         margin-right: 30px;
       }
       </style>
-      </div>
+    </div>
 
-      <div class="item4">
-        <br><br>
+    <div class="item4">
+      <br><br>
       <div id="header2">
         HISTORY OF REQUESTS
       </div>
@@ -532,18 +421,19 @@ tr:nth-child{
       </table>
 
       <br><br><br><br>
-
       <br><br>
+
       <footer>
-      <div>
-        <p style="float:right;margin-right:200px">Developed By: David Li, Katie Stadler, Renita John;&emsp;
-          With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
-          And Sponsored By: The UVA DevHub</p>
-          <!-- <div style="margin-left:170px;float:left;margin-top:10px;">
-            <img src="https://i.ya-webdesign.com/images/space-invaders-alien-png.png" style = "width:30px; height:30px;" onclick="window.open('https://arcade.ly/games/space-invaders/', '_blank');">
-          </div> -->
-        </div> </footer>
-      </div>
+        <div>
+          <p style="float:right;margin-right:200px">Developed By: David Li, Katie Stadler, Renita John;&emsp;
+            With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
+            And Sponsored By: The UVA DevHub</p>
+            <!-- <div style="margin-left:170px;float:left;margin-top:10px;">
+              <img src="https://i.ya-webdesign.com/images/space-invaders-alien-png.png" style = "width:30px; height:30px;" onclick="window.open('https://arcade.ly/games/space-invaders/', '_blank');">
+            </div> -->
+        </div>
+      </footer>
+    </div>
     </div>
     </div>
     </div>
@@ -632,18 +522,21 @@ tr:nth-child{
     var maplong; // describes the longitude pulled from the google map
     var marker; // describes the google map marker
     var map; // describes the google map
+    var infowindow; // describes the marker's infowindow
     /* function that initializes the google map, google autocomplete search bar,
     and the google map marker. takes no parameters. */
-    var infowindow;
     function initMap() {
       var latlong = new google.maps.LatLng(38.031078, -78.512772); // default location for google map marker
       var options = {
         zoom: 12,
         center: latlong
       }
+      // creating the map
       map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 38.031078, lng: -78.512772},
       zoom: 4,
+      /* following style section displays the map in "dark mode." featureType refers
+      features of the map. elementType is a subdivision of featureType. */
       styles: [
         {elementType: 'geometry', stylers: [{color: '#242F3E'}]},
         {elementType: 'labels.text.stroke', stylers: [{color: '#242F3E'}]},
@@ -726,24 +619,26 @@ tr:nth-child{
       ]
     });
 
-
-
       var input = document.getElementById('searchTextField'); // user input from the google autocomplete search bar
-      var manualLat = document.getElementById('ulat');
-      var manualLng = document.getElementById('ulong');
+      var manualLat = document.getElementById('ulat'); // manual latitude input
+      var manualLng = document.getElementById('ulong'); // manual longitude input
 
+      // initializing an empty infowindow
       infowindow = new google.maps.InfoWindow({
         content: ''
       });
 
+      /* placing the latitude/longitude input boxes at the top left of the map */
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(manualLat);
       map.controls[google.maps.ControlPosition.LEFT_TOP].push(manualLng);
 
+      /* placing the google search bar at the top of the map */
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-      var autocomplete = new google.maps.places.Autocomplete(input);
-      autocomplete.bindTo('bounds', map);
 
-      // google map marker
+      var autocomplete = new google.maps.places.Autocomplete(input); // controls the google autcomplete search bar
+      autocomplete.bindTo('bounds', map); // binds the search bar to the bounds of the map
+
+      // initalizing google map marker
       marker = new google.maps.Marker({
         position: latlong,
         map: map,
@@ -751,9 +646,12 @@ tr:nth-child{
         animation: google.maps.Animation.DROP // marker drops onto the screen
       });
 
+      /* listener that controls the google autocomplete search bar. entering a valid location in
+      the search bar is equivalent to pressing the compute button. */
       autocomplete.addListener('place_changed', function() {
-        infowindow.close();
-        var place = autocomplete.getPlace();
+        infowindow.close(); // ensuring that any open infowindow is closed
+        var place = autocomplete.getPlace(); // retrieving the inputted address
+
         /* if the user enters an unknown address into the google autocomplete
         search bar an invalid address message will print */
         if (!place.geometry) {
@@ -773,29 +671,27 @@ tr:nth-child{
         document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
-        //document.getElementById('comp').innerHTML= "Address: " + input.value + ". Latitude and longitude: " + userlat + ", " + userlong;
 
+        /* inputted address and corresponding latitude and longitude. displayed in the infowindow */
         var requestInfo = "<b>Address: </b>" + input.value + ". <br>" + "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
 
-        infowindow.setContent(requestInfo);
+        infowindow.setContent(requestInfo); // setting the content of the infowindow to the user address and latitude/longitude
         // same functions as compute button
         latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); setTimeout(clouds, 1000); computeZoom();
 
-        infowindow.open(map,marker);
+        infowindow.open(map,marker); // opening the infowindow
       });
 
       /* allows the user to select a place on the map by clicking on the map */
       google.maps.event.addListener(map, 'click', function(event) {
         infowindow.close();
-        placeMarker(event.latLng);
+        placeMarker(event.latLng); // placing the marker where the user clicks
         maplat = marker.getPosition().lat(); // latitude from the google map
         maplong = marker.getPosition().lng(); // longitude from the google map
         document.getElementById('ulat').value = maplat; // clearing the latitude input box
         document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
-        /* printing out the user latitude and longitude */
-        //document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
       });
 
       /* allows the user to select a place on the map by dragging the google map marker*/
@@ -807,8 +703,6 @@ tr:nth-child{
         document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
-        /* printing out the user latitude and longitude */
-        //document.getElementById('comp').innerHTML = "User latitude and longitude: " + userlat + ", " + userlong;
       });
 
       /* function that takes a location and places a marker on the location */
@@ -828,7 +722,7 @@ tr:nth-child{
           marker.setPosition(location);
           userlat = marker.getPosition().lat(); // setting the user latitude to the marker's latitude
           userlong = marker.getPosition().lng(); // setting the user longitude to the marker's longitude
-        //  map.setZoom(7);
+
           /* checks to ensure the latitude and longitude are correctly assigned */
           console.log("TEST LAT: " + marker.getPosition().lat() + " check equals " + userlat);
           console.log("TEST LONG: " + marker.getPosition().lng() + " check equals " + userlong);
@@ -836,10 +730,11 @@ tr:nth-child{
         map.setCenter(location); // centering the map on the provided location
       }
     }
+
+    /* function that opens an infowindow if the user manually enters latitude and longitude */
     function manualInfoWindow() {
       if (userlat !== "" && userlong !== "" && userlat !== undefined && userlong !== undefined && !isNaN(userlat) && !isNaN(userlong)) {
         var requestInfo = "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
-
         infowindow.setContent(requestInfo);
         infowindow.open(map, marker);
       }
@@ -869,19 +764,18 @@ tr:nth-child{
         map.setZoom(5);
       }
     }
+
+    /* function that sets the map zoom every time compute is pressed */
     function computeZoom() {
       map.setZoom(10);
     }
+
   </script>
 
   <!-- calling the google map api -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCT6pTAuib-JSgt6j1obhJsrcbPm_dxt1s&libraries=places&callback=initMap" async defer>
   </script>
   <br>
-
-  <!--<div class="compute">
-    <button onclick="myFunction(); calc(); latlonginput(); resetCounter(); counter(); reset(); markerPosition(); clouds();">COMPUTE</button>
-  </div>-->
 
   <script>
   var userlat; // describes the user's latitude
@@ -894,34 +788,30 @@ tr:nth-child{
   function latlonginput() {
     inputLat = document.getElementById('ulat').value; // pulling user latitude from input box
     inputLong = document.getElementById('ulong').value; // pulling user longitude from input box
-    /* only executes if the user has not yet entered information into the google
-    auto complete search bar. if information has already been entered into the
-    google autocomplete search bar when compute is pressed, that data will be used
-    for calculations */
-      // executes if the input textboxes contain data
-      if (inputLat !== "" && inputLong !== "") {
-        /* executes if the user inputs number data into text fields */
-        if (!isNaN(inputLat) || isNaN(!inputLong)) {
-          // ensuring that the inputted values within the valid ranges
-          if ((parseFloat(inputLat) > -91 && parseFloat(inputLat) < 91) && (parseFloat(inputLong) > -181 && parseFloat(inputLong) < 181)) {
-            userlat = inputLat; // setting user latitude equal to the inputted value
-            userlong = inputLong; // setting user longitude equal to the inputted value
-            result = userlat + ", " + userlong;
-            /* reseting the input boxes after compute is pressed */
-            document.getElementById('ulat').value = "";
-            document.getElementById('ulong').value = "";
-          }
-          else {
-            userlat = "NV"; // user entered a non-valid (NV) latitude
-            userlong = "NV"; // user entered a non-valid (NV) longitude
-          }
+    // executes if the input textboxes contain data
+    if (inputLat !== "" && inputLong !== "") {
+      /* executes if the user inputs number data into text fields */
+      if (!isNaN(inputLat) || isNaN(!inputLong)) {
+        // ensuring that the inputted values within the valid ranges
+        if ((parseFloat(inputLat) > -91 && parseFloat(inputLat) < 91) && (parseFloat(inputLong) > -181 && parseFloat(inputLong) < 181)) {
+          userlat = inputLat; // setting user latitude equal to the inputted value
+          userlong = inputLong; // setting user longitude equal to the inputted value
+          result = userlat + ", " + userlong;
+          /* reseting the input boxes after compute is pressed */
+          document.getElementById('ulat').value = "";
+          document.getElementById('ulong').value = "";
+        }
+        else {
+          userlat = "NV"; // user entered a non-valid (NV) latitude
+          userlong = "NV"; // user entered a non-valid (NV) longitude
         }
       }
-      /* executes if compute is pressed and either input boxes are empty */
-      else if (inputLat == "" || inputLong == "") {
-        userlat = inputLat;
-        userlong = inputLong;
-      }
+    }
+    /* executes if compute is pressed and either input box is empty */
+    else if (inputLat == "" || inputLong == "") {
+      userlat = inputLat;
+      userlong = inputLong;
+    }
   }
   </script>
 
@@ -1053,13 +943,15 @@ tr:nth-child{
     })
   }
 
+  /* function that controls previous request information. contains information from
+  the popup window displayed in the previous request section. */
   function history() {
-    document.getElementById("datetimeprint").innerHTML = date;
-    document.getElementById("sat_latitudeprint").innerHTML = satlat;
-    document.getElementById("sat_longitudeprint").innerHTML = satlong;
-    document.getElementById("result_satprint").innerHTML = result_sat;
-    document.getElementById("cloud_descrip_print").innerHTML = cloudy_desc;
-    /* eliminate repetitive if statements */
+    document.getElementById("datetimeprint").innerHTML = date; // display date
+    document.getElementById("sat_latitudeprint").innerHTML = satlat; // display satellite latitude
+    document.getElementById("sat_longitudeprint").innerHTML = satlong; // display satellite longitude
+    document.getElementById("result_satprint").innerHTML = result_sat; // whether or user is below satellite
+    document.getElementById("cloud_descrip_print").innerHTML = cloudy_desc; // weather description
+    /* determines whether or not user can see satellite with weather consideration */
     if (light) {
       document.getElementById("cloud_perc_print").innerHTML = light;
     }
@@ -1072,8 +964,6 @@ tr:nth-child{
     document.getElementById("prev_position").innerHTML = result;
   }
 
-
 </script>
-
 
 </html>
