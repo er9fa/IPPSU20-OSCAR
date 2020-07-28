@@ -102,16 +102,21 @@ p {
 }
 
 /**/
-.footer {
-   left:0; bottom:0; right:0;
+footer {
+   margin-bottom: 0;
+   left:0; bottom:0;
    width: 100%;
-   background-color: gray;
+   height: 35px;
+   /* background-color: gray; */
    opacity: 0.7;
    color: white;
    text-align: center;
    font-family: "Helvetica";
    font-weight: 100;
-   margin-top: 100px;
+   /* margin-top: 100px; */
+   position: absolute;
+   float: center;
+   overflow: hidden;
 }
 
 .searchBox {
@@ -242,7 +247,7 @@ p {
   background-color: transparent;
   border: 3px solid #C0ECAD;
   border-radius: 50px;
-  color: white ;
+  color: white;
   padding: 10px 24px;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -444,7 +449,7 @@ tr:nth-child{
          </text>
       </div>
 
-      <div style="margin-top: 10px;" >
+      <div style="margin-top: 10px;margin-right: 35px;" >
         <!-- <form>
           <br>
           <br>
@@ -457,7 +462,7 @@ tr:nth-child{
           <input type="text" id="ulong"/>
           &emsp;
         </form> -->
-          <a class="a" style = "position:relative; width: 200px; font-size: 20px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
+          <a class="a" style ="position:relative; width: 200px; font-size: 20px; font-family:'Helvetica'; font-weight:100;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
           <br><br><br>
       </div>
       </div>
@@ -512,15 +517,15 @@ tr:nth-child{
       </div>
 
       <div class="item4">
-        <br><br><br><br><br><br>
+        <br><br>
       <div id="header2">
         HISTORY OF REQUESTS
       </div>
       <table id="myTable">
         <tr>
           <th>Date & Time: </th>
-          <th>Satellite Location (Lat,Long): </th>
-          <th>User Location (Lat,Long):</th>
+          <th>Satellite Location (Latitude, Longitude): </th>
+          <th>User Location (Latitude, Longitude):</th>
           <th>Is it above me?</th>
           <th>Satellite Name:</th>
         </tr>
@@ -529,14 +534,15 @@ tr:nth-child{
       <br><br><br><br>
 
       <br><br>
-        <div style = "position: absolute; bottom: -100px", class="footer">
-          <p style="margin-right:200px;float:right;">Coded By: David Li, Katie Stadler, Renita John;&emsp;
+      <footer>
+      <div>
+        <p>Developed By: David Li, Katie Stadler, Renita John;&emsp;
           With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
           And Sponsored By: The UVA DevHub</p>
           <!-- <div style="margin-left:150px;float:left;">
             <img src="https://i.ya-webdesign.com/images/space-invaders-alien-png.png" style = "width:50px; height:50px;" onclick="window.open('https://arcade.ly/games/space-invaders/', '_blank');">
           </div> -->
-        </div>
+        </div> </footer>
       </div>
     </div>
     </div>
@@ -560,6 +566,18 @@ tr:nth-child{
         document.getElementById("sat_desc").innerHTML="The Galileo 26 is one of the most recent additions to the European Union’s planned total of 38 satellites in the Galileo series to increase its independence and influence in technology. The satellite was launched at the same time as three others -Galileo 23, 24, and 25- with the purpose to improve position, navigation, and timing systems. The Galileo satellites together are controlled by civilians and recognized as the most precise of positioning, navigation, and timing systems in the world."
       }else if (satid_num ===43275){
         document.getElementById("sat_desc").innerHTML="The Yaogan-31a is a remote sensing satellite launched by China in 2018. Its intent is to collect and monitor data on the Earth concerning the environment. Much about the Yaogan series of satellites, however, is unknown, including what equipment is used for its research."
+      }else if (satid_num ===32784){
+        document.getElementById("sat_desc").innerHTML="The CanX-6 is Canadian satellite that is small, and compact with a maximum of just 14 kg. It is used to track and monitor ships. Though the CanX-6 was originally intended to only last a few months at the time of launch, it surpassed expectations and is still in orbit and operational."
+      }else if (satid_num ===45787){
+        document.getElementById("sat_desc").innerHTML="The Starlink-1517 is a part of SpaceX’s Starlink “satellite constellation” with the intention of improving communication and internet. SpaceX intends to put thousands of Starlink satellites in the sky and the Starlink-1517 is just one of those. SpaceX also intends to sell some of these satellites for other purposes including exploration and research."
+      }else if (satid_num ===40717){
+        document.getElementById("sat_desc").innerHTML="The DMC 3-FM3 is the United Kingdom’s satellite which is a part of the DMC (Disaster Monitoring Constellation). It weighs around 447 kg and boasts an impressively high resolution imager (capable of taking black-and-white images with notably higher resolutions than its color images) that allows it to monitor disasters occurring on Earth."
+      }else if (satid_num ===31792){
+        document.getElementById("sat_desc").innerHTML="The Cosmos-2428 is a Russian intelligence satellite said to be the last of the Tselina-2 class satellites. "
+      }else if (satid_num ===33591){
+        document.getElementById("sat_desc").innerHTML="The NOAA 19 is a US satellite initially launched by NASA then given to the National Oceanic and Atmospheric Administration (NOAA). It collects a variety of meteorological data important for weather forecasting including: ocean surface temperature and atmospheric temperature."
+      }else if (satid_num ===40967){
+        document.getElementById("sat_desc").innerHTML="The Fox-1A is an amateur radio/communication satellite. It is rather small and not incredibly complicated. Though it does carry a student experiment on it. "
       }else{
         document.getElementById("sat_desc").innerHTML="Please select a satellite!";
       }
