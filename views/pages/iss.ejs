@@ -145,13 +145,10 @@ p {
 }
 
 .grow {
-  float:right;
   padding: 20px 15px 12px 15px;
+  width: 400px;
   border-radius: 25px;
   height: 30px;
-  width: 22%;
-  margin-right: 30px;
-  margin-left: 40px;
   float: left;
   transition:height 0.5s;
   text-align: center;
@@ -347,6 +344,35 @@ tr:nth-child{
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown:hover .dropdownbutton {background-color: darkgray;}
 
+.item1 {
+  grid-area: header;
+  text-align: center;
+  width: auto;
+}
+.item2 {
+  grid-area: drop;
+}
+.item3 {
+  grid-area: map;
+}
+.item4 {
+  grid-area: history; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'drop drop map map map map'
+    'history history history history history history';
+  grid-gap: 8px;
+  padding: 5px;
+}
+
+.grid-container > div {
+  text-align: center;
+  padding: 20px 0;
+}
+
 </style>
 </head>
 
@@ -354,6 +380,10 @@ tr:nth-child{
 
   <div class = "container" id="blur">
    <div class = "content">
+
+     <div class="grid-container">
+
+     <div class="item1">
 
      <h1>Can I see the
         <div class="dropdown">
@@ -373,8 +403,9 @@ tr:nth-child{
         </div>
         </div> ?
      </h1>
+     </div>
 
-
+     <div class="item2">
       <div class="grow">
           <text style="font-size: 20px; font-family: 'Orbitron';"> INSTRUCTIONS </text> <br> <br>
           <text style="font-size: 14px;"> 1. Select a satellite. Hover your mouse over “Select Satellite” (or if you have already selected one, the satellite name in title) to select a satellite. <br> <br>
@@ -384,7 +415,71 @@ tr:nth-child{
                  3. Once your location is entered, click the “compute” button. <br></text>
       </div>
 
+      <div style="margin-top: 10px;" class="grow">
+        <text style="font-size: 20px; font-family: 'Orbitron';"> BEHIND THE SCENES </text>
+        <img src="/Calc_FOV.gif" style = "width:250px; height:225px;" id ="rcornersimg">
+      </div>
 
+      <div style="margin-top: 10px;" class="grow">
+          <text style="font-size: 20px; font-family: 'Orbitron';"> SATELLITE DESCRIPTION </text> <br> <br>
+          <text style="font-size: 14px;"> <span id="sat_desc"> </span> <br></text>
+      </div>
+
+      <div style="margin-top: 10px;" class="grow">
+        <text style="font-size: 20px; font-family: 'Orbitron';">     PREVIOUS REQUEST   </text> <br>
+        <text style="font-size: 14px;">
+        <br>
+        <p><b>Date & Time: </b><span id="datetimeprint"></span> </p>
+         <div><p>
+           <b>Location of <span id="satnameprint"></span>:</b> <br>
+           Latitude: <span id="sat_latitudeprint"> </span>
+           <br>
+           Longitude: <span id="sat_longitudeprint"> </span> </p>
+         </div>
+         <p><b>Is it above me? </b> <span style="color:#C0ECAD; font-size: 14px" id="result_satprint"></span> </p>
+         <p><b>Weather Description: </b> <span id="cloud_descrip_print"></span> </p>
+         <p><b>Can I see it? </b> <span id="cloud_perc_print"></span> </p>
+         <!-- <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span> </b> </p> -->
+         <p><b>User latitude and longitude: </b> <span id="prev_position"></span> <br> </p>
+         </text>
+      </div>
+
+      <div style="margin-top: 10px;" >
+        <!-- <form>
+          <br>
+          <br>
+          manual input box for user latitude
+          <label>Latitude:</label>
+          <input type="text" id="ulat"/>
+          &emsp;
+          manual input box for user longitude
+          <label>Longitude:</label>
+          <input type="text" id="ulong"/>
+          &emsp;
+        </form> -->
+          <a class="a" style = "position:relative; width: 200px; font-size: 20px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
+          <br><br><br>
+      </div>
+      </div>
+
+      <!--
+      <table>
+        <tr>
+          <th>Date&Time: </th>
+          <th>Satellite Location: </th>
+          <th>User Location:</th>
+          <th>Can I see it?</th>
+        </tr>
+        <tr>
+          <td><span id="d&t"></td>
+          <td><span id="slat&long"></td>
+          <td><span id="ulat&long"></td>
+          <td><span id="visible"></td>
+        </tr>
+
+      </table>
+      -->
+      <div class="item3">
       <div>
         <input
            id="searchTextField"
@@ -410,113 +505,14 @@ tr:nth-child{
       /* style and size setting for the google map */
       #map {
         height:600px;
-        width:66%;
-        float:right;
-        margin-right: 40px;
+        width:900px;
+        margin-right: 30px;
       }
       </style>
-
-      <div style="margin-top: 10px;" class="grow">
-        <text style="font-size: 20px; font-family: 'Orbitron';"> BEHIND THE SCENES </text>
-        <img src="/Calc_FOV.gif" style = "width:250px; height:225px;" id ="rcornersimg">
       </div>
 
-      <div style="margin-top: 10px;" class="grow">
-          <text style="font-size: 20px; font-family: 'Orbitron';"> SATELLITE DESCRIPTION </text> <br> <br>
-          <text style="font-size: 14px;"> <span id="sat_desc"> </span> <br></text>
-      </div>
-
-      <div style="margin-top: 10px;" class="grow">
-        <text style="font-size: 20px; font-family: 'Orbitron';"> PREVIOUS REQUEST </text> <br>
-        <text style="font-size: 14px;">
-        <p><b>Date & Time: </b><span id="datetimeprint"></span> </p>
-         <div><p>
-           <b>Location of <span id="satnameprint"></span>:</b> <br>
-           Latitude: <span id="sat_latitudeprint"> </span>
-           <br>
-           Longitude: <span id="sat_longitudeprint"> </span> </p>
-         </div>
-         <p><b>Is it above me? </b> <span style="color:#C0ECAD; font-size: 14px" id="result_satprint"></span> </p>
-         <p><b>Weather Description: </b> <span id="cloud_descrip_print"></span> </p>
-         <p><b>Can I see it? </b> <span id="cloud_perc_print"></span> </p>
-         <!-- <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span> </b> </p> -->
-         <p><b>User latitude and longitude: </b> <span id="prev_position"></span> <br> </p>
-         </text>
-      </div>
-
-      <script>
-      var sat_key;
-      document.getElementById("satname1").innerHTML="Select Satellite";
-      document.getElementById("sat_desc").innerHTML="A satellite is any object that orbits in a curved path around a planet. The moon is one of the Earth’s natural satellites. Conventionally, the term “satellite” refers to a machine that is launched into space and orbits around Earth or another object in space. To learn more about specific satellites and your relation to these artificial space objects, please select a satellite. ";
-      function titlesat(sat_name,satel_id){
-        satel=sat_name;
-        document.getElementById("satname1").innerHTML=satel;
-        document.getElementById("satname").innerHTML=satel;
-        document.getElementById("satname2").innerHTML=satel;
-        document.getElementById("satnameprint").innerHTML=satel;
-        sat_key=satel_id;
-        var satid_num =parseFloat(satel_id);
-        if (satid_num ===25544){
-          document.getElementById("sat_desc").innerHTML="The International Space Station is the result of a collaborative project built by Canada, Europe, Japan, Russia, and the United States. The spacecraft was designed to take advantage of its environment and conduct experiments in its numerous laboratories and research payloads that would help both life on earth and propel future space expeditions. Despite its large size, measuring in at more than 70 meters long, the space station has been inhabited by a small six person crew since November 2000 that constantly changes."
-        } else if (satid_num ===43565){
-          document.getElementById("sat_desc").innerHTML="The Galileo 26 is one of the most recent additions to the European Union’s planned total of 38 satellites in the Galileo series to increase its independence and influence in technology. The satellite was launched at the same time as three others -Galileo 23, 24, and 25- with the purpose to improve position, navigation, and timing systems. The Galileo satellites together are controlled by civilians and recognized as the most precise of positioning, navigation, and timing systems in the world."
-        }else if (satid_num ===43275){
-          document.getElementById("sat_desc").innerHTML="The Yaogan-31a is a remote sensing satellite launched by China in 2018. Its intent is to collect and monitor data on the Earth concerning the environment. Much about the Yaogan series of satellites, however, is unknown, including what equipment is used for its research."
-        }else if (satid_num ===32784){
-          document.getElementById("sat_desc").innerHTML="The CanX-6 is Canadian satellite that is small, and compact with a maximum of just 14 kg. It is used to track and monitor ships. Though the CanX-6 was originally intended to only last a few months at the time of launch, it surpassed expectations and is still in orbit and operational."
-        }else if (satid_num ===45787){
-          document.getElementById("sat_desc").innerHTML="The Starlink-1517 is a part of SpaceX’s Starlink “satellite constellation” with the intention of improving communication and internet. SpaceX intends to put thousands of Starlink satellites in the sky and the Starlink-1517 is just one of those. SpaceX also intends to sell some of these satellites for other purposes including exploration and research."
-        }else if (satid_num ===40717){
-          document.getElementById("sat_desc").innerHTML="The DMC 3-FM3 is the United Kingdom’s satellite which is a part of the DMC (Disaster Monitoring Constellation). It weighs around 447 kg and boasts an impressively high resolution imager (capable of taking black-and-white images with notably higher resolutions than its color images) that allows it to monitor disasters occurring on Earth."
-        }else if (satid_num ===31792){
-          document.getElementById("sat_desc").innerHTML="The Cosmos-2428 is a Russian intelligence satellite said to be the last of the Tselina-2 class satellites. "
-        }else if (satid_num ===33591){
-          document.getElementById("sat_desc").innerHTML="The NOAA 19 is a US satellite initially launched by NASA then given to the National Oceanic and Atmospheric Administration (NOAA). It collects a variety of meteorological data important for weather forecasting including: ocean surface temperature and atmospheric temperature."
-        }else if (satid_num ===40967){
-          document.getElementById("sat_desc").innerHTML="The Fox-1A is an amateur radio/communication satellite. It is rather small and not incredibly complicated. Though it does carry a student experiment on it. "
-        }else{
-          document.getElementById("sat_desc").innerHTML="Please select a satellite!";
-        }
-      }
-      </script>
-
-      <div class="buttoncomp">
-        <!-- <form>
-          <br>
-          <br>
-          manual input box for user latitude
-          <label>Latitude:</label>
-          <input type="text" id="ulat"/>
-          &emsp;
-          manual input box for user longitude
-          <label>Longitude:</label>
-          <input type="text" id="ulong"/>
-          &emsp;
-        </form> -->
-          <a class="a" style = "position:relative; left:47px; width: 200px; font-size: 20px; margin-top: 25px;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
-          <br><br><br>
-      </div>
-      <div style="float:right; position:relative; bottom: 10px;left:100px; margin-right: 200px;" class = "textbox">
-          <p  id="comp"></p>
-      </div>
-
-      <!--
-      <table>
-        <tr>
-          <th>Date&Time: </th>
-          <th>Satellite Location: </th>
-          <th>User Location:</th>
-          <th>Can I see it?</th>
-        </tr>
-        <tr>
-          <td><span id="d&t"></td>
-          <td><span id="slat&long"></td>
-          <td><span id="ulat&long"></td>
-          <td><span id="visible"></td>
-        </tr>
-
-      </table>
-      -->
+      <div class="item4">
+        <br><br><br><br><br><br>
       <div id="header2">
         HISTORY OF REQUESTS
       </div>
@@ -531,22 +527,44 @@ tr:nth-child{
       </table>
 
       <br><br><br><br>
-      <br><br><br><br>
-      <br>
 
       <br><br>
-      <br><br>
-        <div style = "position: relative; bottom: 25px", class="footer">
-          <p style="margin-right:200px;float:right;">Developed By: David Li, Katie Stadler, Renita John;&emsp;
+        <div style = "position: absolute; bottom: -100px", class="footer">
+          <p style="margin-right:200px;float:right;">Coded By: David Li, Katie Stadler, Renita John;&emsp;
           With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
           And Sponsored By: The UVA DevHub</p>
           <!-- <div style="margin-left:150px;float:left;">
             <img src="https://i.ya-webdesign.com/images/space-invaders-alien-png.png" style = "width:50px; height:50px;" onclick="window.open('https://arcade.ly/games/space-invaders/', '_blank');">
           </div> -->
         </div>
-
       </div>
     </div>
+    </div>
+    </div>
+
+    <script>
+    var sat_key;
+    document.getElementById("satname1").innerHTML="Select Satellite";
+    document.getElementById("sat_desc").innerHTML="A satellite is any object that orbits in a curved path around a planet. The moon is one of the Earth’s natural satellites. Conventionally, the term “satellite” refers to a machine that is launched into space and orbits around Earth or another object in space. To learn more about specific satellites and your relation to these artificial space objects, please select a satellite. ";
+    function titlesat(sat_name,satel_id){
+      satel=sat_name;
+      document.getElementById("satname1").innerHTML=satel;
+      document.getElementById("satname").innerHTML=satel;
+      document.getElementById("satname2").innerHTML=satel;
+      document.getElementById("satnameprint").innerHTML=satel;
+      sat_key=satel_id;
+      var satid_num =parseFloat(satel_id);
+      if (satid_num ===25544){
+        document.getElementById("sat_desc").innerHTML="The International Space Station is the result of a collaborative project built by Canada, Europe, Japan, Russia, and the United States. The spacecraft was designed to take advantage of its environment and conduct experiments in its numerous laboratories and research payloads that would help both life on earth and propel future space expeditions. Despite its large size, measuring in at more than 70 meters long, the space station has been inhabited by a small six person crew since November 2000 that constantly changes."
+      } else if (satid_num ===43565){
+        document.getElementById("sat_desc").innerHTML="The Galileo 26 is one of the most recent additions to the European Union’s planned total of 38 satellites in the Galileo series to increase its independence and influence in technology. The satellite was launched at the same time as three others -Galileo 23, 24, and 25- with the purpose to improve position, navigation, and timing systems. The Galileo satellites together are controlled by civilians and recognized as the most precise of positioning, navigation, and timing systems in the world."
+      }else if (satid_num ===43275){
+        document.getElementById("sat_desc").innerHTML="The Yaogan-31a is a remote sensing satellite launched by China in 2018. Its intent is to collect and monitor data on the Earth concerning the environment. Much about the Yaogan series of satellites, however, is unknown, including what equipment is used for its research."
+      }else{
+        document.getElementById("sat_desc").innerHTML="Please select a satellite!";
+      }
+    }
+    </script>
 
   <div id="popup">
      <p><b>Date & Time: </b><span id="datetime"></span></p>
