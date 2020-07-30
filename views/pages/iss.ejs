@@ -333,16 +333,18 @@
   /* separate element nav menu option */
   .navmenu {
     padding: 10px 40.5px;
-    background: #C0ECAD;
-    color: black;
+    background: transparent;
+    color: white;
     font-weight: 100;
     font-family: 'Orbitron';
     font-size: 20px;
     text-align: center;
     border-radius: 10px;
+    border: 3px solid #C0ECAD;
   }
   .navmenu:hover {
-    background-color: lightgray;
+    /* background-color: lightgray; */
+    box-shadow: 0 0 15px 0 #C0ECAD;
   }
   #wrapper {
       position:relative;
@@ -350,13 +352,14 @@
   }
   #wrapper > div {
       float:left;
-      margin-right: 20px; /* remove for joined element design */
+      margin-right: 15px; /* remove for joined element design */
   }
   input[name=content] {
       display:none;
   }
   input[name=content]:checked + label[class="navmenu"] {
-      background:lightgray;
+      background: #C0ECAD;
+      color: black;
   }
   </style>
 
@@ -445,11 +448,11 @@
              <div> <input type='radio' name='content' id='ins_content' checked='true' onclick="display()"/>
              <label for='ins_content' class="navmenu">INSTRUCTIONS</label> </div>
 
-             <div> <input type='radio' name='content' id='bts_content' onclick="display()"/>
-             <label for='bts_content' class="navmenu">BEHIND THE SCENES</label> </div>
-
              <div> <input type='radio' name='content' id='satdes_content' onclick="display()"/>
              <label for='satdes_content' class="navmenu">SATELLITE DESCRIPTION</label> </div>
+
+             <div> <input type='radio' name='content' id='bts_content' onclick="display()"/>
+             <label for='bts_content' class="navmenu">BEHIND THE SCENES</label> </div>
 
              <div> <input type='radio' name='content' id='prereq_content' onclick="display()"/>
              <label for='prereq_content' class="navmenu">PREVIOUS REQUEST</label> </div>
