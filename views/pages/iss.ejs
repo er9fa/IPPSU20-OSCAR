@@ -659,6 +659,7 @@
 
     <script>
     var sat_key;
+    var satel;
     document.getElementById("satname1").innerHTML="-Select Satellite Above-";
     document.getElementById("sat_desc").innerHTML="A satellite is any object that orbits in a curved path around a planet. The moon is one of the Earth’s natural satellites. Conventionally, the term “satellite” refers to a machine that is launched into space and orbits around Earth or another object in space. To learn more about specific satellites and your relation to these artificial space objects, please select a satellite. ";
     function titlesat(sat_name,satel_id){
@@ -666,7 +667,6 @@
       document.getElementById("satname1").innerHTML=satel;
       document.getElementById("satname").innerHTML=satel;
       document.getElementById("satname2").innerHTML=satel;
-      document.getElementById("satnameprint").innerHTML=satel;
       sat_key=satel_id;
       var satid_num =parseFloat(satel_id);
       if (satid_num ===25544){
@@ -1166,6 +1166,7 @@
   the popup window displayed in the previous request section. */
   function history() {
     document.getElementById("datetimeprint").innerHTML = date; // display date
+    document.getElementById("satnameprint").innerHTML = satel;
     document.getElementById("sat_latitudeprint").innerHTML = satlat; // display satellite latitude
     document.getElementById("sat_longitudeprint").innerHTML = satlong; // display satellite longitude
     document.getElementById("result_satprint").innerHTML = result_sat; // whether or user is below satellite
