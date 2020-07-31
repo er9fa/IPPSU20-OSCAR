@@ -413,6 +413,11 @@
   }
   </script>
 
+  <script>
+  var bleep = new Audio();
+  bleep.src = 'https://www.soundjay.com/button/sounds/button-3.mp3';
+  </script>
+
 
 </head>
 
@@ -574,7 +579,7 @@
       </div> -->
 
       <div style="margin-top: 10px;margin-right: 35px;" >
-        <a class="a" style ="position:relative; width: 200px; font-size: 20px; font-family:'Helvetica'; font-weight:100;" href="#" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
+        <a class="a" style ="position:relative; width: 200px; font-size: 20px; font-family:'Helvetica'; font-weight:100;" href="#" onmousedown="bleep.play()" onclick="latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
         <br><br><br>
       </div>
 
