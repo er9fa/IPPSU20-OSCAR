@@ -417,11 +417,11 @@
 
 <body onload="check()">
 
-  <div class = "container" id="blur">
-   <div class = "content">
-     <div class="grid-container">
-       <div class="item1">
-         <span>
+  <div class = "container" id="blur"> <!--places the website inside a container that can be blurred-->
+   <div class = "content"> <!--identifies the contents of the container-->
+     <div class="grid-container"> <!--places the contents into a grid layout-->
+       <div class="item1"> <!--first section of the grid: header-->
+         <span> <!--button display for satellite selection-->
            <a style="background-color: transparent; margin-left: -60px; margin-top: -20px; margin-bottom: -10px" href="#">
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button>
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button>
@@ -434,7 +434,7 @@
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('FOX-1A (AO-85)','40967');resetlatlong();"> <h2>FOX-1A (AO-85)</h2> </button>
            </a>
          </span>
-         <h1>Can I see the
+         <h1>Can I see the <!--header for the website and formatting-->
             <div class="dropdown1" style="margin-top: -50px;margin-bottom: -50px; ">
             <!--<button class="dropdownbutton">--><h1><span id="satname1"><!--</span></h1></button>-->
             <!--<div class="dropdown-content">
@@ -473,7 +473,7 @@
 
 
 
-     <div class="item2">
+     <div class="item2"> <!--second section of the grid: infobox-->
 
        <div class='displaybox'>
              <div id="instructions">
@@ -563,15 +563,16 @@
 
     </div>
 
-    <div class="item3">
-      <div>
+
+    <div class="item3"> <!--third section of the grid: map-->
+      <div> <!--search box for the location-->
         <input
            id="searchTextField"
            class="searchBox"
            type="search"
            placeholder="Enter a location">
       </div>
-      <div>
+      <div> <!--input box for the latitude and longitude-->
         <input
           id="ulat"
           class="mapInputs"
@@ -583,7 +584,7 @@
           type="search"
           placeholder="Longitude">
       </div>
-      <div id="map"> </div>
+      <div id="map"> </div> <!--google maps-->
 
       <style>
       /* style and size setting for the google map */
@@ -595,13 +596,14 @@
       </style>
     </div>
 
-    <div class="item4">
+
+    <div class="item4"> <!--fourth section of the grid: history of requests-->
       <marquee behavior="alternate" direction="right" style="color: white"> <img src="https://media.giphy.com/media/LUfSlaXJyvARZsiJtA/giphy.gif" style="width:175px;height:175px;" ></marquee>
       <br><br>
       <div id="header2">
         HISTORY OF REQUESTS
       </div>
-      <table id="myTable">
+      <table id="myTable"> <!--inserts a table for history with the following headers-->
         <tr>
           <th>Date & Time: </th>
           <th>Satellite Location (Latitude, Longitude): </th>
@@ -705,7 +707,7 @@
     }
     </script>
 
-  <div id="popup">
+  <div id="popup"> <!--places the contents of the popup inside it and calls the variable information-->
      <p><b>Date & Time: </b><span id="datetime"></span></p>
 
       <div><p>
@@ -719,7 +721,7 @@
       <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
       <p><b>Can I see it? </b> <span id=cloud_perc></span> </p>
       <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
-      <a class="a" href="#" onclick="toggleclose(); history(); setTimeout(addhistory, 1000)">Close</a>
+      <a class="a" href="#" onclick="toggleclose(); history(); setTimeout(addhistory, 1000)">Close</a> <!--inserts a close button to exit out of the popup and then creates history-->
   </div>
 
   <script type="text/javascript">
@@ -1048,6 +1050,7 @@
   }
   </script>
 
+  <!--function to get the time when the compute button is clicked-->
   <script>
   var date;
   function myFunction() {
@@ -1057,6 +1060,7 @@
   }
   </script>
 
+  <!--function to keep a counter of the number of seconds that have elapsed since compute button was pressed-->
   <script>
   var count = null;
   function counter(){
@@ -1072,6 +1076,7 @@
   }
  </script>
 
+    <!--creates a table that then adds rows with the following variables updated-->
     <script>
     function addhistory() {
       var table = document.getElementById("myTable");
