@@ -233,17 +233,22 @@
     border: transparent;
   }
 
+  .dropdown1 {
+    position: relative;
+    display: inline-block;
+  }
+
   /* formatting for the dropdown menu */
   .dropdownbutton {
     background-color: transparent;
-    width: 600px;
+    width: 200px;
     opacity: 1.0;
     color: white;
     padding-left: 30px;
     padding-right: 30px;
-    font-size: 18px;
-    font-family: monospace;
-    border-radius: 30px;
+    font-size: 25px;
+    font-family: Orbitron;
+    border-radius: 15px;
     border: 3px solid #C0ECAD;
   }
   .dropdown {
@@ -265,7 +270,7 @@
     font-family: monospace;
     border-radius: 30px;
     border: 3px solid #C0ECAD;
-    width: 550px;
+    width: auto;
   }
   .dropdown-content .a:hover {background-color: darkgray;}
   .dropdown:hover .dropdown-content {display: block;}
@@ -416,7 +421,23 @@
    <div class = "content">
      <div class="grid-container">
        <div class="item1">
-         <span>
+         <div class=dropdown>
+         <button class="dropdownbutton">Satellites</button>
+         <div class="dropdown-content">
+           <a class="a" style="background-color: black" href="#">
+             <button style="width:175px; margin-bottom:10px" onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button>
+             <button style="width:175px;margin-bottom:10px" onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button>
+             <button style="width:175px;margin-bottom:10px" onclick="titlesat('YAOGAN-31 A','43275');resetlatlong();"> <h2>YAOGAN-31 A</h2> </button>
+             <button style="width:175px;margin-bottom:10px" onclick="titlesat('CANX-6','32784');resetlatlong();"> <h2>CANX-6</h2> </button>
+             <button style="width:175px;margin-bottom:10px" onclick="titlesat('STARLINK-1517','45787');resetlatlong();"> <h2>STARLINK-1517</h2> </button>
+             <button style="width:175px;margin-bottom:10px" onclick="titlesat('DMC 3-FM3','40717');resetlatlong();"> <h2>DMC 3-FM3</h2> </button>
+             <button style="width:175px;margin-bottom:10px" onclick="titlesat('COSMOS 2428','31792');resetlatlong();"> <h2>COSMOS 2428</h2> </button>
+             <button style="width:175px;margin-bottom:10px" onclick="titlesat('NOAA 19','33591');resetlatlong();"> <h2>NOAA 19</h2> </button>
+             <button style="width:175px;margin-bottom:10px" onclick="titlesat('FOX-1A (AO-85)','40967');resetlatlong();"> <h2>FOX-1A (AO-85)</h2> </button>
+           </a>
+         </div>
+       </div>
+         <!--<span>
            <a class="a" style="background-color: transparent; margin-left: -60px; margin-top: -20px; margin-bottom: -10px" href="#">
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button>
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button>
@@ -428,9 +449,9 @@
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('NOAA 19','33591');resetlatlong();"> <h2>NOAA 19</h2> </button>
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('FOX-1A (AO-85)','40967');resetlatlong();"> <h2>FOX-1A (AO-85)</h2> </button>
            </a>
-         </span>
+         </span>-->
          <h1>Can I see the
-            <div class="dropdown" style="margin-top: -50px;margin-bottom: -50px">
+            <div class="dropdown1" style="margin-top: -50px;margin-bottom: -50px; ">
             <!--<button class="dropdownbutton">--><h1><span id="satname1"><!--</span></h1></button>-->
             <!--<div class="dropdown-content">
               <a class="a" style="background-color: black" href="#">
@@ -450,7 +471,7 @@
 
          <br> <br> <br>
 
-           <div id="wrapper">
+           <div id="wrapper" style="margin-top: -30px">
              <div> <input type='radio' name='content' id='ins_content' checked='true' onclick="display()"/>
              <label for='ins_content' class="navmenu">INSTRUCTIONS</label> </div>
 
@@ -487,7 +508,7 @@
 
              <div id="behindthescenes" style="display:none">
                <text style="font-size: 20px; font-family: 'Orbitron';"> BEHIND THE SCENES </text>
-               <img src="/Calc_FOV.gif" style = "width:250px; height:225px;" id ="rcornersimg">
+               <img src="/Calc_FOV.gif" style = "width:300px; height:275px;" id ="rcornersimg">
              </div>
 
              <div id="satellitedescription" style="display:none">
