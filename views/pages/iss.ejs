@@ -676,6 +676,7 @@
     var satel;
     document.getElementById("satname1").innerHTML="-Select Satellite Above-";
     document.getElementById("sat_desc").innerHTML="A satellite is any object that orbits in a curved path around a planet. The moon is one of the Earth’s natural satellites. Conventionally, the term “satellite” refers to a machine that is launched into space and orbits around Earth or another object in space. To learn more about specific satellites and your relation to these artificial space objects, please select a satellite. ";
+    /*a function that takes user input based on the button selected and stores that information for use in adjusting api path and what the website displays*/
     function titlesat(sat_name,satel_id){
       satel=sat_name;
       document.getElementById("satname1").innerHTML=satel;
@@ -1100,6 +1101,7 @@
   var satlat;
   var satlong;
   var result_sat;
+  /*a function that clears/resets the values for several defined elements*/
   function resetlatlong(){
   document.getElementById("sat_longitude").innerHTML = "";
   document.getElementById("sat_latitude").innerHTML = "";
@@ -1107,7 +1109,7 @@
   document.getElementById("cloud_perc").innerHTML = "";
   document.getElementById("cloud_descrip").innerHTML= "";
   }
-
+  /* a function that fetches information about the selected satellites location then calculates (based on the formula for a cirlce) whether or not that satellite is "above" the user*/
   function calc(){
   fetch("https://www.n2yo.com/rest/v1/satellite/positions/"+sat_key+"/"+userlat+"/"+userlong+"/0/1/&apiKey=UG67VU-3MRS33-SWNLRM-4I6R").then(r => r.json()).then(data => {
 
@@ -1154,6 +1156,7 @@
   var light;
   var mid;
   var heavy;
+  /*a function that fetches weather data for a user's location from a weather api and then stores a statement on satellite visibility based on the the what is in the api's response*/
   function clouds(){
     fetch("https://api.openweathermap.org/data/2.5/weather?lat="+userlat+"&lon="+userlong+"&appid=658295ed6de928f64794e23ee97cab06").then(r_weath => r_weath.json()).then(data_weath => {
         cloudy_desc = data_weath.weather[0].description;
