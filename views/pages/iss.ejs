@@ -409,13 +409,13 @@
 <!--controls audio for the compute button-->
   <script>
   var bleep = new Audio();
-  bleep.src = 'https://www.soundjay.com/button/sounds/button-3.mp3';
+  bleep.src = 'https://www.soundjay.com/button/sounds/beep-29.mp3';
   </script>
 
 
 </head>
 
-<body onload="check()">
+<body">
 
   <div class = "container" id="blur"> <!--places the website inside a container that can be blurred-->
    <div class = "content"> <!--identifies the contents of the container-->
@@ -598,7 +598,6 @@
 
 
     <div class="item4"> <!--fourth section of the grid: history of requests-->
-      <marquee behavior="alternate" direction="right" style="color: white"> <img src="https://media.giphy.com/media/LUfSlaXJyvARZsiJtA/giphy.gif" style="width:175px;height:175px;" ></marquee>
       <br><br>
       <div id="header2">
         HISTORY OF REQUESTS
@@ -614,6 +613,7 @@
       </table>
 
       <br><br><br><br>
+      <marquee behavior="alternate" direction="right" style="color: white"> <img src="https://media.giphy.com/media/LUfSlaXJyvARZsiJtA/giphy.gif" style="width:175px;height:175px;" ></marquee>
       <br><br><br><br>
       <br><br>
 
@@ -743,6 +743,7 @@
         blur.classList.toggle('active');
         var popup = document.getElementById('popup');
         popup.classList.toggle('active');
+        bleep.play();
       }
     }
     function toggleclose(){
