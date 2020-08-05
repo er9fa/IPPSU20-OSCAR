@@ -1200,9 +1200,13 @@
       var duration = data_prediction.passes[0].duration
       var round_duration = Math.round(duration/60)
       return fetch("https://showcase.api.linx.twenty57.net/UnixTime/fromunixtimestamp?unixtimestamp="+next_pass).then(r_unix => r_unix.json()).then(data_unix =>{
-          est_next_pass=data_unix.Datetime.slice(11,16)
-          date_np =data_unix.Datetime.slice(5,11)
-           var satpredicresponsepass = "We predict the " +satel+ " may be visible at " + est_next_pass + " on "+date_np+" (EST) for about " +round_duration + " minutes."
+          utc_next_pass=data_unix.Datetime.slice(11,16)
+          p_dm =data_unix.Datetime.slice(5,7)
+          p_day =data_unix.Datetime.slice(8,10)
+          if (p_dm == "01"){p_dm="January";}else if (p_dm == "02"){p_dm="February";}else if (p_dm == "03"){p_dm="March";}else if (p_dm == "04"){p_dm="April";}else if (p_dm == "05"){p_dm="May";}
+          else if (p_dm == "06"){p_dm="June";}else if (p_dm == "07"){p_dm="July";}else if (p_dm == "08"){p_dm="August";}else if (p_dm == "09"){p_dm="September";}else if (p_dm == "10"){p_dm="October";}
+          else if (p_dm == "11"){p_dm="November";} else {p_dm="December";}
+           var satpredicresponsepass = "We predict the " +satel+ " may be visible at around " + utc_next_pass + " on "+p_dm+ " "+p_day+"th (UTC) for about " +round_duration + " minutes."
            document.getElementById("satprediction").innerHTML = satpredicresponsepass
            document.getElementById("satprediction1").innerHTML = satpredicresponsepass
         })
