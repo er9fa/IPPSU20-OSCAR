@@ -557,7 +557,7 @@
       </div> -->
 
       <div style="margin-top: 10px;margin-right: 35px;" >
-        <a class="a" style ="position:relative; width: 200px; font-size: 20px; font-family:'Helvetica'; font-weight:100;" href="#" onclick="bleep.play(); latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition();  setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
+        <a class="a" style ="position:relative; width: 200px; font-size: 20px; font-family:'Helvetica'; font-weight:100;" href="#" onclick="bleep.play(); latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); setTimeout(prediction,1000); setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
         <br><br><br>
       </div>
 
@@ -721,6 +721,7 @@
       <p><b>Is it above me? </b><span style="color:#C0ECAD;" id="result_sat"></span></p>
       <p><b>Weather Description: </b><span id="cloud_descrip"></span></p>
       <p><b>Can I see it? </b> <span id=cloud_perc></span> </p>
+      <p><b>Prediction: </b> <span id="satprediction"></span </p>
       <p><b>Time since last request for <span id="satname2"></span> position: </b><span id="count"> </span></p>
       <a class="a" href="#" onclick="toggleclose(); history(); setTimeout(addhistory, 1000)">Close</a> <!--inserts a close button to exit out of the popup and then creates history-->
   </div>
@@ -914,7 +915,7 @@
 
         infowindow.setContent(requestInfo); // setting the content of the infowindow to the user address and latitude/longitude
         // same functions as compute button
-        latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); setTimeout(clouds, 1000); computeZoom();
+        latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); setTimeout(prediction,1000); setTimeout(clouds, 1000); computeZoom();
 
         infowindow.open(map,marker); // opening the infowindow
       });
@@ -1184,7 +1185,19 @@
       }
     })
   }
+  function prediction() {
+    fetch("https://www.n2yo.com/rest/v1/satellite/visualpasses/"+sat_key+"/"+userlat+"/"+userlong+"/0/1/120/&apiKey=UG67VU-3MRS33-SWNLRM-4I6R").then(r_prediction => r_prediction.json()).then(data_prediction =>{
+      next_pass = data_prediction.passes[0].startUTC
+      duration = data_prediction.passes[0].duration
+      round_duration = Math.round(duration/60)
+      if(next_pass==undefined||duration==undefined||next_pass==""||duration==""){
+        document.getElementById("satprediction").innerHTML = "The satellite likely won't be visible in the next 24 hours."
+      }else{
 
+        document.getElementById("satprediction").innerHTML = "We predict the satellite may be visible at " + est_next_pass + " (EST) for about " +round_duration + " minutes."
+      }
+    })
+  }
   /* function that controls previous request information. contains information from
   the popup window displayed in the previous request section. */
   function history() {
