@@ -1110,6 +1110,7 @@
   document.getElementById("result_sat").innerHTML = "";
   document.getElementById("cloud_perc").innerHTML = "";
   document.getElementById("cloud_descrip").innerHTML= "";
+  document.getElementById("satprediction").innerHTML= "";
   }
   /* a function that fetches information about the selected satellites location then calculates (based on the formula for a cirlce) whether or not that satellite is "above" the user*/
   function calc(){
@@ -1187,15 +1188,18 @@
   }
   function prediction() {
     fetch("https://www.n2yo.com/rest/v1/satellite/visualpasses/"+sat_key+"/"+userlat+"/"+userlong+"/0/1/120/&apiKey=UG67VU-3MRS33-SWNLRM-4I6R").then(r_prediction => r_prediction.json()).then(data_prediction =>{
-      next_pass = data_prediction.passes[0].startUTC
-      duration = data_prediction.passes[0].duration
-      round_duration = Math.round(duration/60)
-      if(next_pass==undefined||duration==undefined||next_pass==""||duration==""){
+      checkpass = data_prediction.info.passescount
+      if (checkpass == 0){
         document.getElementById("satprediction").innerHTML = "The satellite likely won't be visible in the next 24 hours."
       }else{
-
-        document.getElementById("satprediction").innerHTML = "We predict the satellite may be visible at " + est_next_pass + " (EST) for about " +round_duration + " minutes."
-      }
+      var next_pass = data_prediction.passes[0].startUTC
+      var duration = data_prediction.passes[0].duration
+      round_duration = Math.round(duration/60)
+      return fetch("https://showcase.api.linx.twenty57.net/UnixTime/fromunixtimestamp?unixtimestamp="+next_pass).then(r_unix => r_unix.json()).then(data_unix =>{
+          est_next_pass=data_unix.Datetime.slice(11,16)
+          document.getElementById("satprediction").innerHTML = "We predict the satellite may be visible at " + est_next_pass + " (EST) for about " +round_duration + " minutes."
+        })
+        }
     })
   }
   /* function that controls previous request information. contains information from
