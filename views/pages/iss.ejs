@@ -735,10 +735,13 @@
       }
       else if (userlat == "" || userlong== "" || userlat == undefined || userlong == undefined){
         bleep.pause();
-        alert('Please select, or reinput, a location before pressing compute.')
+        alert('Please select, or reinput, a location before pressing compute.');
       }
       else if (userlat == "NV" || userlong == "NV") {
         alert('Please enter a latitude and longitude within the valid ranges. Latitude: -90 to 90. Longitude: -180 to 180.')
+      }
+      else if (userlat == "IV" || userlong == "IV") {
+        alert('Please select or reinput a valid location.')
       }
       else{
         var blur = document.getElementById('blur');
@@ -894,9 +897,13 @@
         /* if the user enters an unknown address into the google autocomplete
         search bar an invalid address message will print */
         if (!place.geometry) {
-          alert("Invalid address: " + input.value);
-          //document.getElementById('comp').innerHTML = "Invalid address: " + input.value;
-          return;
+          userlat = "IV";
+          userlong = "IV";
+          prevlat = "";
+          prevlong = "";
+          // alert("Invalid address: " + input.value);
+          // //document.getElementById('comp').innerHTML = "Invalid address: " + input.value;
+          // return;
         }
         /* setting the bounds of the map according to user input and placing the
         marker at the user's provided address */
@@ -910,6 +917,8 @@
         document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
+        prevlat = userlat;
+        prevlong = userlong;
 
         /* inputted address and corresponding latitude and longitude. displayed in the infowindow */
         var requestInfo = "<b>Address: </b>" + input.value + ". <br>" + "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
@@ -931,6 +940,8 @@
         document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
+        prevlat = userlat;
+        prevlong = userlong;
       });
 
       /* allows the user to select a place on the map by dragging the google map marker*/
@@ -942,6 +953,8 @@
         document.getElementById('ulong').value = maplong; // clearing the longitude input box
         userlat = maplat; // setting user latitude equal to the latitude pulled from the google map
         userlong = maplong; // setting user longitude equal to the longitude pulled from the google map
+        prevlat = userlat;
+        prevlong = userlong;
       });
 
       /* function that takes a location and places a marker on the location */
@@ -961,6 +974,8 @@
           marker.setPosition(location);
           userlat = marker.getPosition().lat(); // setting the user latitude to the marker's latitude
           userlong = marker.getPosition().lng(); // setting the user longitude to the marker's longitude
+          prevlat = userlat;
+          prevlong = userlong;
 
           /* checks to ensure the latitude and longitude are correctly assigned */
           console.log("TEST LAT: " + marker.getPosition().lat() + " check equals " + userlat);
@@ -973,7 +988,7 @@
     /* function that opens an infowindow if the user manually enters latitude and longitude */
     function manualInfoWindow() {
       if (userlat !== "" && userlong !== "" && userlat !== undefined && userlong !== undefined && !isNaN(userlat) && !isNaN(userlong)) {
-        var requestInfo = "<b>Latitude: </b>" + userlat + ", <br>" + "<b>Longitude: </b>" + userlong;
+        var requestInfo = "<b>Latitude: </b>" + parseFloat(userlat) + ", <br>" + "<b>Longitude: </b>" + parseFloat(userlong);
         infowindow.setContent(requestInfo);
         infowindow.open(map, marker);
       }
@@ -1017,6 +1032,8 @@
   <br>
 
   <script>
+  var prevlat; // describes the user's previously inputted latitude
+  var prevlong; // describes the user's previously inputted longitude
   var userlat; // describes the user's latitude
   var userlong; // describes the user's longitude
   var inputLat = ""; // describes the manually inputted latitude
@@ -1035,7 +1052,9 @@
         if ((parseFloat(inputLat) > -91 && parseFloat(inputLat) < 91) && (parseFloat(inputLong) > -181 && parseFloat(inputLong) < 181)) {
           userlat = inputLat; // setting user latitude equal to the inputted value
           userlong = inputLong; // setting user longitude equal to the inputted value
-          result = userlat + ", " + userlong;
+          result = parseFloat(userlat) + ", " + parseFloat(userlong);
+          prevlat = userlat;
+          prevlong = userlong;
           /* reseting the input boxes after compute is pressed */
           document.getElementById('ulat').value = "";
           document.getElementById('ulong').value = "";
@@ -1043,6 +1062,8 @@
         else {
           userlat = "NV"; // user entered a non-valid (NV) latitude
           userlong = "NV"; // user entered a non-valid (NV) longitude
+          prevlat = "";
+          prevlong = "";
         }
       }
     }
@@ -1050,6 +1071,14 @@
     else if (inputLat == "" || inputLong == "") {
       userlat = inputLat;
       userlong = inputLong;
+
+      if (userlat == "" || userlong== "" || userlat == undefined || userlong == undefined) {
+        console.log(prevlat + " " + prevlong + " TESTING");
+        if (prevlat != undefined && !isNaN(prevlat) && prevlong != undefined && !isNaN(prevlong) && prevlat != "" && prevlong != "") {
+          userlat = prevlat;
+          userlong = prevlong;
+        }
+      }
     }
   }
   </script>
