@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<style>
+  /* all icons/images used are copyright free */
+  body {
+    background: url('https://www.publicdomainpictures.net/pictures/10000/velka/starry-night-871287410454UmtH.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+  }
+  /* controls page title */
+  div#title {
+    font-family: 'Orbitron';
+    font-size: 60px;
+    text-align: center;
+    text-shadow: 5px 5px 3px #999;
+    margin-top: 15px;
+    margin-left: 400px;
+    color: white;
+    width: 800px;
+    position: absolute;
+  }
+  /* controls text on the page */
+  div#text {
+    height: 200px;
+    width: 300px;
+    border-radius: 25px;
+    font-weight: 100;
+    border: 8px double #C0ECAD;
+    box-shadow: 0 0 15px 0 #C0ECAD;
+    float: right;
+    font-size: 14px;
+    padding: 5px 10px 0px 10px;
+    margin: 25px 50px 10px 50px;
+    color: white;
+    position: absolute;
+  }
+  /* controls display box on the page */
+  .displaybox {
+    font-family: "Orbitron";
+    font-size: 30px;
+    font-weight: 100;
+    border: 4px solid #C0ECAD;
+    border-radius: 25px;
+    float: left;
+    margin-left: 53px;
+    margin-top: 340px;
+    text-align: center;
+    height: 50px;
+    width: 300px;
+    box-shadow: 0 0 15px 0 #C0ECAD;
+    padding-top: 10px;
+    color: white;
+    padding: 10px 10px 0px 10px;
+    position: absolute;
+  }
+  /* controls the button that begins/restarts the game */
+  .play {
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    background-color: #C0ECAD;
+    border: 3px solid #black;
+    border-radius: 50px;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 0 15px 0 #C0ECAD;
+    font-family: "Helvetica";
+    font-weight: 100;
+    font-size: 20px;
+    width: 85px;
+    position: absolute;
+    left: 0;
+    margin-left: 170px;
+    margin-top: 270px;
+    text-align: center;
+    z-index: 10;
+  }
+  /* formatting of button when hovered over */
+  .play:hover{
+      background-color: lightgray;
+  }
+  /* controls formatting of player icon */
+  div#player {
+      display:block;
+      width: 50px;
+      height: 50px;
+      background-image: url('https://webstockreview.net/images/spaceship-clipart-pixel-2.png');
+      background-size: 62px;
+      position: absolute;
+      left: 700px;
+      top: 550px;
+      padding: 10px;
+      padding-left: 2px;
+      max-width: 200px;
+  }
+  /* controls formatting of the fireable missiles */
+  div#missiles {
+      width: 600px;
+      height: 800px;
+      position: absolute;
+  }
+  div.missile1 {
+      width: 4px;
+      height: 28px;
+      background-color: yellowgreen;
+      background-size: 20px;
+      position: absolute;
+  }
+  /* controls formatting of the space opponents */
+  div#opponents {
+      width: 1200px;
+      height: 800px;
+      position: absolute;
+  }
+  div.opponent {
+      width: 50px;
+      height: 50px;
+      background-image: url('https://i.ya-webdesign.com/images/space-invaders-alien-png.png');
+      background-size: 50px;
+      position: absolute;
+  }
+</style>
+
+<body>
+    <!-- page title -->
+    <div id="title"> SATELLITE INVADERS </div>
+
+    <!-- instructions -->
+    <div id="text">
+      <p style="font-family: Orbitron; font-size: 22px;"> INSTRUCTIONS </p>
+      <p style="font-family: Helvetica; font-size: 14px;"> Use your left and right arrow keys to move the spaceship. Press the up arrow key to shoot a missile.
+      If you successfully defeat all the space enemies, you win! If the enemies reach you
+      before you hit them all with missiles, then you lose. </p>
+    </div>
+
+    <!-- play/restart buttons -->
+    <div>
+      <a class="play" href="#" onclick="display(); gameLoop();" value = "play" id="playbutton">PLAY</a>
+      <a style="visibility: hidden;" class="play" href="#" onclick="restart();" value = "restart" id="restartbutton">RESTART</a>
+    </div>
+
+    <!-- score display box -->
+    <div class="displaybox" style="color: white;"><span id="score"> </span> </div>
+
+    <!-- player icon -->
+    <div id="player"></div>
+
+    <!-- missile display -->
+    <div id="missiles"></div>
+
+    <!-- opponent icon display -->
+    <div id="opponents"></div>
+
+</body>
+
+  <script>
+
+    var game = false; // determines whether or not the game is "on" or "off"
+    /* function that displays the correct button and turns on the game */
+    function display() {
+      game = true;
+      var play = document.getElementById('playbutton'); // play button
+      var restart = document.getElementById('restartbutton'); // restart button
+
+      play.style.visibility = "hidden"; // hiding the play button when it is clicked
+      restart.style.visibility = "visible"; // displaying the restart button after the play button is clicked
+    }
+
+    /* function that resets the player after restart is clicked */
+    function resetPlayer() {
+      // setting the positioning of the player
+      player.left = 700;
+      player.top = 550;
+      // displaying the position of the player
+      document.getElementById('player').style.left = '700px';
+      document.getElementById('player').style.top = '550px';
+      // resetting the player icon
+      document.getElementById('player').style.backgroundImage = "url('https://webstockreview.net/images/spaceship-clipart-pixel-2.png')";
+    }
+
+    /* function that resets the opponents after restart is clicked */
+    function resetOpponents() {
+      opponents.splice(0, opponents.length); // ensuring opponents are cleared out of the array
+      // resetting the positioning of the opponents
+      opponents = [
+      { left: 425, top: 100 },
+      { left: 525, top: 100 },
+      { left: 625, top: 100 },
+      { left: 725, top: 100 },
+      { left: 825, top: 100 },
+      { left: 925, top: 100 },
+      { left: 1025, top: 100 },
+      { left: 1125, top: 100 },
+      { left: 425, top: 175 },
+      { left: 525, top: 175 },
+      { left: 625, top: 175 },
+      { left: 725, top: 175 },
+      { left: 825, top: 175 },
+      { left: 925, top: 175 },
+      { left: 1025, top: 175 },
+      { left: 1125, top: 175 }
+      ];
+      score = 0; // resetting the score
+      // displaying the reset score
+      document.getElementById('score').innerHTML = "Score: " + score;
+    }
+
+    // default display for the score
+    document.getElementById('score').innerHTML = "Score: ";
+
+    // initializing the original player positioning
+    var player = {
+        left: 700,
+        top: 550
+    };
+
+    // initializing the missiles
+    var missiles = [];
+
+    // initializing the original opponents positioning
+    var opponents = [
+    { left: 425, top: 100 },
+    { left: 525, top: 100 },
+    { left: 625, top: 100 },
+    { left: 725, top: 100 },
+    { left: 825, top: 100 },
+    { left: 925, top: 100 },
+    { left: 1025, top: 100 },
+    { left: 1125, top: 100 },
+    { left: 425, top: 175 },
+    { left: 525, top: 175 },
+    { left: 625, top: 175 },
+    { left: 725, top: 175 },
+    { left: 825, top: 175 },
+    { left: 925, top: 175 },
+    { left: 1025, top: 175 },
+    { left: 1125, top: 175 }
+    ];
+
+    /* controls user keystrokes */
+    document.onkeydown = function(e) {
+        // left arrow key
+        if (e.keyCode === 37) {
+            // player cannot move unless the game is on
+            if (game == true) {
+              player.left = player.left - 10; // moving the player based on key stroke
+            }
+        }
+        // right arrow key
+        if (e.keyCode === 39) {
+            // player cannot move unless the game is on
+            if (game == true) {
+              player.left = player.left + 10; // moving the player based on key stroke
+            }
+        }
+        // up arrow key
+        if (e.keyCode === 38) {
+          // missiles cannot be fired unless the game is on
+          if (game == true) {
+            // firing off missiles upon key press
+            missiles.push({
+                left: player.left + 20,
+                top: player.top - 20
+            });
+            // displaying fired missiles
+            drawMissiles();
+          }
+        }
+        // displaying the hero icon
+        drawPlayer();
+    }
+
+    /* function that displays the player icon (adjusts based on key strokes) */
+    function drawPlayer() {
+        // player position is determined by key strokes and original positioning
+        document.getElementById('player').style.left = player.left + 'px';
+        document.getElementById('player').style.top = player.top + 'px';
+    }
+
+    /* function that displays missiles fired by user */
+    function drawMissiles() {
+        document.getElementById('missiles').innerHTML = "" // no missiles displayed
+        // controls missile fire upon key stroke
+        for(var i = 0 ; i < missiles.length ; i++ ) {
+            document.getElementById('missiles').innerHTML += `<div class='missile1' style='left:${missiles[i].left}px; top:${missiles[i].top}px'></div>`;
+        }
+    }
+
+    /* function that moves missiles on the screen */
+    function moveMissiles() {
+        for(var i = 0 ; i < missiles.length ; i++ ) {
+            // missiles move "up" the screen by 3 pixels per game loop
+            missiles[i].top = missiles[i].top - 3
+        }
+    }
+
+    /* function that displays the opponents */
+    function drawOpponents() {
+        document.getElementById('opponents').innerHTML = "" // no opponents displayed
+        for(var i = 0 ; i < opponents.length ; i++ ) {
+            document.getElementById('opponents').innerHTML += `<div class='opponent' style='left:${opponents[i].left}px; top:${opponents[i].top}px'></div>`;
+        }
+    }
+
+    /* function that moves opponents based on game loop */
+    function moveOpponents() {
+        for(var i = 0 ; i < opponents.length ; i++ ) {
+            // opponents move "down" the screen by 0.05 pixels per game loop
+            opponents[i].top = opponents[i].top + 0.05;
+        }
+    }
+
+    var score = 0; // controls the user's score (determined by number of "hit" opponents)
+    /* function that determines whether or not a missile comes in contact with an opponent */
+    function collisionDetection() {
+        for (var opponent = 0; opponent < opponents.length; opponent++) {
+          if (opponents.length > 0) { // ensuring that all opponents have not been "hit"
+            for (var missile = 0; missile < missiles.length; missile++) {
+                // determines whether or not any of the fired missiles hit any of the opponents (in their respective arrays)
+                if (
+                    missiles[missile].left >= opponents[opponent].left  &&
+                    missiles[missile].left <= (opponents[opponent].left + 50)  &&
+                    missiles[missile].top <= (opponents[opponent].top + 50)  &&
+                    missiles[missile].top >= opponents[opponent].top && opponents.length > 0
+                ) {
+                    opponents.splice(opponent, 1); // removing an opponent if it is hit
+                    missiles.splice(missile, 1);
+                    // increasing the score everytime an opponent is hit
+                    score += 1;
+                    // displaying the updated score
+                    document.getElementById('score').innerHTML = "Score: " + score;;
+                }
+                // ensuring the missile array periodically empties
+                else if (missiles[missile].top <= 0) {
+                  /* if the missile array becomes too large, the game lags. this statement
+                  ensures that missiles are removed from the array once they reach the "top"
+                  of the screen */
+                  missiles.splice(missile, 1);
+                }
+              }
+              /* series of statements that determine whether or not a user has lost */
+              if (opponents.length > 0) {
+                // statement that determines if the opponents have reached the player's position
+                if (opponents[opponent].top >= 515) {
+                  game = false; // turns the game off (player can no longer move or fire missiles)
+                  document.getElementById('score').innerHTML = "YOU LOSE!"; // displaying lose message
+                  // changing the icon of the player
+                  document.getElementById('player').style.backgroundImage = "url('https://www.maxpixel.net/static/photo/1x/Explosion-Detonation-Blast-Fulmination-Burst-155624.png')";
+                  // clearing the game loop
+                  clearTimeout(time);
+                }
+              }
+            }
+            /* statement that determines if a player has won */
+            if (score == 16) {
+              game = false; // turns the game off (player can no longer move or fire missiles)
+              document.getElementById('score').innerHTML = "YOU WIN!"; // displays the win message
+              missiles.splice(0, missiles.length); // emptying out the missile array
+              // clearing the game loop
+              clearTimeout(time);
+            }
+        }
+    }
+
+    var time; // controls setTimeout game loop
+    function gameLoop() {
+        game = true; // turns game on
+        /* setTimeout is set to 1 millisecond to ensure that the missiles move at a
+        reasonable rate and smoothly. adjustments for player/opponent movement have been made
+        to ensure every icon moves at a reasonable speed */
+        time = setTimeout(gameLoop, 1);
+        // calling functions relevant to game play
+        moveMissiles();
+        moveOpponents();
+        collisionDetection();
+        drawMissiles();
+        drawOpponents();
+    }
+
+    /* function that controls game restart */
+    function restart() {
+      game = true; // turns game on
+      document.getElementById('playbutton').innerHTML = "RESTART"; // displaying restart button
+      document.getElementById('playbutton').value = "restart";
+      // determines whether or not play has already been selected
+      if (document.getElementById('playbutton').value == "restart") {
+        resetOpponents(); // resetting opponents
+        resetPlayer(); // resetting player
+        clearTimeout(time); // clearing game loop
+        time = setTimeout(gameLoop, 1); // resetting game loop
+      }
+    }
+  </script>
+
+</html>
