@@ -146,6 +146,7 @@
       filter: blur(15px);
       pointer-events: none;
       user-select: none;
+      background: transparent;
   }
   /* contents of the container*/
   .container.content{
@@ -326,6 +327,11 @@
     /* background-color: lightgray; */
     box-shadow: 0 0 15px 0 #C0ECAD;
   }
+  .active{
+    background-color: #C0ECAD;
+    color: black;
+    box-shadow: 0 0 15px 0 #C0ECAD;
+  }
 
   /* joined element nav menu option */
   /* .navmenu {
@@ -369,6 +375,8 @@
       background: #C0ECAD;
       color: black;
   }
+
+}
   </style>
 
 <!--controls the browser cookie to store user's search history-->
@@ -421,6 +429,7 @@
        <div class="item1"> <!--first section of the grid: header-->
          <span> <!--button display for satellite selection-->
            <a style="background-color: transparent; margin-left: -30px; margin-top: -20px; margin-bottom: -10px" href="#">
+             <div id="myDIV">
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('ISS','25544');resetlatlong();"> <h2>ISS</h2> </button>
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('GALILEO 26','43565');resetlatlong();"> <h2>GALILEO 26</h2> </button>
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('YAOGAN-31 A','43275');resetlatlong();"> <h2>YAOGAN-31 A</h2> </button>
@@ -430,6 +439,7 @@
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('COSMOS 2428','31792');resetlatlong();"> <h2>COSMOS 2428</h2> </button>
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('NOAA 19','33591');resetlatlong();"> <h2>NOAA 19</h2> </button>
              <button class="satbuttons" style="width:150px;font-size:10px; margin-bottom:10px" onclick="titlesat('FOX-1A (AO-85)','40967');resetlatlong();"> <h2>FOX-1A (AO-85)</h2> </button>
+             </div>
            </a>
          </span>
          <h1>Can I see the <!--header for the website and formatting-->
@@ -642,6 +652,20 @@
     </div>
     </div>
     </div>
+
+    <script>
+    var header = document.getElementById("myDIV");
+    var btns = header.getElementsByClassName("satbuttons");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+      var current = document.getElementsByClassName("active");
+      if (current.length > 0) {
+        current[0].className = current[0].className.replace(" active", "");
+      }
+      this.className += " active";
+      });
+    }
+    </script>
 
 
     <script>
