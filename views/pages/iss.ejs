@@ -1280,12 +1280,11 @@
           }else if(hour_np==0){
             hour_np = 12
             halftime = " a.m."
-          }else if (0<hour_np<12){
+          }else if(hour_np<12){
             halftime = " a.m."
-          }else if(hour_np>12){
+          }else{
             hour_np = hour_np-12
             halftime = " p.m."
-          }else{
           }
           p_dm =data_unix.formatted.slice(5,7)
           p_day =data_unix.formatted.slice(8,10)
