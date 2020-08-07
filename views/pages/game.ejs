@@ -79,7 +79,7 @@
     text-align: center;
     z-index: 10;
   }
-  /* formatting of button when hovered over */
+  /* formatting of button hover style */
   .play:hover{
       background-color: lightgray;
   }
@@ -159,7 +159,7 @@
 
   <script>
 
-    var game = false; // determines whether or not the game is "on" or "off"
+    var game = false; // determines whether the game is "on" or "off"
     /* function that displays the correct button and turns on the game */
     function display() {
       game = true;
@@ -320,7 +320,7 @@
         for (var opponent = 0; opponent < opponents.length; opponent++) {
           if (opponents.length > 0) { // ensuring that all opponents have not been "hit"
             for (var missile = 0; missile < missiles.length; missile++) {
-                // determines whether or not any of the fired missiles hit any of the opponents (in their respective arrays)
+                // determines whether any of the fired missiles hit any of the opponents (in their respective arrays)
                 if (
                     missiles[missile].left >= opponents[opponent].left  &&
                     missiles[missile].left <= (opponents[opponent].left + 50)  &&

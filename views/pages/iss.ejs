@@ -300,7 +300,6 @@
     padding: 20px 0;
   }
 
-
   .displaybox {
     padding: 20px 15px 12px 15px;
     width: 400px;
@@ -353,7 +352,6 @@
     border: 3px solid #C0ECAD;
   }
   .navmenu:hover {
-    /* background-color: lightgray; */
     box-shadow: 0 0 15px 0 #C0ECAD;
   }
   #wrapper {
@@ -455,27 +453,32 @@
 
          <br> <br> <br>
 
+           <!-- elements pertaining to the navigation menu. series of radio buttons that control each "tab" -->
            <div id="wrapper" style="margin-top: -30px">
+             <!-- instruction tab -->
              <div> <input type='radio' name='content' id='ins_content' checked='true' onclick="display()"/>
              <label for='ins_content' class="navmenu">INSTRUCTIONS</label> </div>
 
+             <!-- satellite description tab  -->
              <div> <input type='radio' name='content' id='satdes_content' onclick="display()"/>
              <label for='satdes_content' class="navmenu">SATELLITE DESCRIPTION</label> </div>
 
+             <!-- behind the scenes tab  -->
              <div> <input type='radio' name='content' id='bts_content' onclick="display()"/>
              <label for='bts_content' class="navmenu">BEHIND THE SCENES</label> </div>
 
+             <!-- previous request tab -->
              <div> <input type='radio' name='content' id='prereq_content' onclick="display()"/>
              <label for='prereq_content' class="navmenu">PREVIOUS REQUEST</label> </div>
            </div>
 
        </div>
 
-
-
      <div class="item2"> <!--second section of the grid: infobox-->
 
+       <!-- box that displays information of the opened tab  -->
        <div class='displaybox'>
+             <!-- display content for the instructions -->
              <div id="instructions">
                <text style="font-size: 20px; font-family: 'Orbitron';"> INSTRUCTIONS </text> <br> <br>
                <text style="font-size: 14px;"> 1. Select a satellite at the top of the page. <br> <br>
@@ -490,16 +493,19 @@
                       recent request under the “previous request” tab. <br> </text>
              </div>
 
+             <!-- display content for behind the scenes  -->
              <div id="behindthescenes" style="display:none">
                <text style="font-size: 20px; font-family: 'Orbitron';"> BEHIND THE SCENES </text>
                <img src="/Calc_FOV.gif" style = "width:300px; height:275px;" id ="rcornersimg">
              </div>
 
+             <!-- display content for the satellite description  -->
              <div id="satellitedescription" style="display:none">
                <text style="font-size: 20px; font-family: 'Orbitron';"> SATELLITE DESCRIPTION </text> <br> <br>
                <text style="font-size: 14px;"> <span id="sat_desc"> </span> <br></text>
              </div>
 
+             <!-- display content for the previous reqest tab  -->
              <div id="previousrequest" style="display:none">
                <text style="font-size: 20px; font-family: 'Orbitron';"> PREVIOUS REQUEST </text><br>
                <text style="font-size: 14px;">
@@ -520,6 +526,7 @@
              </div>
        </div>
 
+      <!-- styling option: tabs are displayed vertically and expand when hovered over -->
       <!-- <div class="grow">
           <text style="font-size: 20px; font-family: 'Orbitron';"> INSTRUCTIONS </text> <br> <br>
           <text style="font-size: 14px;"> 1. Select a satellite. Hover your mouse over “Select Satellite” (or if you have already selected one, the satellite name in title) to select a satellite. <br> <br>
@@ -557,6 +564,7 @@
         </text>
       </div> -->
 
+      <!-- display for the compute button -->
       <div style="margin-top: 10px;margin-right: 35px;" >
         <a class="a" style ="position:relative; width: 200px; font-size: 20px; font-family:'Helvetica'; font-weight:100;" href="#" onclick="bleep.play(); latlonginput(); toggle(); myFunction(); resetlatlong(); calc(); resetCounter(); counter(); reset(); markerPosition(); setTimeout(prediction,1000); setTimeout(clouds, 1000); computeZoom(); manualInfoWindow();">COMPUTE</a>
         <br><br><br>
@@ -614,12 +622,14 @@
       </table>
 
       <br><br><br><br>
+      <!-- stylistic moving satellite. when clicked opens a new tab with satellite game ("easter egg") -->
       <marquee behavior="alternate" direction="right" style="color: white"> <img src="https://media.giphy.com/media/LUfSlaXJyvARZsiJtA/giphy.gif" style="width:175px;height:175px;" onclick="window.open('game', '_blank');"></marquee>
       <br><br><br><br>
       <br><br>
 
       <footer>
         <div>
+          <!-- display content for the footer -->
           <p style="float:right;margin-right:200px">Developed By: David Li, Katie Stadler, Renita John;&emsp;
             With Thanks To: Ned Rossman, Nadim El-Jaroudi;&emsp;
             And Sponsored By: The UVA DevHub</p>
@@ -635,34 +645,37 @@
 
 
     <script>
+        /* functiion that controls the display of the tabs. */
         function display() {
-          var ins = document.getElementById('instructions');
-          var bts = document.getElementById('behindthescenes');
-          var satd = document.getElementById('satellitedescription');
-          var prevreq = document.getElementById('previousrequest');
+          var ins = document.getElementById('instructions'); // refers to instruction tab content
+          var bts = document.getElementById('behindthescenes'); // refers to behind the scenes content
+          var satd = document.getElementById('satellitedescription'); // refers to satellite description content
+          var prevreq = document.getElementById('previousrequest'); // refers to previous request content
 
-          if (document.getElementById("ins_content").checked) {
+          /* series of if statements that determine which tab is selected. information
+          for the selected tab is displayed, and information for the remaining tabs is hidden. */
+          if (document.getElementById("ins_content").checked) { // instruction tab is selected
             // console.log("INS");
             ins.style.display = "block";
             bts.style.display = "none";
             satd.style.display = "none";
             prevreq.style.display = "none";
           }
-          if (document.getElementById("bts_content").checked) {
+          if (document.getElementById("bts_content").checked) { // behind the scenes tab is selected
             // console.log("BTS");
             bts.style.display = "block";
             satd.style.display = "none";
             prevreq.style.display = "none";
             ins.style.display = "none";
           }
-          if (document.getElementById("satdes_content").checked) {
+          if (document.getElementById("satdes_content").checked) { // satellite description tab is selected
             // console.log("SD");
             satd.style.display = "block";
             bts.style.display = "none";
             prevreq.style.display = "none";
             ins.style.display = "none";
           }
-          if (document.getElementById("prereq_content").checked) {
+          if (document.getElementById("prereq_content").checked) { // previous request tab is selected
             // console.log("PR");
             prevreq.style.display = "block";
             bts.style.display = "none";
@@ -733,14 +746,17 @@
         bleep.pause();
         alert('Please select a satellite before pressing compute.');
       }
-      else if (userlat == "" || userlong== "" || userlat == undefined || userlong == undefined){
+      else if (userlat == "" || userlong== "" || userlat == undefined || userlong == undefined) {
         bleep.pause();
+        /* message pops up if the user has not inputted a location */
         alert('Please select, or reinput, a location before pressing compute.');
       }
       else if (userlat == "NV" || userlong == "NV") {
+        /* message pops up if user as manually inputted an invalid latitude/longitude */
         alert('Please enter a latitude and longitude within the valid ranges. Latitude: -90 to 90. Longitude: -180 to 180.')
       }
       else if (userlat == "IV" || userlong == "IV") {
+        /* message pops up if user has inputted an invalid address */
         alert('Please select or reinput a valid location.')
       }
       else{
@@ -901,9 +917,6 @@
           userlong = "IV";
           prevlat = "";
           prevlong = "";
-          // alert("Invalid address: " + input.value);
-          // //document.getElementById('comp').innerHTML = "Invalid address: " + input.value;
-          // return;
         }
         /* setting the bounds of the map according to user input and placing the
         marker at the user's provided address */
