@@ -7,7 +7,7 @@ This website allows a user to specify a location by coordinates, address, or pin
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed. Permission is required to push to this repository.
+Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed. Permission is required to alter this repository.
 
 ```sh
 $ git clone https://github.com/er9fa/IPPSU20-OSCAR # or clone your own fork
