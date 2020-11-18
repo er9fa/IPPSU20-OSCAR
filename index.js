@@ -14,6 +14,7 @@ app.get('/api/v1/corsbypass', (req, res) => {
   .catch(err => console.log(err))
   .then(data => {
     res.header('Access-Control-Allow-Origin', '*');
+    res.send(data);
   });
 });
 
