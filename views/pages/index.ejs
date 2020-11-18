@@ -1182,7 +1182,8 @@
   }
   /* a function that fetches information about the selected satellites location then calculates (based on the formula for a cirlce) whether or not that satellite is "above" the user*/
   function calc(){
-  fetch("https://api.n2yo.com/rest/v1/satellite/positions/"+sat_key+"/"+userlat+"/"+userlong+"/0/1/&apiKey=WXKLJR-AMJM8S-Y9GBGH-4L7F")
+    let local = false;
+  fetch(`${local ? 'http://localhost:5000' : 'https://ippsu20-oscar.herokuapp.com'}/api/v1/corsbypass?sat_key=${sat_key}&user_lat=${userlat}&user_long=${userlong}`)
   .then(r => r.json())
   .then(data => {
 
