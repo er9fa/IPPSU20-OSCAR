@@ -12,7 +12,8 @@ app.get('/api/v1/corsbypass', (req, res) => {
 
   fetch(`https://api.n2yo.com/rest/v1/satellite/visualpasses/${sat_key}/${user_lat}/${user_long}/0/1/120/&apiKey=WXKLJR-AMJM8S-Y9GBGH-4L7F`)
   .catch(err => console.log(err))
-  .then(data => {
+  .then(r => r.json()).then(data => {
+    console.log(data);
     res.header('Access-Control-Allow-Origin', '*');
     res.send(data);
   });
