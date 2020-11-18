@@ -11,6 +11,7 @@ app.get('/api/v1/corsbypass', (req, res) => {
   user_long = req.query.user_long;
   passes = req.query.passes == true;
 
+  console.log(`https://api.n2yo.com/rest/v1/satellite/${passes ? 'visualpasses' : 'positions'}/${sat_key}/${user_lat}/${user_long}/0/1/120/&apiKey=WXKLJR-AMJM8S-Y9GBGH-4L7F`);
   fetch(`https://api.n2yo.com/rest/v1/satellite/${passes ? 'visualpasses' : 'positions'}/${sat_key}/${user_lat}/${user_long}/0/1/120/&apiKey=WXKLJR-AMJM8S-Y9GBGH-4L7F`)
   .catch(err => console.log(err))
   .then(r => r.json()).then(data => {
