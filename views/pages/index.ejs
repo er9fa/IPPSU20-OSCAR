@@ -1183,7 +1183,7 @@
   /* a function that fetches information about the selected satellites location then calculates (based on the formula for a cirlce) whether or not that satellite is "above" the user*/
   function calc(){
     let local = false;
-  fetch(`${local ? 'http://localhost:5000' : 'https://ippsu20-oscar.herokuapp.com'}/api/v1/corsbypass?sat_key=${sat_key}&user_lat=${userlat}&user_long=${userlong}`)
+  fetch(`${local ? 'http://localhost:5000' : 'https://ippsu20-oscar.herokuapp.com'}/api/v1/corsbypass?sat_key=${sat_key}&user_lat=${userlat}&user_long=${userlong}&passes=false`)
   .then(r => r.json())
   .then(data => {
 
@@ -1261,7 +1261,8 @@
   }
   /*function that fetches for prediction on next pass from satellite*/
   function prediction() {
-    fetch("https://api.n2yo.com/rest/v1/satellite/visualpasses/"+sat_key+"/"+userlat+"/"+userlong+"/0/1/120/&apiKey=WXKLJR-AMJM8S-Y9GBGH-4L7F").then(r_prediction => r_prediction.json()).then(data_prediction =>{
+    let local = false;
+    fetch(`${local ? 'http://localhost:5000' : 'https://ippsu20-oscar.herokuapp.com'}/api/v1/corsbypass?sat_key=${sat_key}&user_lat=${userlat}&user_long=${userlong}&passes=true`).then(r_prediction => r_prediction.json()).then(data_prediction =>{
       checkpass = data_prediction.info.passescount
       if (checkpass == 0){
         var nopassresp= "The "+ satel + " likely won't be visible in the next 24 hours."
